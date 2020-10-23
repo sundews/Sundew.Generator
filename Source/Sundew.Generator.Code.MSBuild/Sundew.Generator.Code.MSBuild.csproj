@@ -1,0 +1,86 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Kim Hugener-Ohlsen</Authors>
+    <Company>Hukano</Company>
+    <Description>MSBuild integration for Sundew.Generator.Code</Description>
+    <Version>3.0.0</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <OutputPath>bin\$(Configuration)</OutputPath>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Kim Hugener-Ohlsen</Copyright>
+    <NuspecFile>Sundew.Generator.Code.MSBuild.nuspec</NuspecFile>
+    <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove=".package\**" />
+    <EmbeddedResource Remove=".package\**" />
+    <None Remove=".package\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="16.6.0" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.6.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.7.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sundew.Build.Publish" Version="2.2.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sundew.Generator\Sundew.Generator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="build\Sundew.Generator.Code.MSBuild.targets">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="_DeletePackageDirectory" AfterTargets="PreBuildEvent">
+    <RemoveDir Directories=".package" ContinueOnError="False" />
+  </Target>
+
+  <Target Name="SetNuspecProperties" AfterTargets="SbpPreparePublishNuGet">
+    <PropertyGroup>
+      <NuspecProperties>$(NuspecProperties);company=$(Company);description=$(Description);copyright=$(Copyright);authors=$(Authors);version=$(PackageVersion);repositoryUrl=$(RepositoryUrl);releaseNotes=$(PackageReleaseNotes);repositoryType=$(RepositoryType);licenseExpression=$(PackageLicenseExpression);targetFramework=$(TargetFramework);configuration=$(Configuration);projectDir=$(MSBuildProjectDirectory);outputPath=$(OutputPath)</NuspecProperties>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="_CopyPackageOutput" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <ToolsFiles Include="$(OutputPath)\**\*.dll" />
+      <ToolsFiles Remove="$(OutputPath)\**\Sundew.Generator.dll" />
+      <ToolsFiles Remove="$(OutputPath)\**\$(AssemblyName).dll" />
+      <BuildFiles Include="$(OutputPath)\**\*.targets" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ToolsFiles)" DestinationFiles="@(ToolsFiles->'.package\tools\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="False" />
+    <Copy SourceFiles="@(BuildFiles)" DestinationFiles="@(BuildFiles->'.package\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="False" />
+  </Target>
+
+</Project>

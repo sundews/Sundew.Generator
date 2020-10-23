@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Kim Hugener-Ohlsen</Authors>
+    <Company>Hukano</Company>
+    <Description>Sundew.Generator is code generator aiming to provide an alternative or replacement for T4 templates.</Description>
+    <Version>3.0.0</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <OutputPath>bin\$(Configuration)</OutputPath>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Kim Hugener-Ohlsen</Copyright>
+    <LangVersion>preview</LangVersion>
+    <PackageReleaseNotes>3.0 - Changed to .NET Standard 2.0</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>code generation</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sundew.Base" Version="5.0.0" />
+    <PackageReference Include="Sundew.Build.Publish" Version="2.2.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sundew.IO" Version="1.0.0" />
+    <PackageReference Include="System.Threading.Tasks.Parallel" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="build\Sundew.Generator.targets" Pack="true" PackagePath="build\Sundew.Generator.targets">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="build\Sundew.Generator.targets" Pack="true" PackagePath="buildTransitive\Sundew.Generator.targets">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

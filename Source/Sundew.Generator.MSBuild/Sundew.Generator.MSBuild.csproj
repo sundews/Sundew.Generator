@@ -1,0 +1,81 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <LangVersion>8</LangVersion>
+    <Authors>Kim Hugener-Ohlsen</Authors>
+    <Company>Hukano</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>3.0.0</Version>
+    <RepositoryType>git</RepositoryType>
+    <Description>MSBuild integration for Sundew.Generator</Description>
+    <NuspecFile>Sundew.Generator.MSBuild.nuspec</NuspecFile>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <Copyright>Kim Hugener-Ohlsen</Copyright>
+    <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove=".package\**" />
+    <EmbeddedResource Remove=".package\**" />
+    <None Remove=".package\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="16.6.0" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.6.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.7.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sundew.Build.Publish" Version="2.2.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sundew.Generator\Sundew.Generator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="build\Sundew.Generator.MSBuild.targets">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="_DeletePackageDirectory" AfterTargets="PreBuildEvent">
+    <RemoveDir Directories=".package" ContinueOnError="False" />
+  </Target>
+
+  <Target Name="SetNuspecProperties" AfterTargets="SbpPreparePublishNuGet">
+    <PropertyGroup>
+      <NuspecProperties>$(NuspecProperties);company=$(Company);description=$(Description);copyright=$(Copyright);authors=$(Authors);version=$(PackageVersion);repositoryUrl=$(RepositoryUrl);releaseNotes=$(PackageReleaseNotes);repositoryType=$(RepositoryType);licenseExpression=$(PackageLicenseExpression);targetFramework=$(TargetFramework);configuration=$(Configuration);projectDir=$(MSBuildProjectDirectory);outputPath=$(OutputPath)</NuspecProperties>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="_CopyPackageOutput" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <ToolsFiles Include="$(OutputPath)\**\*.dll" />
+      <BuildFiles Include="$(OutputPath)\**\*.targets" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ToolsFiles)" DestinationFiles="@(ToolsFiles->'.package\tools\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="False" />
+    <Copy SourceFiles="@(BuildFiles)" DestinationFiles="@(BuildFiles->'.package\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="False" />
+  </Target>
+
+</Project>

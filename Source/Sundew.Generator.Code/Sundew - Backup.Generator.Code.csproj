@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <Authors>Kim Hugener-Ohlsen</Authors>
+    <Company>Hukano</Company>
+    <Description>Generation library</Description>
+    <Version>3.0.0</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <OutputPath>bin\$(Configuration)</OutputPath>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Kim Hugener-Ohlsen</Copyright>
+    <Copyright>Hukano</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
+    <PackageReleaseNotes>
+      3.0.0 - Changed to .NET Standard 2.0, adds support for Sundew.Xaml.Optimizations 3.0.0
+      2.0.0 - Adds support for Sundew.Xaml.Optimizations 2.0.0
+      1.0.0 - First release
+    </PackageReleaseNotes>
+    <SbpSourceName>local-stable</SbpSourceName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sundew.Generator\Sundew.Generator.csproj" />
+  </ItemGroup>
+
+  <Target Name="SetNuspecProperties" AfterTargets="AdjustProjectReferenceVersions">
+    <PropertyGroup>
+      <NuspecProperties>$(NuspecProperties);company=$(Company);description=$(Description);copyright=$(Copyright);authors=$(Authors);version=$(PackageVersion);repositoryUrl=$(RepositoryUrl);releaseNotes=$(PackageReleaseNotes);repositoryType=$(RepositoryType);licenseExpression=$(PackageLicenseExpression);targetFramework=$(TargetFramework);configuration=$(Configuration);projectDir=$(MSBuildProjectDirectory);outputPath=$(OutputPath);packageFiles=$(IntermediateOutputPath)package</NuspecProperties>
+    </PropertyGroup>
+  </Target>
+
+</Project>

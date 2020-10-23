@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>Sundew.Generator.CommandLine</id>
+        <version>2.0.0-rc3</version>
+        <authors>Kim Hugener-Ohlsen</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Console application for generation.</description>
+        <releaseNotes />
+        <dependencies>
+            <dependency id="Sundew.Generator" version="2.0.0" />
+            <dependency id="Sundew.Base" version="3.1.0-pre7" />
+            <dependency id="Sundew.CommandLine" version="1.0.0-pre5" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\sg.exe" target="content\sg.exe" />
+        <file src="bin\Release\sg.exe.config" target="content\sg.exe.config" />
+    </files>
+</package>

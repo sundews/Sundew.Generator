@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Sundew.Generator.Code.MSBuild</id>
+    <version>1.0.0</version>
+    <title></title>
+    <authors>$authors$</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <developmentDependency>true</developmentDependency>
+    <releaseNotes>$releaseNotes$</releaseNotes>
+    <license type="expression">$licenseExpression$</license>
+    <copyright>$copyright$</copyright>
+    <repository type="$repositoryType$" url="$repositoryUrl$"></repository>
+  </metadata>
+  <files>
+    <file src=".package\**\*.*" target=""/>
+    <file src=".package\build\*.*" target="buildCrossTargeting"/>
+  </files>
+</package>
