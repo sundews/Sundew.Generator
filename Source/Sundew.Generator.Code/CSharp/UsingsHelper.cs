@@ -5,6 +5,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Sundew.Generator.Code.CSharp
 {
     using System.Collections.Generic;
@@ -68,7 +70,7 @@ namespace Sundew.Generator.Code.CSharp
                 return string.Empty;
             }
 
-            return stringBuilder.ToString(0, stringBuilder.Length - 2);
+            return stringBuilder.ToString(0, stringBuilder.Length - Environment.NewLine.Length);
         }
     }
 }
