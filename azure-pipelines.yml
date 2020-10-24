@@ -29,5 +29,5 @@ steps:
     TargetFolder: $(Build.ArtifactStagingDirectory)
 
 - script: dotnet nuget push '$(Build.ArtifactStagingDirectory)/**/*.nupkg' -s '$(pushSource)' -k '$(SbpApiKey)'
-  condition: $[ne(variables.pushSource, 'null')]
+  condition: ne(variables.pushSource, 'null')
   displayName: 'dotnet nuget push'
