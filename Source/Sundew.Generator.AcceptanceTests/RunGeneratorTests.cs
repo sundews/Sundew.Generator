@@ -39,7 +39,7 @@ namespace Sundew.Generator.AcceptanceTests
         [Fact]
         public async Task Given_ASetupWithOneGeneratorAndRunAndModelAndWriter_When_GeneratorRuns_Then_GeneratorGenerateShouldBeCalledOnce()
         {
-            await this.RunGenerator();
+            await this.RunGenerator().ConfigureAwait(false);
 
             this.generator.Verify(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), this.run1, It.IsAny<long>()), Times.Once());
         }
@@ -47,7 +47,7 @@ namespace Sundew.Generator.AcceptanceTests
         [Fact]
         public async Task Given_ASetupWithOneGeneratorAndRunAndModelAndWriter_When_GeneratorRuns_Then_WriterCompleteTargetAsyncShouldBeCalledOnce()
         {
-            await this.RunGenerator();
+            await this.RunGenerator().ConfigureAwait(false);
 
             this.writer.Verify(x => x.CompleteTargetAsync(It.IsAny<ITargetCompletionTracker>()), Times.Once());
         }
@@ -59,7 +59,7 @@ namespace Sundew.Generator.AcceptanceTests
             this.generator.Setup(x => x.Prepare(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), It.IsAny<string>())).Returns(() => new List<IRun> { this.run1, run2 });
             this.generator.Setup(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), run2, It.IsAny<long>())).Returns(() => new object());
 
-            await this.RunGenerator();
+            await this.RunGenerator().ConfigureAwait(false);
 
             this.generator.Verify(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), It.IsAny<IRun>(), It.IsAny<long>()), Times.Exactly(2));
         }
@@ -71,7 +71,7 @@ namespace Sundew.Generator.AcceptanceTests
             this.generator.Setup(x => x.Prepare(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), It.IsAny<string>())).Returns(() => new List<IRun> { this.run1, run2 });
             this.generator.Setup(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), run2, It.IsAny<long>())).Returns(() => new object());
 
-            await this.RunGenerator();
+            await this.RunGenerator().ConfigureAwait(false);
 
             this.writer.Verify(x => x.GetTargetAsync(It.IsAny<IWriterSetup>()), Times.Once);
         }
@@ -83,7 +83,7 @@ namespace Sundew.Generator.AcceptanceTests
             this.generator.Setup(x => x.Prepare(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), It.IsAny<string>())).Returns(() => new List<IRun> { this.run1, run2 });
             this.generator.Setup(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), run2, It.IsAny<long>())).Returns(() => new object());
 
-            await this.RunGenerator();
+            await this.RunGenerator().ConfigureAwait(false);
 
             this.writer.Verify(x => x.PrepareTargetAsync(It.IsAny<ITarget>(), It.IsAny<IWriterSetup>()), Times.Once);
         }
@@ -95,7 +95,7 @@ namespace Sundew.Generator.AcceptanceTests
             this.generator.Setup(x => x.Prepare(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), It.IsAny<string>())).Returns(() => new List<IRun> { this.run1, run2 });
             this.generator.Setup(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), run2, It.IsAny<long>())).Returns(() => new object());
 
-            await this.RunGenerator();
+            await this.RunGenerator().ConfigureAwait(false);
 
             this.writer.Verify(x => x.ApplyContentToTargetAsync(It.IsAny<ITarget>(), It.IsAny<IRun>(), It.IsAny<IWriterSetup>(), It.IsAny<object>()), Times.Exactly(2));
         }
@@ -107,7 +107,7 @@ namespace Sundew.Generator.AcceptanceTests
             this.generator.Setup(x => x.Prepare(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), It.IsAny<string>())).Returns(() => new List<IRun> { this.run1, run2 });
             this.generator.Setup(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), run2, It.IsAny<long>())).Returns(() => new object());
 
-            await this.RunGenerator();
+            await this.RunGenerator().ConfigureAwait(false);
 
             this.writer.Verify(x => x.CompleteTargetAsync(It.IsAny<ITargetCompletionTracker>()), Times.Once);
         }
@@ -121,7 +121,7 @@ namespace Sundew.Generator.AcceptanceTests
             generator2.Setup(x => x.Prepare(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), It.IsAny<string>())).Returns(() => new List<IRun> { this.run1 });
             generator2.Setup(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), this.run1, It.IsAny<long>())).Returns(() => new object());
 
-            await this.RunGenerator(new[] { this.generator, generator2 }, shareGlobalWriters);
+            await this.RunGenerator(new[] { this.generator, generator2 }, shareGlobalWriters).ConfigureAwait(false);
 
             this.writer.Verify(x => x.CompleteTargetAsync(It.IsAny<ITargetCompletionTracker>()), Times.Exactly(expectedNumberOfCalls));
         }
