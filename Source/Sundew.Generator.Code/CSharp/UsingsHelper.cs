@@ -61,7 +61,11 @@ namespace Sundew.Generator.Code.CSharp
 
             foreach (var @using in flattenedUsings)
             {
-                stringBuilder.AppendLine($"{new string(' ', indent)}using {global}{@using};");
+                stringBuilder.Append(' ', indent)
+                             .Append("using ")
+                             .Append(global)
+                             .Append(@using)
+                             .AppendLine(";");
             }
 
             if (stringBuilder.Length < 3)
