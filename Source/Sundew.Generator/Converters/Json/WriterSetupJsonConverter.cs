@@ -44,11 +44,10 @@ namespace Sundew.Generator.Converters.Json
                             $"Error: The writer type: {writerToken} is invalid or is a type that does not implement {typeof(IWriter<,,,>)}.");
                     }
                 }
-                else
-                {
-                    throw new JsonReaderException("Error: The writer setup type was not set.");
-                }
+            }
 
+            if (writerSetupType != null)
+            {
                 this.lastWriterSetup = (IWriterSetup)item.ToObject(writerSetupType, serializer);
                 return this.lastWriterSetup;
             }

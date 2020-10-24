@@ -7,15 +7,15 @@
 
 namespace Sundew.Generator.Tests
 {
+    using FluentAssertions;
     using Newtonsoft.Json;
     using Sundew.Generator.Converters.Json;
-    using Sundew.Generator.Core;
     using Xunit;
 
     public class DeserializationTests
     {
         [Fact]
-        public void T()
+        public void DeserializeObject_When_TextContainsWriterSetup_Then_ResultWriterSetupShouldBeEmpty()
         {
             var input = $@"
 {{
@@ -42,7 +42,8 @@ namespace Sundew.Generator.Tests
                 new GeneratorSetupJsonConverter(),
                 new TypeOrObjectJsonConverter(),
                 new ModelSetupJsonConverter());
-            result.ToString();
+
+            result.WriterSetups.Should().NotBeEmpty();
         }
     }
 }
