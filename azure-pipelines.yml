@@ -14,6 +14,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   source: 'https://api.nuget.org/v3/index.json'
+  pushSource: 'null'
 
 steps:
 - script: dotnet build ./Source/Sundew.Generator.sln --configuration $(buildConfiguration) -p:'SbpSourceName=$(Build.SourceBranch)' -p:'SbpProductionSource=refs/heads/master|$(source)' -p:'SbpIntegrationSource=refs/heads/release/.+|$(source)' -p:'SbpAllowLocalSource=false' -p:'SbpEnablePublish=false' -p:'SbpPublishLogFormats=##vso[task.setvariable variable=pushSource]{2}'
@@ -28,4 +29,5 @@ steps:
     TargetFolder: $(Build.ArtifactStagingDirectory)
 
 - script: dotnet nuget push '$(Build.ArtifactStagingDirectory)/**/*.nupkg' -s '$(pushSource)' -k '$(SbpApiKey)'
+  condition: ne($(pushSource), 'null')
   displayName: 'dotnet nuget push'
