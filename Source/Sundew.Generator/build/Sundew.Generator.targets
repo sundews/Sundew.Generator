@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="ExecuteGenerator" AfterTargets="Build" Condition="!$(DefineConstants.Contains('DISABLE_SG'))">
+    <PropertyGroup>
+      <WorkingDirPath>$(MSBuildProjectDirectory)\$(OutputPath)</WorkingDirPath>
+      <ExecutablePath>$(WorkingDirPath)$(AssemblyName).exe</ExecutablePath>
+      <ExecutablePath Condition="!Exists($(ExecutablePath))">dotnet.exe $(WorkingDirPath)$(AssemblyName).dll</ExecutablePath>
+    </PropertyGroup>
+    <Exec Command="$(ExecutablePath)" ConsoleToMSBuild="true" WorkingDirectory="$(WorkingDirPath)"/>
+  </Target>
+
+</Project>
