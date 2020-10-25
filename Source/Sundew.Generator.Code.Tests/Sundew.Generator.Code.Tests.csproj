@@ -5,7 +5,6 @@
     <Authors>Kim Hugener-Ohlsen</Authors>
     <Company>Hukano</Company>
     <Description>Generation library</Description>
-    <Version>3.0.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <OutputPath>bin\$(Configuration)</OutputPath>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>

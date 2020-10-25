@@ -5,15 +5,15 @@
     <AvailableItemName Include="CompileGenerationSetup"/>
     <AvailableItemName Include="Generate"/>
     <AvailableItemName Include="GenerateAndCompile"/>
-    <GeneratorReference Include="$(MSBuildThisFileDirectory)..\tools\*.dll"/>
-    <GeneratorReference Remove="$(MSBuildThisFileDirectory)..\tools\Sundew.Generator.MSBuild.dll;$(MSBuildThisFileDirectory)..\tools\System*.dll" />
+    <GeneratorReference Include="$(MSBuildThisFileDirectory)../tools/*.dll"/>
+    <GeneratorReference Remove="$(MSBuildThisFileDirectory)../tools/Sundew.Generator.MSBuild.dll;$(MSBuildThisFileDirectory)../tools/System*.dll" />
     <Compile Include="@(GenerateAndCompile)"/>
     <Compile Include="@(Generate);@(CompileGenerationSetup)" Condition="$(DesignTimeBuild) == true AND $(BuildingProject) != true"/>
     <Reference Include="@(GeneratorReference)" />
   </ItemGroup>
 
   <PropertyGroup>
-    <_SundewGeneratorMSBuild Condition="'$(_SundewGeneratorMSBuild)'==''">$(MSBuildThisFileDirectory)..\tools\Sundew.Generator.MSBuild.dll</_SundewGeneratorMSBuild>
+    <_SundewGeneratorMSBuild Condition="'$(_SundewGeneratorMSBuild)'==''">$(MSBuildThisFileDirectory)../tools/Sundew.Generator.MSBuild.dll</_SundewGeneratorMSBuild>
     <_SundewIsCompilerBuild>False</_SundewIsCompilerBuild>
     <_SundewIsCompilerBuild Condition="$(DesignTimeBuild) == true AND $(BuildingProject) != true">True</_SundewIsCompilerBuild>
     <DefineConstants>$(DefineConstants);DISABLE_SG</DefineConstants>

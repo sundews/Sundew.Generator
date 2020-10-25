@@ -1,13 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Target Name="ExecuteGenerator" AfterTargets="Build" Condition="!$(DefineConstants.Contains('DISABLE_SG'))">
+  <PropertyGroup Condition="!$(DefineConstants.Contains('DISABLE_SG'))">
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <Target Name="SundewGeneratorPublishProject" AfterTargets="Build" Condition="!$(DefineConstants.Contains('DISABLE_SG'))">
     <PropertyGroup>
-      <WorkingDirPath>$(MSBuildProjectDirectory)\$(OutputPath)</WorkingDirPath>
-      <ExecutablePath>$(WorkingDirPath)$(AssemblyName).exe</ExecutablePath>
-      <ExecutablePath Condition="!Exists($(ExecutablePath))">dotnet $(WorkingDirPath)$(AssemblyName).dll</ExecutablePath>
+      <ExecutePublishCommand>dotnet publish -c $(Configuration) -p:GenerateRuntimeConfigurationFiles=true --no-build $(MSBuildProjectFullPath)</ExecutePublishCommand>
     </PropertyGroup>
-    <Exec Command="$(ExecutablePath)"  ConsoleToMSBuild="true" WorkingDirectory="$(WorkingDirPath)"/>
+    <Exec Command="$(ExecutePublishCommand)" ConsoleToMSBuild="true"/>
   </Target>
 
+  <Target Name="SundewGeneratorExecuteGenerator" AfterTargets="SundewGeneratorPublishProject" Condition="!$(DefineConstants.Contains('DISABLE_SG'))">
+    <PropertyGroup>
+      <WorkingDirPath>$(MSBuildProjectDirectory)/$(OutputPath)</WorkingDirPath>
+      <ExecuteGeneratorCommand>dotnet $(WorkingDirPath)publish/$(AssemblyName).dll</ExecuteGeneratorCommand>
+    </PropertyGroup>
+
+    <Exec Command="$(ExecuteGeneratorCommand)" ConsoleToMSBuild="true" WorkingDirectory="$(WorkingDirPath)"/>
+  </Target>
 </Project>

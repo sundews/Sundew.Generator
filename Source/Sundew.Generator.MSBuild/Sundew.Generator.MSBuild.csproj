@@ -7,10 +7,7 @@
     <Authors>Kim Hugener-Ohlsen</Authors>
     <Company>Hukano</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>3.0.1.0</AssemblyVersion>
-    <FileVersion>3.0.1.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>3.0.1</Version>
     <RepositoryType>git</RepositoryType>
     <Description>MSBuild integration for Sundew.Generator</Description>
     <NuspecFile>Sundew.Generator.MSBuild.nuspec</NuspecFile>

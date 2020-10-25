@@ -6,7 +6,6 @@
     <Authors>Kim Hugener-Ohlsen</Authors>
     <Company>Hukano</Company>
     <Description>Sundew.Generator is code generator aiming to provide an alternative or replacement for T4 templates.</Description>
-    <Version>3.0.1</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <OutputPath>bin\$(Configuration)</OutputPath>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
@@ -17,7 +16,6 @@
     <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
     <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <FileVersion>3.0.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
