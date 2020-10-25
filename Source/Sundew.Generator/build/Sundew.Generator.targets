@@ -5,9 +5,9 @@
     <PropertyGroup>
       <WorkingDirPath>$(MSBuildProjectDirectory)\$(OutputPath)</WorkingDirPath>
       <ExecutablePath>$(WorkingDirPath)$(AssemblyName).exe</ExecutablePath>
-      <ExecutablePath Condition="!Exists($(ExecutablePath))">dotnet.exe $(WorkingDirPath)$(AssemblyName).dll</ExecutablePath>
+      <ExecutablePath Condition="!Exists($(ExecutablePath))">dotnet $(WorkingDirPath)$(AssemblyName).dll</ExecutablePath>
     </PropertyGroup>
-    <Exec Command="$(ExecutablePath)" ConsoleToMSBuild="true" WorkingDirectory="$(WorkingDirPath)"/>
+    <Exec Command="$(ExecutablePath)"  ConsoleToMSBuild="true" WorkingDirectory="$(WorkingDirPath)"/>
   </Target>
 
 </Project>
