@@ -8,7 +8,7 @@ The concept separates generators from models and output, meaning it is possible 
 
 ## **Getting started**
 
-1. Create a new project.
+1. Create a new project (Console application).
 1. Add the [Sundew.Generator](https://www.nuget.org/packages/Sundew.Generator/) or [Sundew.Generator.Code](https://www.nuget.org/packages/Sundew.Generator.Code/) NuGet package.
 1. [Implement a generator](#implement_a_generator)
 1. [Setup](#setup)
@@ -45,7 +45,8 @@ public interface IGenerator<in TSetup, in TGeneratorSetup, in TTarget, in TModel
 }
 ```
 
-### **Example**
+### **Generator Example**
+[QuantityGenerator](https://github.com/hugener/Sundew.Quantities/blob/master/Source/Sundew.Quantities.Generator/Quantities/QuantityGenerator.cs)
 
 ## <a id="setup"></a>**Setup**
 
@@ -87,9 +88,9 @@ public interface IModelProvider<in TSetup, in TModelSetup, TModel> : IModelProvi
 }
 ```
 
-##### **Generator Example**
+##### **Model Provider Example**
 
-[QuantityGenerator](https://github.com/hugener/Sundew.Quantities/tree/master/Sources/Sundew.Quantities.Generator/Quantities/QuantityGenerator.cs)
+[JsonModelProvider](https://github.com/hugener/Sundew.Generator/blob/main/Source/Sundew.Generator/Input/JsonModelProvider.cs)
 
 ### **GeneratorSetups**
 
@@ -136,7 +137,7 @@ public interface IWriter<in TWriterSetup, TTarget, in TRun, in TOutput> : IWrite
 
 ##### **Writer Example**
 
-[TextFileWriter](Sources/Sundew.Generator/Output/TextFileWriter.cs)
+[TextFileWriter](https://github.com/hugener/Sundew.Generator/blob/main/Source/Sundew.Generator/Output/FileWriterSetup.cs)
 
 ## **Additional info**
 
