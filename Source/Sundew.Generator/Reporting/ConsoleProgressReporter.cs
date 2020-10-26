@@ -11,9 +11,9 @@ namespace Sundew.Generator.Reporting
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
+    using Sundew.Base.Text;
 
     /// <summary>
     /// Prints generator progress info to the <see cref="Console"/>.
@@ -148,10 +148,16 @@ namespace Sundew.Generator.Reporting
 
                         break;
                     case ReportType.GeneratedItem:
+                    case ReportType.AppliedContent:
                     case ReportType.CompletedTarget:
-                        yield return new ConsoleLine(!this.isRedirected, $"{Path.GetFileName(progress.Report.Parameter.ToString()),-60} - {progress.Percentage,8:P}{Environment.NewLine}");
-                        if (!this.isRedirected)
+                        if (this.isRedirected)
                         {
+                            var text = progress.Report.Parameter.ToString();
+                            yield return new ConsoleLine(false, $"{text.LimitAndPad(Math.Max(60, text.Length), ' ', PadSide.Right, LimitSide.Left)} - {progress.Percentage,8:P}{Environment.NewLine}");
+                        }
+                        else
+                        {
+                            yield return new ConsoleLine(true, $"{progress.Report.Parameter.ToString().LimitAndPad(Console.BufferWidth - 11, ' ', PadSide.Right, LimitSide.Left)} - {progress.Percentage,8:P}{Environment.NewLine}");
                             yield return new ConsoleLine(false, this.GetProgressMessage(progress, this.GetProcessValueAndTick()));
                         }
 

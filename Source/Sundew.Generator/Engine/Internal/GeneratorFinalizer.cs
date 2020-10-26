@@ -29,7 +29,9 @@ namespace Sundew.Generator.Engine.Internal
             {
                 for (int i = 0; i < targetRunGeneratorRun.Outputs.Length; i++)
                 {
-                    outputs.Add(await targetRun.Writer.ApplyContentToTargetAsync(targetRunGeneratorRun.Target, targetRunGeneratorRun.Runs[i], targetRun.WriterSetup, targetRunGeneratorRun.Outputs[i]).ConfigureAwait(false));
+                    var result = await targetRun.Writer.ApplyContentToTargetAsync(targetRunGeneratorRun.Target, targetRunGeneratorRun.Runs[i], targetRun.WriterSetup, targetRunGeneratorRun.Outputs[i]).ConfigureAwait(false);
+                    outputs.Add(result);
+                    progressTracker.CompleteItem(new Report(ReportType.AppliedContent, result));
                 }
             }
 

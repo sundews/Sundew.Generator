@@ -56,8 +56,9 @@ namespace Sundew.Generator.Reporting
                     this.textWriter.WriteLine("Starting generation");
                     break;
                 case ReportType.GeneratedItem:
+                case ReportType.AppliedContent:
                 case ReportType.CompletedTarget:
-                    this.textWriter.WriteLine(Path.GetFileName(progress.Report.Parameter.ToString()));
+                    this.textWriter.WriteLine(progress.Report.Parameter.ToString());
                     break;
                 case ReportType.CompletedGeneration:
                     this.textWriter.WriteLine("Completed generation");

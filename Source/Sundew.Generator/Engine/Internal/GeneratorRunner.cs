@@ -83,7 +83,7 @@ namespace Sundew.Generator.Engine.Internal
                         target,
                         modelInfo.Model,
                         modelInfo.ModelOrigin);
-                    progressTracker.AddItems(runs.Count, new Report(ReportType.AddingItems, runs.Count));
+                    progressTracker.AddItems(runs.Count * 2, new Report(ReportType.AddingItems, runs.Count * 2));
                     var generatorRun = new GeneratorRun(
                         generatorInfo.Setup,
                         generatorInfo.GeneratorSetup,

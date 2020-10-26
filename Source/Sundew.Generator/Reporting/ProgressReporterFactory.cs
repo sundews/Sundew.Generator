@@ -37,12 +37,7 @@ namespace Sundew.Generator.Reporting
                 return simpleProgressReporter;
             }
 
-            if (progressReporter != null)
-            {
-                return progressReporter;
-            }
-
-            return new ConsoleProgressReporter();
+            return progressReporter ?? new ConsoleProgressReporter();
         }
     }
 }

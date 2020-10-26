@@ -33,6 +33,11 @@ namespace Sundew.Generator.Reporting
         GeneratedItem,
 
         /// <summary>
+        /// The applied content to the target.
+        /// </summary>
+        AppliedContent,
+
+        /// <summary>
         /// Report for target completed.
         /// </summary>
         CompletedTarget,
