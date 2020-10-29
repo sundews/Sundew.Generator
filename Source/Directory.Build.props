@@ -2,5 +2,6 @@
  <PropertyGroup>
    <Deterministic>true</Deterministic>
    <Version>3.0.3</Version>
+   <OutputPath>bin/$(Configuration)</OutputPath>
  </PropertyGroup>
 </Project>

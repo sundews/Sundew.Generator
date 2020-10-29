@@ -12,15 +12,16 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
+  solutionPath: ./Source/Sundew.Generator.sln
   buildConfiguration: 'Release'
   source: 'https://api.nuget.org/v3/index.json'
   pushSource: 'null'
 
 steps:
-- script: dotnet build ./Source/Sundew.Generator.sln --verbosity detailed --configuration $(buildConfiguration) -p:'SbpSourceName=$(Build.SourceBranch)' -p:'SbpProductionSource=refs/heads/main|$(source)' -p:'SbpIntegrationSource=refs/heads/release/.+|$(source)' -p:'SbpAllowLocalSource=false' -p:'SbpEnablePublish=false' -p:'SbpPublishLogFormats=##vso[task.setvariable variable=pushSource]{2}'
+- script: dotnet build $(solutionPath) --verbosity normal --configuration $(buildConfiguration) -p:'SbpSourceName=$(Build.SourceBranch)' -p:'SbpProductionSource=refs/heads/master|$(source)' -p:'SbpIntegrationSource=refs/heads/release/.+|$(source)' -p:'SbpAllowLocalSource=false' -p:'SbpEnablePublish=false' -p:'SbpPublishLogFormats=##vso[task.setvariable variable=pushSource]{2}'
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: dotnet test '**/bin/$(buildConfiguration)/**/*Tests.dll' --configuration $(buildConfiguration) 
+- script: dotnet test $(solutionPath) --verbosity normal --configuration $(buildConfiguration) --no-build
   displayName: 'dotnet test $(buildConfiguration)'
 
 - task: CopyFiles@2

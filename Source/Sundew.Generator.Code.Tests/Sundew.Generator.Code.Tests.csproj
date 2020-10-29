@@ -6,7 +6,6 @@
     <Company>Hukano</Company>
     <Description>Generation library</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <OutputPath>bin\$(Configuration)</OutputPath>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <TreatSpecificWarningsAsErrors />
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>

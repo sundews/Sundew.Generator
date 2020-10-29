@@ -6,7 +6,6 @@
     <Company>Hukano</Company>
     <Description>MSBuild integration for Sundew.Generator.Code</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	  <OutputPath>bin\$(Configuration)</OutputPath>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

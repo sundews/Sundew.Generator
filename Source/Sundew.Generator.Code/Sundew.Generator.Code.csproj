@@ -7,7 +7,6 @@
     <Company>Hukano</Company>
     <Description>Sundew.Generator is code generator aiming to provide an alternative or replacement for T4 templates.</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	  <OutputPath>bin\$(Configuration)</OutputPath>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
