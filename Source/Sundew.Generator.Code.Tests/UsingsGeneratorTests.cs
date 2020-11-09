@@ -18,7 +18,7 @@ namespace Sundew.Generator.Code.Tests
         {
             var usings1 = new[] { "Microsoft.Windows", "System.Collections", "Microsoft.Windows" };
             var usings2 = new[] { "Microsoft.Win32", "System" };
-            var expectedResult = $@"using System;
+            const string expectedResult = @"using System;
 using System.Collections;
 using Microsoft.Win32;
 using Microsoft.Windows;";

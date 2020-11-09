@@ -17,24 +17,24 @@ namespace Sundew.Generator.Tests
         [Fact]
         public void DeserializeObject_When_TextContainsWriterSetup_Then_ResultWriterSetupShouldBeEmpty()
         {
-            var input = $@"
-{{
+            const string input = @"
+{
     ""Type"": ""Sundew.Generator.Tests.Setup, Sundew.Generator.Tests"",
     ""WriterSetups"": [
-        {{ ""Target"": ""c:\\temp\\hmm.txt"", ""Writer"": ""Sundew.Generator.Tests.TextWriter, Sundew.Generator.Tests"", ""AddFilesToProject"": false }},
-        {{ ""Target"": ""c:\\temp\\hmm2.txt"", ""AddFilesToProject"": true }}
+        { ""Target"": ""c:\\temp\\hmm.txt"", ""Writer"": ""Sundew.Generator.Tests.TextWriter, Sundew.Generator.Tests"", ""AddFilesToProject"": false },
+        { ""Target"": ""c:\\temp\\hmm2.txt"", ""AddFilesToProject"": true }
     ],
     ""GeneratorSetups"": [
-        {{
+        {
             ""Generator"": ""Sundew.Generator.Tests.EmptyGenerator, Sundew.Generator.Tests"",
             ""WriterSetups"": [
-                {{ ""Target"": ""c:\\temp\\hmm3.txt"", ""AddFilesToProject"": false }},
-                {{ ""Target"": ""c:\\temp\\hmm4.txt"", ""AddFilesToProject"": true }}
+                { ""Target"": ""c:\\temp\\hmm3.txt"", ""AddFilesToProject"": false },
+                { ""Target"": ""c:\\temp\\hmm4.txt"", ""AddFilesToProject"": true }
             ]
-        }}
+        }
     ],
     ""ModelType"": ""Sundew.Generator.Tests.TextWriter, Sundew.Generator.Tests""
-}}";
+}";
             var result = JsonConvert.DeserializeObject<ISetup>(
                 input,
                 new SetupJsonConverter(),
