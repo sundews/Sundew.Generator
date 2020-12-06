@@ -18,11 +18,13 @@ namespace Sundew.Generator.MSBuild
         /// <summary>
         /// The progress reporter.
         /// </summary>
-        public IProgressReporter ProgressReporter;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "Script globals")]
+        public IProgressReporter? ProgressReporter;
 
         /// <summary>
         /// The setups factory.
         /// </summary>
-        public ISetupsFactory SetupsFactory;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "Script globals")]
+        public ISetupsFactory? SetupsFactory;
     }
 }

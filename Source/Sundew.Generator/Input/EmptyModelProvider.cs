@@ -27,7 +27,7 @@ namespace Sundew.Generator.Input
         /// <returns>
         /// The models.
         /// </returns>
-        public Task<IReadOnlyList<IModelInfo<TModel>>> GetModelsAsync(ISetup setup, IModelSetup modelSetup)
+        public Task<IReadOnlyList<IModelInfo<TModel>>> GetModelsAsync(ISetup setup, IModelSetup? modelSetup)
         {
             return Task.FromResult((IReadOnlyList<IModelInfo<TModel>>)new IModelInfo<TModel>[] { new ModelInfo<TModel>(Activator.CreateInstance<TModel>(), this.GetType().ToString()) });
         }

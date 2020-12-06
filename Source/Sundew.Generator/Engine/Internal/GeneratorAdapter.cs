@@ -7,6 +7,7 @@
 
 namespace Sundew.Generator.Engine.Internal
 {
+    using System;
     using System.Collections.Generic;
     using Sundew.Generator.Core;
 
@@ -73,7 +74,7 @@ namespace Sundew.Generator.Engine.Internal
         /// </returns>
         public object Generate(ISetup setup, IGeneratorSetup generatorSetup, ITarget target, object model, IRun run, long index)
         {
-            return this.generator.Generate((TSetup)setup, (TGeneratorSetup)generatorSetup, (TTarget)target, (TModel)model, (TRun)run, index);
+            return this.generator.Generate((TSetup)setup, (TGeneratorSetup)generatorSetup, (TTarget)target, (TModel)model, (TRun)run, index) ?? throw new InvalidOperationException($"Generator: {this.generator} returned null.");
         }
     }
 }

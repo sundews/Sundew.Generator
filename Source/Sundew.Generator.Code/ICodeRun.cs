@@ -20,7 +20,7 @@ namespace Sundew.Generator.Code
         /// <value>
         /// The name of the file.
         /// </value>
-        string FileName { get; }
+        string? FileName { get; }
 
         /// <summary>
         /// Gets the namespace.
@@ -28,6 +28,6 @@ namespace Sundew.Generator.Code
         /// <value>
         /// The namespace.
         /// </value>
-        string Namespace { get; }
+        string? Namespace { get; }
     }
 }

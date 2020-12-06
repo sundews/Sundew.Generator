@@ -18,7 +18,7 @@ namespace Sundew.Generator.Input
     /// <typeparam name="TModel">The type of the model.</typeparam>
     public interface IModelProvider<in TSetup, in TModelSetup, TModel> : IModelProvider
         where TModelSetup : class
-        where TModel : class
+        where TModel : class?
     {
         /// <summary>
         /// Gets the models.
@@ -28,6 +28,6 @@ namespace Sundew.Generator.Input
         /// <returns>
         /// The models.
         /// </returns>
-        Task<IReadOnlyList<IModelInfo<TModel>>> GetModelsAsync(TSetup setup, TModelSetup modelSetup);
+        Task<IReadOnlyList<IModelInfo<TModel>>> GetModelsAsync(TSetup setup, TModelSetup? modelSetup);
     }
 }

@@ -13,7 +13,7 @@ namespace Sundew.Generator.Engine.Internal
 
     internal static class GeneratorFactory
     {
-        public static IGenerator<ISetup, IGeneratorSetup, ITarget, object, IRun, object> CreateGenerator(TypeOrObject<IGenerator> generatorObjectOrType, SetupInfo setupInfo, int generatorSetupIndex, IGenerator previousGenerator)
+        public static IGenerator<ISetup, IGeneratorSetup, ITarget, object, IRun, object> CreateGenerator(TypeOrObject<IGenerator>? generatorObjectOrType, SetupInfo setupInfo, int generatorSetupIndex, IGenerator? previousGenerator)
         {
             if (generatorObjectOrType == null)
             {

@@ -36,7 +36,7 @@ namespace Sundew.Generator.Core
         /// <param name="modelSetup">The model setup.</param>
         /// <param name="writerSetups">The writer setups.</param>
         /// <param name="generatorSetups">The generator setups.</param>
-        protected Setup(TModelSetup modelSetup, IReadOnlyList<TWriterSetup> writerSetups, IReadOnlyList<TGeneratorSetup> generatorSetups)
+        protected Setup(TModelSetup modelSetup, IReadOnlyList<TWriterSetup> writerSetups, IReadOnlyList<TGeneratorSetup>? generatorSetups)
             : this()
         {
             this.ModelSetup = modelSetup;
@@ -50,7 +50,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The model setup.
         /// </value>
-        public TModelSetup ModelSetup { get; init; }
+        public TModelSetup? ModelSetup { get; init; }
 
         /// <summary>
         /// Gets the target setups.
@@ -58,7 +58,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The target setups.
         /// </value>
-        public IReadOnlyList<TWriterSetup> WriterSetups { get; init; }
+        public IReadOnlyList<TWriterSetup>? WriterSetups { get; init; }
 
         /// <summary>
         /// Gets the generator setups.
@@ -66,7 +66,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The generator setups.
         /// </value>
-        public IReadOnlyList<TGeneratorSetup> GeneratorSetups { get; init; }
+        public IReadOnlyList<TGeneratorSetup>? GeneratorSetups { get; init; }
 
         /// <summary>
         /// Gets the model setup.
@@ -74,7 +74,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The model setup.
         /// </value>
-        IModelSetup ISetup.ModelSetup => this.ModelSetup;
+        IModelSetup? ISetup.ModelSetup => this.ModelSetup;
 
         /// <summary>
         /// Gets the writer setups.
@@ -82,7 +82,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The output setups.
         /// </value>
-        IReadOnlyList<IWriterSetup> ISetup.WriterSetups => this.WriterSetups;
+        IReadOnlyList<IWriterSetup>? ISetup.WriterSetups => this.WriterSetups;
 
         /// <summary>
         /// Gets the generator setups.
@@ -90,6 +90,6 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The generator setups.
         /// </value>
-        IReadOnlyList<IGeneratorSetup> ISetup.GeneratorSetups => this.GeneratorSetups;
+        IReadOnlyList<IGeneratorSetup>? ISetup.GeneratorSetups => this.GeneratorSetups;
     }
 }

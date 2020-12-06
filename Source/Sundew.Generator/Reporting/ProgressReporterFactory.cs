@@ -23,8 +23,8 @@ namespace Sundew.Generator.Reporting
         /// A progress reporter.
         /// </returns>
         public IProgressReporter Create(
-            IProgressReporter progressReporter,
-            TextWriter textWriter = null)
+            IProgressReporter? progressReporter,
+            TextWriter? textWriter = null)
         {
             var simpleProgressReporter = textWriter != null ? new SimpleProgressReporter(textWriter) : null;
             if (progressReporter != null && simpleProgressReporter != null)

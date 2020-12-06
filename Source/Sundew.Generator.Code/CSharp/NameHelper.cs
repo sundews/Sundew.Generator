@@ -23,11 +23,11 @@ namespace Sundew.Generator.Code.CSharp
         /// <returns>
         /// The folder path.
         /// </returns>
-        public static IReadOnlyList<string> GetFolderPath(string @namespace)
+        public static IReadOnlyList<string> GetFolderPath(string? @namespace)
         {
             return string.IsNullOrEmpty(@namespace)
                 ? new string[0]
-                : @namespace.Split(Dot);
+                : @namespace!.Split(Dot);
         }
     }
 }

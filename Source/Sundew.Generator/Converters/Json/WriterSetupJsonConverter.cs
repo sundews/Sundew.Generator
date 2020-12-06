@@ -16,19 +16,19 @@ namespace Sundew.Generator.Converters.Json
     {
         private const string WriterPropertyName = "Writer";
 
-        private IWriterSetup lastWriterSetup;
+        private IWriterSetup? lastWriterSetup;
 
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(IWriterSetup);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             JsonHelper.WriteWithType(writer, value, serializer, WriterPropertyName);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             JObject item = JObject.Load(reader);
             var writerSetupType = JsonHelper.GetType(item);
@@ -48,7 +48,7 @@ namespace Sundew.Generator.Converters.Json
 
             if (writerSetupType != null)
             {
-                this.lastWriterSetup = (IWriterSetup)item.ToObject(writerSetupType, serializer);
+                this.lastWriterSetup = (IWriterSetup?)item.ToObject(writerSetupType, serializer);
                 return this.lastWriterSetup;
             }
 

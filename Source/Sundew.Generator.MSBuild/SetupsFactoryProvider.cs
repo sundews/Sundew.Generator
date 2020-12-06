@@ -22,13 +22,13 @@ namespace Sundew.Generator.MSBuild
     public class SetupsFactoryProvider
     {
         private readonly string currentDirectory;
-        private readonly ITaskItem[] generationSetupTaskItems;
+        private readonly ITaskItem[]? generationSetupTaskItems;
         private readonly SetupsFactoryTypesVisitor typeNameAndAssemblyVisitor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SetupsFactoryProvider"/> class.
         /// </summary>
-        public SetupsFactoryProvider(string currentDirectory, ITaskItem[] generationSetupTaskItems, IEnumerable<SyntaxTree> compiledGenerationSetupsSyntaxTrees, Compilation compilation)
+        public SetupsFactoryProvider(string currentDirectory, ITaskItem[]? generationSetupTaskItems, IEnumerable<SyntaxTree> compiledGenerationSetupsSyntaxTrees, Compilation compilation)
         {
             this.currentDirectory = currentDirectory;
             this.generationSetupTaskItems = generationSetupTaskItems;
@@ -39,10 +39,10 @@ namespace Sundew.Generator.MSBuild
         /// Gets the setups factory.
         /// </summary>
         /// <returns>A setups factory.</returns>
-        public ISetupsFactory GetSetupsFactory()
+        public ISetupsFactory? GetSetupsFactory()
         {
-            ISetupsFactory setupsFactory = null;
-            if (this.generationSetupTaskItems.Any())
+            ISetupsFactory? setupsFactory = null;
+            if (this.generationSetupTaskItems?.Any() == true)
             {
                 setupsFactory = new JsonSetupsFactory(this.generationSetupTaskItems.Select(x => Path.Combine(this.currentDirectory, x.ItemSpec)));
             }
@@ -62,8 +62,8 @@ namespace Sundew.Generator.MSBuild
         {
             private readonly IEnumerable<SyntaxTree> syntaxTrees;
             private readonly Compilation compilation;
-            private List<string> types;
-            private SemanticModel semanticModel;
+            private List<string>? types;
+            private SemanticModel? semanticModel;
 
             public SetupsFactoryTypesVisitor(IEnumerable<SyntaxTree> syntaxTrees, Compilation compilation)
             {
@@ -91,7 +91,7 @@ namespace Sundew.Generator.MSBuild
                 var declaredSymbol = this.semanticModel.GetDeclaredSymbol(node);
                 if (declaredSymbol != null)
                 {
-                    this.types.Add($"{declaredSymbol.ToDisplayString()}, {declaredSymbol.ContainingAssembly}");
+                    this.types?.Add($"{declaredSymbol.ToDisplayString()}, {declaredSymbol.ContainingAssembly}");
                 }
             }
         }

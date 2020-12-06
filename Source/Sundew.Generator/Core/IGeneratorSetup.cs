@@ -21,7 +21,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The generator.
         /// </value>
-        TypeOrObject<IGenerator> Generator { get; }
+        TypeOrObject<IGenerator>? Generator { get; }
 
         /// <summary>
         /// Gets the writer setups.
@@ -29,7 +29,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The writer setups.
         /// </value>
-        IReadOnlyList<IWriterSetup> WriterSetups { get; }
+        IReadOnlyList<IWriterSetup>? WriterSetups { get; }
 
         /// <summary>
         /// Gets a value indicating whether [skip global writer setup].

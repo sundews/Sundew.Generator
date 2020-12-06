@@ -45,6 +45,6 @@ namespace Sundew.Generator.Code
         /// <value>
         /// The compilation paths.
         /// </value>
-        public IReadOnlyList<string> CompilationPaths { get; }
+        public IReadOnlyList<string>? CompilationPaths { get; }
     }
 }

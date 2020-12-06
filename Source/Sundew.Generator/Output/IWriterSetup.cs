@@ -29,6 +29,6 @@ namespace Sundew.Generator.Output
         /// <value>
         /// The writer.
         /// </value>
-        TypeOrObject<IWriter> Writer { get; }
+        TypeOrObject<IWriter>? Writer { get; }
     }
 }

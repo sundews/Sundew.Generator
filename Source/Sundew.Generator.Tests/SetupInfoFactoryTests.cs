@@ -23,10 +23,9 @@ namespace Sundew.Generator.Tests
                 {
                     WriterSetups = new IWriterSetup[]
                     {
-                        new WriterSetup
+                        new WriterSetup(@"c:\temp")
                         {
                             Writer = new TextFileWriter(),
-                            Target = @"c:\temp",
                         },
                     },
                     GeneratorSetups = new[] { new GeneratorSetup() },

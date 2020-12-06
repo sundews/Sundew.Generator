@@ -24,7 +24,7 @@ namespace Sundew.Generator.Reflection
         /// </summary>
         /// <param name="typeAndAssembly">The type and assembly.</param>
         /// <returns>The loaded type.</returns>
-        public static Type GetType(string typeAndAssembly)
+        public static Type? GetType(string typeAndAssembly)
         {
             var nameAndAssembly = typeAndAssembly.Split(TypeAssemblySeparator, StringSplitOptions.RemoveEmptyEntries);
             if (nameAndAssembly.Length >= 2)
@@ -57,9 +57,9 @@ namespace Sundew.Generator.Reflection
             return null;
         }
 
-        private static Type TryGetType(string[] nameAndAssembly)
+        private static Type? TryGetType(string[] nameAndAssembly)
         {
-            var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => x.GetName().Name == nameAndAssembly[1]);
+            var assembly = Array.Find(AppDomain.CurrentDomain.GetAssemblies(), x => x.GetName().Name == nameAndAssembly[1]);
             if (assembly == null && File.Exists(nameAndAssembly[1] + ".dll"))
             {
                 assembly = Assembly.Load(AssemblyName.GetAssemblyName(nameAndAssembly[1] + ".dll"));

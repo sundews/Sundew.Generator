@@ -35,7 +35,7 @@ namespace Sundew.Generator.MSBuild
         /// The project path.
         /// </value>
         [Required]
-        public string ProjectPath { get; set; }
+        public string? ProjectPath { get; set; }
 
         /// <summary>
         /// Gets or sets the intermediate output path.
@@ -44,7 +44,7 @@ namespace Sundew.Generator.MSBuild
         /// The intermediate output path.
         /// </value>
         [Required]
-        public string IntermediateOutputPath { get; set; }
+        public string? IntermediateOutputPath { get; set; }
 
         /// <summary>
         /// Gets or sets the output path.
@@ -53,7 +53,7 @@ namespace Sundew.Generator.MSBuild
         /// The output path.
         /// </value>
         [Required]
-        public string OutputPath { get; set; }
+        public string? OutputPath { get; set; }
 
         /// <summary>
         /// Gets or sets the generation references.
@@ -62,7 +62,7 @@ namespace Sundew.Generator.MSBuild
         /// The generation references.
         /// </value>
         [Required]
-        public ITaskItem[] GeneratorReferences { get; set; }
+        public ITaskItem[]? GeneratorReferences { get; set; }
 
         /// <summary>
         /// Gets or sets the additional generation references.
@@ -71,7 +71,7 @@ namespace Sundew.Generator.MSBuild
         /// The additional generation references.
         /// </value>
         [Required]
-        public ITaskItem[] AdditionalGeneratorReferences { get; set; }
+        public ITaskItem[]? AdditionalGeneratorReferences { get; set; }
 
         /// <summary>
         /// Gets or sets the generation setups.
@@ -80,7 +80,7 @@ namespace Sundew.Generator.MSBuild
         /// The generation setups.
         /// </value>
         [Required]
-        public ITaskItem[] GenerationSetups { get; set; }
+        public ITaskItem[]? GenerationSetups { get; set; }
 
         /// <summary>
         /// Gets or sets the compiled generation setups.
@@ -89,7 +89,7 @@ namespace Sundew.Generator.MSBuild
         /// The generation setups.
         /// </value>
         [Required]
-        public ITaskItem[] CompileGenerationSetups { get; set; }
+        public ITaskItem[]? CompileGenerationSetups { get; set; }
 
         /// <summary>
         /// Gets or sets the generation and compiles.
@@ -98,7 +98,7 @@ namespace Sundew.Generator.MSBuild
         /// The generation and compiles.
         /// </value>
         [Required]
-        public ITaskItem[] GeneratesAndCompiles { get; set; }
+        public ITaskItem[]? GeneratesAndCompiles { get; set; }
 
         /// <summary>
         /// Gets or sets the generation.
@@ -107,7 +107,7 @@ namespace Sundew.Generator.MSBuild
         /// The generation.
         /// </value>
         [Required]
-        public ITaskItem[] Generates { get; set; }
+        public ITaskItem[]? Generates { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is compiler build.
@@ -130,7 +130,7 @@ namespace Sundew.Generator.MSBuild
         /// The generated files.
         /// </value>
         [Output]
-        public ITaskItem[] GeneratedFiles { get; set; }
+        public ITaskItem[]? GeneratedFiles { get; set; }
 
         /// <summary>
         /// Gets or sets the generated compiles.
@@ -139,7 +139,7 @@ namespace Sundew.Generator.MSBuild
         /// The generated compiles.
         /// </value>
         [Output]
-        public ITaskItem[] GeneratedCompiles { get; set; }
+        public ITaskItem[]? GeneratedCompiles { get; set; }
 
         /// <summary>
         /// Must be implemented by derived class.
@@ -156,21 +156,21 @@ namespace Sundew.Generator.MSBuild
 
             var currentDirectory = Directory.GetCurrentDirectory();
             var assemblyName = Path.GetFileNameWithoutExtension(this.ProjectPath) + ".gen";
-            var sgDirectoryPath = Path.Combine(this.IntermediateOutputPath, "sg");
+            var sgDirectoryPath = Path.Combine(this.IntermediateOutputPath!, "sg");
             var libraryPath = Path.Combine(sgDirectoryPath, $"{assemblyName}.dll");
 
             this.CleanUpTemporaryDirectory(sgDirectoryPath);
 
-            EmitResult emitResult = null;
+            EmitResult? emitResult = null;
             try
             {
-                var referenceItems = this.GeneratorReferences.Concat(this.AdditionalGeneratorReferences).ToList();
+                var referenceItems = this.GeneratorReferences!.Concat(this.AdditionalGeneratorReferences!).ToList();
                 var references = AppDomain.CurrentDomain.GetAssemblies()
                     .Select(x => MetadataReference.CreateFromFile(x.Location))
                     .Concat(referenceItems.Select(reference =>
                         MetadataReference.CreateFromFile(Path.GetFullPath(reference.ItemSpec)))).ToList();
-                var generatesSyntaxTrees = this.Generates.Concat(this.GeneratesAndCompiles).Select(ParseCompile);
-                var compiledGenerationSetupsSyntaxTrees = this.CompileGenerationSetups.Select(ParseCompile).ToArray();
+                var generatesSyntaxTrees = this.Generates!.Concat(this.GeneratesAndCompiles!).Select(ParseCompile);
+                var compiledGenerationSetupsSyntaxTrees = this.CompileGenerationSetups!.Select(ParseCompile).ToArray();
                 var compilation =
                     CSharpCompilation.Create(
                         assemblyName,
@@ -194,7 +194,7 @@ namespace Sundew.Generator.MSBuild
                 var msBuildLogReporter = new MsBuildLogReporter(this.Log);
 
                 var generationScript = CSharpScript.Create<ConcurrentBag<string>>(
-                    $@"
+                    @"
 using System;
 using System.Collections.Concurrent;
 using Sundew.Generator;
@@ -208,7 +208,7 @@ result.Result
                     interactiveAssemblyLoader);
                 var setupFactoryProvider = new SetupsFactoryProvider(Directory.GetCurrentDirectory(), this.GenerationSetups, compiledGenerationSetupsSyntaxTrees, compilation);
                 var setupsFactory = setupFactoryProvider.GetSetupsFactory();
-                Directory.SetCurrentDirectory(Path.Combine(currentDirectory, this.OutputPath));
+                Directory.SetCurrentDirectory(Path.Combine(currentDirectory, this.OutputPath!));
                 var scriptStateTask = generationScript.RunAsync(new Globals
                 { ProgressReporter = msBuildLogReporter, SetupsFactory = setupsFactory });
                 scriptStateTask.Wait();

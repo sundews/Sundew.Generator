@@ -8,7 +8,6 @@
 namespace Sundew.Generator.Discovery
 {
     using System.Threading.Tasks;
-    using Sundew.Generator.Core;
 
     /// <summary>
     /// Provider for getting an <see cref="ISetup"/> based on a file path.

@@ -30,7 +30,7 @@ namespace Sundew.Generator.Engine.Internal.Input
 
             if (modelType == null)
             {
-                throw new InitializationException($"The model type could not be determined, please check the setup.", setupInfo.Origin, null);
+                throw new InitializationException("The model type could not be determined, please check the setup.", setupInfo.Origin, null);
             }
 
             var modelProviderTypeOrObject = modelSetup.Provider;
@@ -66,7 +66,7 @@ namespace Sundew.Generator.Engine.Internal.Input
             return CreateWrappedModelProvider(setup, modelSetup, modelType, (IModelProvider)Activator.CreateInstance(modelProviderType));
         }
 
-        private static Type GetModelType(Type modelType, SetupInfo setupInfo, Type modelProviderType)
+        private static Type GetModelType(Type? modelType, SetupInfo setupInfo, Type? modelProviderType)
         {
             if (modelType != null)
             {
@@ -91,26 +91,25 @@ namespace Sundew.Generator.Engine.Internal.Input
                 null);
         }
 
-        private static Type GetModelProviderInterfaceModelType(Type modelProviderType)
+        private static Type? GetModelProviderInterfaceModelType(Type? modelProviderType)
         {
             var modelProviderInterfaceType = modelProviderType?.GetGenericInterface(ModelProviderInterfaceType);
             return DefaultImplementation.GetDefaultImplementationType(modelProviderInterfaceType?.GenericTypeArguments[2]);
         }
 
-        private static Type GetGeneratorInterfaceModelType(SetupInfo setupInfo)
+        private static Type? GetGeneratorInterfaceModelType(SetupInfo setupInfo)
         {
-            var generatorSetup = setupInfo.Setup.GeneratorSetups.FirstOrDefault();
+            var generatorSetup = setupInfo.Setup.GeneratorSetups?.FirstOrDefault();
             if (generatorSetup != null)
             {
-                var generatorType = generatorSetup.Generator.Type;
-                var interfaceType = generatorType.GetGenericInterface(typeof(IGenerator<,,,,,>));
+                var interfaceType = generatorSetup.Generator?.Type.GetGenericInterface(typeof(IGenerator<,,,,,>));
                 return DefaultImplementation.GetDefaultImplementationType(interfaceType?.GenericTypeArguments.ElementAtOrDefault(3));
             }
 
             return null;
         }
 
-        private static IModelProvider<ISetup, IModelSetup, object> CreateWrappedModelProvider(ISetup setup, IModelSetup modelSetup, Type modelType, IModelProvider modelProvider)
+        private static IModelProvider<ISetup, IModelSetup, object> CreateWrappedModelProvider(ISetup setup, IModelSetup? modelSetup, Type modelType, IModelProvider modelProvider)
         {
             return (IModelProvider<ISetup, IModelSetup, object>)Activator.CreateInstance(
                 typeof(ModelProviderAdapter<,,>).MakeGenericType(setup.GetType(), modelSetup?.GetType() ?? typeof(IModelSetup), modelType),

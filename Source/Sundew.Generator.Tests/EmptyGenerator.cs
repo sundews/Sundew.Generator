@@ -14,12 +14,12 @@ namespace Sundew.Generator.Tests
     {
         public IReadOnlyList<IRun> Prepare(Setup setup, GeneratorSetup generatorSetup, ITarget target, int model, string modelOrigin)
         {
-            throw new System.NotImplementedException();
+            throw new System.NotSupportedException();
         }
 
         public string Generate(Setup setup, GeneratorSetup generatorSetup, ITarget target, int model, IRun run, long index)
         {
-            throw new System.NotImplementedException();
+            throw new System.NotSupportedException();
         }
     }
 }

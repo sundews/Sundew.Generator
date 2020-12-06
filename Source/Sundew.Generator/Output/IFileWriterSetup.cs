@@ -21,7 +21,7 @@ namespace Sundew.Generator.Output
         /// <value>
         /// The file extension.
         /// </value>
-        string FileExtension { get; }
+        string? FileExtension { get; }
 
         /// <summary>
         /// Gets the file name suffix.
@@ -29,7 +29,7 @@ namespace Sundew.Generator.Output
         /// <value>
         /// The file name suffix.
         /// </value>
-        string FileNameSuffix { get; }
+        string? FileNameSuffix { get; }
 
         /// <summary>
         /// Gets the folder.
@@ -37,6 +37,6 @@ namespace Sundew.Generator.Output
         /// <value>
         /// The folder.
         /// </value>
-        string Folder { get; }
+        string? Folder { get; }
     }
 }

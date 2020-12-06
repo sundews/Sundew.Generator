@@ -7,10 +7,10 @@
 
 namespace Sundew.Generator.Discovery
 {
+    using System;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Sundew.Generator.Converters.Json;
-    using Sundew.Generator.Core;
     using Sundew.IO;
 
     /// <summary>
@@ -28,13 +28,13 @@ namespace Sundew.Generator.Discovery
         /// </returns>
         public async Task<ISetup> GetSetupAsync(string path)
         {
-            var text = await File.ReadAllTextAsync(path);
+            var text = await File.ReadAllTextAsync(path).ConfigureAwait(false);
             return JsonConvert.DeserializeObject<ISetup>(
                 text,
                 new SetupJsonConverter(),
                 new WriterSetupJsonConverter(),
                 new GeneratorSetupJsonConverter(),
-                new TypeOrObjectJsonConverter());
+                new TypeOrObjectJsonConverter()) ?? throw new InvalidOperationException($"JsonConvert return null for: {text}");
         }
     }
 }

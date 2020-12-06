@@ -7,6 +7,7 @@
 
 namespace Sundew.Generator.Output
 {
+    using Newtonsoft.Json;
     using Sundew.Generator.Core;
 
     /// <summary>
@@ -17,9 +18,11 @@ namespace Sundew.Generator.Output
     public class FileWriterSetup : WriterSetup, IFileWriterSetup
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileWriterSetup"/> class.
+        /// Initializes a new instance of the <see cref="FileWriterSetup" /> class.
         /// </summary>
-        public FileWriterSetup()
+        /// <param name="target">The target.</param>
+        public FileWriterSetup(string target)
+         : base(target)
         {
         }
 
@@ -31,6 +34,7 @@ namespace Sundew.Generator.Output
         /// <param name="folder">The folder.</param>
         /// <param name="target">The target.</param>
         /// <param name="writer">The writer.</param>
+        [JsonConstructor]
         public FileWriterSetup(string fileExtension, string fileNameSuffix, string folder, string target, TypeOrObject<IWriter> writer)
             : base(target, writer)
         {
@@ -45,7 +49,7 @@ namespace Sundew.Generator.Output
         /// <value>
         /// The file extension.
         /// </value>
-        public string FileExtension { get; init; }
+        public string? FileExtension { get; init; }
 
         /// <summary>
         /// Gets the file name suffix.
@@ -53,7 +57,7 @@ namespace Sundew.Generator.Output
         /// <value>
         /// The file name suffix.
         /// </value>
-        public string FileNameSuffix { get; init; }
+        public string? FileNameSuffix { get; init; }
 
         /// <summary>
         /// Gets the folder.
@@ -61,6 +65,6 @@ namespace Sundew.Generator.Output
         /// <value>
         /// The folder.
         /// </value>
-        public string Folder { get; init; }
+        public string? Folder { get; init; }
     }
 }

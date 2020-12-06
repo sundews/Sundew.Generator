@@ -19,7 +19,9 @@ namespace Sundew.Generator.Code
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeRun"/> class.
         /// </summary>
-        public CodeRun()
+        /// <param name="name">The name.</param>
+        public CodeRun(string name)
+            : base(name)
         {
         }
 
@@ -29,7 +31,7 @@ namespace Sundew.Generator.Code
         /// <param name="name">The name.</param>
         /// <param name="fileName">Name of the file.</param>
         /// <param name="namespace">The namespace.</param>
-        public CodeRun(string name, string fileName, string @namespace)
+        public CodeRun(string name, string? fileName, string? @namespace)
             : base(name)
         {
             this.FileName = fileName;
@@ -42,7 +44,7 @@ namespace Sundew.Generator.Code
         /// <value>
         /// The name of the file.
         /// </value>
-        public string FileName { get; init; }
+        public string? FileName { get; init; }
 
         /// <summary>
         /// Gets the namespace.
@@ -50,6 +52,6 @@ namespace Sundew.Generator.Code
         /// <value>
         /// The namespace.
         /// </value>
-        public string Namespace { get; init; }
+        public string? Namespace { get; init; }
     }
 }

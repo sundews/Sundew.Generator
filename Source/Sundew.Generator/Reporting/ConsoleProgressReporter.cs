@@ -13,6 +13,7 @@ namespace Sundew.Generator.Reporting
     using System.Diagnostics;
     using System.Threading;
     using System.Threading.Tasks;
+    using Sundew.Base;
     using Sundew.Base.Text;
 
     /// <summary>
@@ -30,7 +31,7 @@ namespace Sundew.Generator.Reporting
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly BlockingCollection<Base.Computation.Progress<Report>> reports = new BlockingCollection<Base.Computation.Progress<Report>>(new ConcurrentQueue<Base.Computation.Progress<Report>>());
         private readonly bool isRedirected;
-        private Task outputTask;
+        private Task? outputTask;
         private int busyIndicatorIndex;
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace Sundew.Generator.Reporting
         public void Report(Sundew.Base.Computation.Progress<Report> progress)
         {
             this.reports.Add(progress);
-            if (progress.Report != null && progress.Report.ReportType == ReportType.CompletedGeneration)
+            if (progress.Report?.ReportType == ReportType.CompletedGeneration)
             {
                 this.reports.CompleteAdding();
             }
@@ -98,7 +99,7 @@ namespace Sundew.Generator.Reporting
 
         private Task Output()
         {
-            Base.Computation.Progress<Report> previousProgress = null;
+            Base.Computation.Progress<Report>? previousProgress = null;
             while (!this.cancellationTokenSource.Token.IsCancellationRequested && !this.reports.IsCompleted)
             {
                 if (this.reports.TryTake(out var progress, TimeSpan.FromMilliseconds(100)))
@@ -109,7 +110,7 @@ namespace Sundew.Generator.Reporting
 
                     previousProgress = progress;
                 }
-                else if (previousProgress != null && !previousProgress.HasCompletedAdding && !this.isRedirected)
+                else if (previousProgress?.HasCompletedAdding == false && !this.isRedirected)
                 {
                     Print(this.GetBusyIndicatorLine(previousProgress));
                 }
@@ -118,7 +119,7 @@ namespace Sundew.Generator.Reporting
             return Task.CompletedTask;
         }
 
-        private IEnumerable<ConsoleLine> GetLines(Base.Computation.Progress<Report> progress, Base.Computation.Progress<Report> previousProgress)
+        private IEnumerable<ConsoleLine> GetLines(Base.Computation.Progress<Report> progress, Base.Computation.Progress<Report>? previousProgress)
         {
             if (progress.Report != null)
             {
@@ -135,7 +136,7 @@ namespace Sundew.Generator.Reporting
                     case ReportType.AddingItems:
                         if (this.isRedirected)
                         {
-                            if (previousProgress != null && previousProgress.TotalItems == 0)
+                            if (previousProgress?.TotalItems == 0)
                             {
                                 yield return new ConsoleLine(false, $"Initializing...{Environment.NewLine}");
                             }
@@ -152,12 +153,12 @@ namespace Sundew.Generator.Reporting
                     case ReportType.CompletedTarget:
                         if (this.isRedirected)
                         {
-                            var text = progress.Report.Parameter.ToString();
+                            var text = progress.Report.Parameter.ToStringOrEmpty();
                             yield return new ConsoleLine(false, $"{text.LimitAndPad(Math.Max(60, text.Length), ' ', PadSide.Right, LimitSide.Left)} - {progress.Percentage,8:P}{Environment.NewLine}");
                         }
                         else
                         {
-                            yield return new ConsoleLine(true, $"{progress.Report.Parameter.ToString().LimitAndPad(Console.BufferWidth - 11, ' ', PadSide.Right, LimitSide.Left)} - {progress.Percentage,8:P}{Environment.NewLine}");
+                            yield return new ConsoleLine(true, $"{progress.Report.Parameter.ToStringOrEmpty().LimitAndPad(Console.BufferWidth - 11, ' ', PadSide.Right, LimitSide.Left)} - {progress.Percentage,8:P}{Environment.NewLine}");
                             yield return new ConsoleLine(false, this.GetProgressMessage(progress, this.GetProcessValueAndTick()));
                         }
 

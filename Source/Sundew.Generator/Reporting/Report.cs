@@ -17,7 +17,7 @@ namespace Sundew.Generator.Reporting
         /// </summary>
         /// <param name="reportType">Type of the report.</param>
         /// <param name="parameter">The parameter.</param>
-        internal Report(ReportType reportType, object parameter = null)
+        internal Report(ReportType reportType, object? parameter = null)
         {
             this.ReportType = reportType;
             this.Parameter = parameter;
@@ -37,6 +37,6 @@ namespace Sundew.Generator.Reporting
         /// <value>
         /// The parameter.
         /// </value>
-        public object Parameter { get; }
+        public object? Parameter { get; }
     }
 }

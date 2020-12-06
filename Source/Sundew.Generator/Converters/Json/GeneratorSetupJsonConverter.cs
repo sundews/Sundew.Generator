@@ -18,7 +18,7 @@ namespace Sundew.Generator.Converters.Json
     {
         private const string GeneratorPropertyName = "Generator";
         private bool isActive = false;
-        private IGeneratorSetup lastGeneratorSetup;
+        private IGeneratorSetup? lastGeneratorSetup;
 
         public override bool CanConvert(Type objectType)
         {
@@ -30,19 +30,19 @@ namespace Sundew.Generator.Converters.Json
             return typeof(IGeneratorSetup).IsAssignableFrom(objectType);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             JsonHelper.WriteWithType(writer, value, serializer, GeneratorPropertyName);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             JObject item = JObject.Load(reader);
             var generatorTypeObject = item[GeneratorPropertyName];
             if (generatorTypeObject != null)
             {
                 var generatorType = TypeAssemblyLoader.GetType(generatorTypeObject.Value<string>());
-                var interfaceType = generatorType.GetGenericInterface(typeof(IGenerator<,,,,,>));
+                var interfaceType = generatorType?.GetGenericInterface(typeof(IGenerator<,,,,,>));
                 if (interfaceType != null)
                 {
                     var generatorSetupType = typeof(GeneratorSetup);
@@ -51,18 +51,18 @@ namespace Sundew.Generator.Converters.Json
                         generatorSetupType = interfaceType.GenericTypeArguments[1];
                     }
 
-                    if (generatorSetupType == null || generatorSetupType.IsAbstract)
+                    if (generatorSetupType?.IsAbstract != false)
                     {
                         generatorSetupType = DefaultImplementation.GetDefaultImplementationType(generatorSetupType);
                     }
 
-                    if (generatorSetupType == null || generatorSetupType.IsAbstract)
+                    if (generatorSetupType?.IsAbstract != false)
                     {
                         generatorSetupType = objectType;
                     }
 
                     this.isActive = true;
-                    this.lastGeneratorSetup = (IGeneratorSetup)item.ToObject(generatorSetupType, serializer);
+                    this.lastGeneratorSetup = (IGeneratorSetup?)item.ToObject(generatorSetupType, serializer);
                     this.isActive = false;
                     return this.lastGeneratorSetup;
                 }

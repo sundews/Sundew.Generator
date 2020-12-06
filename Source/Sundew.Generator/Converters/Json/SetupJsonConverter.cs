@@ -10,7 +10,6 @@ namespace Sundew.Generator.Converters.Json
     using System;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-    using Sundew.Generator.Core;
 
     internal class SetupJsonConverter : JsonConverter
     {
@@ -21,12 +20,12 @@ namespace Sundew.Generator.Converters.Json
             return objectType == typeof(ISetup);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             JsonHelper.WriteWithType(writer, value, serializer, TypePropertyName);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             JObject item = JObject.Load(reader);
             var setupType = JsonHelper.GetType(item);

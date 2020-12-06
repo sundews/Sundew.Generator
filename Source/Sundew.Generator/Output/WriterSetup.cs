@@ -7,6 +7,7 @@
 
 namespace Sundew.Generator.Output
 {
+    using Newtonsoft.Json;
     using Sundew.Generator.Core;
 
     /// <summary>
@@ -16,10 +17,12 @@ namespace Sundew.Generator.Output
     public class WriterSetup : IWriterSetup
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WriterSetup"/> class.
+        /// Initializes a new instance of the <see cref="WriterSetup" /> class.
         /// </summary>
-        public WriterSetup()
+        /// <param name="target">The target.</param>
+        public WriterSetup(string target)
         {
+            this.Target = target;
         }
 
         /// <summary>
@@ -27,6 +30,7 @@ namespace Sundew.Generator.Output
         /// </summary>
         /// <param name="target">The target.</param>
         /// <param name="writer">The writer.</param>
+        [JsonConstructor]
         public WriterSetup(string target, TypeOrObject<IWriter> writer)
         {
             this.Target = target;
@@ -47,6 +51,6 @@ namespace Sundew.Generator.Output
         /// <value>
         /// The type.
         /// </value>
-        public TypeOrObject<IWriter> Writer { get; init; }
+        public TypeOrObject<IWriter>? Writer { get; init; }
     }
 }

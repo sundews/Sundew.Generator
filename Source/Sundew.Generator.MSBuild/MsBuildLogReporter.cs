@@ -10,6 +10,7 @@ namespace Sundew.Generator.MSBuild
     using System;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
+    using Sundew.Base;
     using Sundew.Generator.Reporting;
 
     /// <summary>
@@ -51,7 +52,7 @@ namespace Sundew.Generator.MSBuild
                     this.log.LogMessage(MessageImportance.Low, $"Added item: {progress.Report.Parameter}");
                     break;
                 case ReportType.CompletedAdding:
-                    this.log.LogMessage(MessageImportance.Normal, $"Completed adding items");
+                    this.log.LogMessage(MessageImportance.Normal, "Completed adding items");
                     break;
                 case ReportType.GeneratedItem:
                     this.log.LogMessage(MessageImportance.High, $"Completed item: {progress.Report.Parameter}");
@@ -69,7 +70,7 @@ namespace Sundew.Generator.MSBuild
                     this.log.LogMessage(MessageImportance.High, "Cancelled code generation");
                     break;
                 case ReportType.Error:
-                    this.log.LogError(progress.Report.Parameter.ToString());
+                    this.log.LogError(progress.Report.Parameter.ToStringOrEmpty());
                     break;
                 case null:
                     break;

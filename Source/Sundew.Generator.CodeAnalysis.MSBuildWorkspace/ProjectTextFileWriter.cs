@@ -7,6 +7,7 @@
 
 namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
 {
+    using System;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -24,10 +25,10 @@ namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
     /// <seealso cref="IWriter{TTargetSetup,TTarget,IRun,TOutput}" />
     public class ProjectTextFileWriter : IWriter<IMsBuildWriterSetup, IProject, ICodeRun, ITextOutput>
     {
-        private Task<Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace> workspaceTask;
-        private Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace workspace;
-        private Microsoft.CodeAnalysis.Project originalProject;
-        private Microsoft.CodeAnalysis.Project project;
+        private Task<Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace>? workspaceTask;
+        private Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace? workspace;
+        private Microsoft.CodeAnalysis.Project? originalProject;
+        private Microsoft.CodeAnalysis.Project? project;
 
         /// <summary>
         /// Prepares the target.
@@ -38,6 +39,11 @@ namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
         /// </returns>
         public async Task<IProject> GetTargetAsync(IMsBuildWriterSetup writerSetup)
         {
+            if (string.IsNullOrEmpty(writerSetup.Target))
+            {
+                throw new ArgumentNullException(nameof(writerSetup.Target), "Target cannot be null.");
+            }
+
             var fullTargetPath = Path.GetFullPath(writerSetup.Target);
             if (writerSetup.AddFilesToProject)
             {
@@ -69,8 +75,11 @@ namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
         {
             if (writerSetup.AddFilesToProject)
             {
-                this.workspace = await this.workspaceTask.ConfigureAwait(false);
-                this.originalProject = this.project = await this.workspace.OpenProjectAsync(target.Path).ConfigureAwait(false);
+                if (this.workspaceTask != null)
+                {
+                    this.workspace = await this.workspaceTask.ConfigureAwait(false);
+                    this.originalProject = this.project = await this.workspace.OpenProjectAsync(target.Path).ConfigureAwait(false);
+                }
             }
         }
 

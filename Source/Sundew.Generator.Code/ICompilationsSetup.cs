@@ -22,6 +22,6 @@ namespace Sundew.Generator.Code
         /// <value>
         /// The compilation paths.
         /// </value>
-        IReadOnlyList<string> CompilationPaths { get; }
+        IReadOnlyList<string>? CompilationPaths { get; }
     }
 }

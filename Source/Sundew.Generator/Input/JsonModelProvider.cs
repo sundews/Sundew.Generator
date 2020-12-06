@@ -32,7 +32,7 @@ namespace Sundew.Generator.Input
         /// <returns>
         /// The models.
         /// </returns>
-        public async Task<IReadOnlyList<IModelInfo<TModel>>> GetModelsAsync(ISetup setup, IModelSetup modelSetup)
+        public async Task<IReadOnlyList<IModelInfo<TModel>>> GetModelsAsync(ISetup setup, IModelSetup? modelSetup)
         {
             var folder = Folder;
             var filesSearchPattern = FilesSearchPattern;

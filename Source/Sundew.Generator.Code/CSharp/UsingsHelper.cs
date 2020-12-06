@@ -24,7 +24,7 @@ namespace Sundew.Generator.Code.CSharp
         /// <param name="indent">The indent.</param>
         /// <param name="usings">The usings.</param>
         /// <returns>A string containing usings.</returns>
-        public static string GetUsings(bool useGlobalUsings, int indent, params IEnumerable<string>[] usings)
+        public static string GetUsings(bool useGlobalUsings, int indent, params IEnumerable<string>?[]? usings)
         {
             return GetUsings(useGlobalUsings, indent, true, usings);
         }
@@ -37,10 +37,10 @@ namespace Sundew.Generator.Code.CSharp
         /// <param name="placeSystemUsingsFirst">if set to <c>true</c> [place system usings first].</param>
         /// <param name="usings">The usings.</param>
         /// <returns>A string containing usings.</returns>
-        public static string GetUsings(bool useGlobalUsings, int indent, bool placeSystemUsingsFirst, params IEnumerable<string>[] usings)
+        public static string GetUsings(bool useGlobalUsings, int indent, bool placeSystemUsingsFirst, params IEnumerable<string>?[]? usings)
         {
             var stringBuilder = new StringBuilder();
-            IEnumerable<string> flattenedUsings = usings.Where(x => x != null).SelectMany(x => x).Distinct().OrderBy(x => x);
+            IEnumerable<string> flattenedUsings = usings?.Where(x => x != null).SelectMany(x => x).Distinct().OrderBy(x => x) ?? Enumerable.Empty<string>();
             if (placeSystemUsingsFirst)
             {
                 var groupedUsings = flattenedUsings.GroupBy(x => x.StartsWith("System.") || x.Equals("System"));

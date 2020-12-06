@@ -27,7 +27,7 @@ namespace Sundew.Generator.Engine.Internal
             this.writerInfos = writerInfos;
         }
 
-        public async Task<ConcurrentBag<string>> GenerateAsync(IGeneratorOptions generatorOptions, IProgressTracker<Report> progressTracker = null)
+        public async Task<ConcurrentBag<string>> GenerateAsync(IGeneratorOptions generatorOptions, IProgressTracker<Report>? progressTracker = null)
         {
             progressTracker ??= IgnoringProgressReporter.Default;
             var result = new ConcurrentBag<string>();
@@ -59,8 +59,8 @@ namespace Sundew.Generator.Engine.Internal
             }
         }
 
-        private static async Task<TargetRun> CreateTargetRunAsync(
-            WriterInfo writerInfo,
+        private static async Task<TargetRun?> CreateTargetRunAsync(
+            WriterInfo? writerInfo,
             BlockingCollection<GeneratorRun> generatorRuns,
             IProgressTracker<Report> progressTracker)
         {
@@ -117,7 +117,10 @@ namespace Sundew.Generator.Engine.Internal
                     }
 
                     var targetRun = await CreateTargetRunAsync(writerInfo, generatorRuns, progressTracker).ConfigureAwait(false);
-                    targetRuns.Add(targetRun);
+                    if (targetRun != null)
+                    {
+                        targetRuns.Add(targetRun);
+                    }
                 }).ConfigureAwait(false);
             }
             finally

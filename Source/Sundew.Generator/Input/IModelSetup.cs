@@ -21,7 +21,7 @@ namespace Sundew.Generator.Input
         /// <value>
         /// The provider.
         /// </value>
-        TypeOrObject<IModelProvider> Provider { get; }
+        TypeOrObject<IModelProvider>? Provider { get; }
 
         /// <summary>
         /// Gets the type of the model.
@@ -29,6 +29,6 @@ namespace Sundew.Generator.Input
         /// <value>
         /// The type of the model.
         /// </value>
-        Type ModelType { get; }
+        Type? ModelType { get; }
     }
 }

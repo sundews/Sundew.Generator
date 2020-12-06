@@ -20,7 +20,7 @@ namespace Sundew.Generator.Core
         /// <param name="message">The message that describes the error.</param>
         /// <param name="setupOrigin">The setup path.</param>
         /// <param name="property">The property.</param>
-        public InitializationException(string message, string setupOrigin, string property)
+        public InitializationException(string message, string setupOrigin, string? property)
             : base(message)
         {
             this.SetupOrigin = setupOrigin;
@@ -41,6 +41,6 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The property.
         /// </value>
-        public string Property { get; }
+        public string? Property { get; }
     }
 }

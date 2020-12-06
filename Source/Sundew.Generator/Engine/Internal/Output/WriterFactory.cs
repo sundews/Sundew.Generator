@@ -15,11 +15,11 @@ namespace Sundew.Generator.Engine.Internal.Output
     internal static class WriterFactory
     {
         public static IWriter<IWriterSetup, ITarget, IRun, object> CreateWriter(
-            TypeOrObject<IWriter> writerTypeOrObject,
+            TypeOrObject<IWriter>? writerTypeOrObject,
             SetupInfo setupInfo,
             int writerSetupIndex,
             int? generatorSetupIndex,
-            IWriter previousWriter)
+            IWriter? previousWriter)
         {
             if (writerTypeOrObject == null)
             {

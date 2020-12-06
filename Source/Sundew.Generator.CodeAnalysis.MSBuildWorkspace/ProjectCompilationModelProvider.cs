@@ -7,6 +7,7 @@
 
 namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.CodeAnalysis;
@@ -18,7 +19,7 @@ namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
     /// Model provider for providing access to MSBuild project <see cref="Compilation"/>s.
     /// </summary>
     /// <seealso cref="IModelProvider{ICompilationsSetup, IModelSetup, Compilation}" />
-    public class ProjectCompilationModelProvider : IModelProvider<ICompilationsSetup, IModelSetup, Compilation>
+    public class ProjectCompilationModelProvider : IModelProvider<ICompilationsSetup, IModelSetup, Compilation?>
     {
         /// <summary>
         /// Gets the models.
@@ -28,13 +29,18 @@ namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
         /// <returns>
         /// The models.
         /// </returns>
-        public async Task<IReadOnlyList<IModelInfo<Compilation>>> GetModelsAsync(ICompilationsSetup setup, IModelSetup modelSetup)
+        public async Task<IReadOnlyList<IModelInfo<Compilation?>>> GetModelsAsync(ICompilationsSetup setup, IModelSetup? modelSetup)
         {
             var msBuildWorkspace = await MSBuildWorkspaceFactory.CreateAsync().ConfigureAwait(false);
+            if (setup.CompilationPaths == null)
+            {
+                return Array.Empty<IModelInfo<Compilation?>>();
+            }
+
             return await setup.CompilationPaths.SelectAsync(async filePath =>
             {
                 var project = await msBuildWorkspace.OpenProjectAsync(filePath).ConfigureAwait(false);
-                return new ModelInfo<Compilation>(await project.GetCompilationAsync().ConfigureAwait(false), filePath);
+                return new ModelInfo<Compilation?>(await project.GetCompilationAsync().ConfigureAwait(false), filePath);
             }).ConfigureAwait(false);
         }
     }

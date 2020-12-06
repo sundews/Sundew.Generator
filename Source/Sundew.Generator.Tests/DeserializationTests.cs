@@ -43,7 +43,7 @@ namespace Sundew.Generator.Tests
                 new TypeOrObjectJsonConverter(),
                 new ModelSetupJsonConverter());
 
-            result.WriterSetups.Should().NotBeEmpty();
+            result!.WriterSetups.Should().NotBeEmpty();
         }
     }
 }

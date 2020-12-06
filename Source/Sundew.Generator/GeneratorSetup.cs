@@ -31,7 +31,7 @@ namespace Sundew.Generator
         /// <param name="writerSetups">The writer setups.</param>
         /// <param name="skipGlobalWriterSetup">if set to <c>true</c> [skip global writer setup].</param>
         /// <param name="shareGlobalWriters">if set to <c>true</c> [share global writers].</param>
-        public GeneratorSetup(TypeOrObject<IGenerator> generator, IReadOnlyList<IWriterSetup> writerSetups, bool skipGlobalWriterSetup, bool shareGlobalWriters)
+        public GeneratorSetup(TypeOrObject<IGenerator> generator, IReadOnlyList<IWriterSetup>? writerSetups, bool skipGlobalWriterSetup, bool shareGlobalWriters)
             : base(generator, writerSetups, skipGlobalWriterSetup, shareGlobalWriters)
         {
         }

@@ -32,7 +32,7 @@ namespace Sundew.Generator.Core
         /// <param name="writerSetups">The target setups.</param>
         /// <param name="skipGlobalWriterSetup">if set to <c>true</c> [skip global writer setup].</param>
         /// <param name="shareGlobalWriters">if set to <c>true</c> [share global writers].</param>
-        protected GeneratorSetup(TypeOrObject<IGenerator> generator, IReadOnlyList<TWriterSetup> writerSetups, bool skipGlobalWriterSetup, bool shareGlobalWriters)
+        protected GeneratorSetup(TypeOrObject<IGenerator> generator, IReadOnlyList<TWriterSetup>? writerSetups, bool skipGlobalWriterSetup, bool shareGlobalWriters)
         {
             this.Generator = generator;
             this.WriterSetups = writerSetups;
@@ -46,7 +46,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The generator.
         /// </value>
-        public TypeOrObject<IGenerator> Generator { get; init; }
+        public TypeOrObject<IGenerator>? Generator { get; init; }
 
         /// <summary>
         /// Gets the target setups.
@@ -54,7 +54,7 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The target setups.
         /// </value>
-        public IReadOnlyList<TWriterSetup> WriterSetups { get; init; }
+        public IReadOnlyList<TWriterSetup>? WriterSetups { get; init; }
 
         /// <summary>
         /// Gets a value indicating whether [skip global writer setup].
@@ -78,6 +78,6 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The writer setups.
         /// </value>
-        IReadOnlyList<IWriterSetup> IGeneratorSetup.WriterSetups => this.WriterSetups;
+        IReadOnlyList<IWriterSetup>? IGeneratorSetup.WriterSetups => this.WriterSetups;
     }
 }

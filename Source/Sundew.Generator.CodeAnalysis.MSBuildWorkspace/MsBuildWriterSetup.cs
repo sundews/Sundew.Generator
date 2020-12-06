@@ -17,9 +17,11 @@ namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
     public class MsBuildWriterSetup : FileWriterSetup, IMsBuildWriterSetup
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MsBuildWriterSetup"/> class.
+        /// Initializes a new instance of the <see cref="MsBuildWriterSetup" /> class.
         /// </summary>
-        public MsBuildWriterSetup()
+        /// <param name="target">The target.</param>
+        public MsBuildWriterSetup(string target)
+            : base(target)
         {
         }
 

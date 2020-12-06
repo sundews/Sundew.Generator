@@ -16,7 +16,7 @@ namespace Sundew.Generator.Converters.Json
 
     internal static class JsonHelper
     {
-        public static Type GetType(JObject jObject)
+        public static Type? GetType(JObject jObject)
         {
             var typeToken = jObject["Type"];
             var typeName = typeToken?.Value<string>();
@@ -28,18 +28,23 @@ namespace Sundew.Generator.Converters.Json
             return null;
         }
 
-        public static void WriteWithType(JsonWriter writer, object value, JsonSerializer serializer, string typePropertyName)
+        public static void WriteWithType(JsonWriter writer, object? value, JsonSerializer serializer, string typePropertyName)
         {
+            if (value == null)
+            {
+                return;
+            }
+
             var item = JObject.FromObject(value, serializer);
             var objectType = value.GetType();
             item[typePropertyName] = $"{objectType.FullName}, {objectType.GetTypeInfo().Assembly.GetName().Name}";
             item.WriteTo(writer);
         }
 
-        public static Type GetSetupTypeFromInterface(JToken token, Type genericInterfaceType, int setupTypeIndex)
+        public static Type? GetSetupTypeFromInterface(JToken token, Type genericInterfaceType, int setupTypeIndex)
         {
             var setupType = TypeAssemblyLoader.GetType(token.Value<string>());
-            var interfaceType = setupType.GetGenericInterface(genericInterfaceType);
+            var interfaceType = setupType?.GetGenericInterface(genericInterfaceType);
             if (interfaceType != null)
             {
                 var defaultImplementationType = DefaultImplementation.GetDefaultImplementationType(interfaceType.GenericTypeArguments[setupTypeIndex]);

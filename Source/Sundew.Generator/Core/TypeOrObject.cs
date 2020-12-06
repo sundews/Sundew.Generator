@@ -23,6 +23,7 @@ namespace Sundew.Generator.Core
         public TypeOrObject()
         {
             this.Type = typeof(TObject);
+            this.Object = default!;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace Sundew.Generator.Core
         public TypeOrObject(TObject @object)
         {
             this.Object = @object;
-            this.Type = @object.GetType();
+            this.Type = @object!.GetType();
         }
 
         /// <summary>

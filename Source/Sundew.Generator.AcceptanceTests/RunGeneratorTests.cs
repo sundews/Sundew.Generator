@@ -126,7 +126,7 @@ namespace Sundew.Generator.AcceptanceTests
             this.writer.Verify(x => x.CompleteTargetAsync(It.IsAny<ITargetCompletionTracker>()), Times.Exactly(expectedNumberOfCalls));
         }
 
-        private Task<ConcurrentBag<string>> RunGenerator(IGenerator[] generators = null, bool shareGlobalWriters = false)
+        private Task<ConcurrentBag<string>> RunGenerator(IGenerator[]? generators = null, bool shareGlobalWriters = false)
         {
             generators ??= new[] { this.generator };
             var generatorSetups = generators.ConvertAll(x =>
@@ -136,7 +136,7 @@ namespace Sundew.Generator.AcceptanceTests
                 new Setup(
                     new ModelSetup(new TypeOrObject<IModelProvider>(this.modelProvider), typeof(object)),
                     new[] { new WriterSetup("AnyTarget", new TypeOrObject<IWriter>(this.writer)) },
-                    generatorSetups));
+                    generatorSetups!));
         }
     }
 }

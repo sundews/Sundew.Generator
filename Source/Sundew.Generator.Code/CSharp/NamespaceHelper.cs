@@ -20,7 +20,7 @@ namespace Sundew.Generator.Code.CSharp
         /// <param name="rootNamespace">The root namespace.</param>
         /// <param name="folderPath">The folder path.</param>
         /// <returns>A C# namespace.</returns>
-        public static string GetNamespace(string rootNamespace, IReadOnlyList<string> folderPath)
+        public static string? GetNamespace(string? rootNamespace, IReadOnlyList<string>? folderPath)
         {
             var folderNamespace = GetNamespace(folderPath);
             return CombineNamespaces(rootNamespace, folderNamespace);
@@ -29,7 +29,7 @@ namespace Sundew.Generator.Code.CSharp
         /// <summary>Combines the two namespaces.</summary>
         /// <param name="rootNamespace">The root namespace.</param>
         /// <param name="otherNamespace">The other namespace.</param>
-        public static string CombineNamespaces(string rootNamespace, string otherNamespace)
+        public static string? CombineNamespaces(string? rootNamespace, string? otherNamespace)
         {
             if (string.IsNullOrEmpty(rootNamespace))
             {
@@ -49,7 +49,7 @@ namespace Sundew.Generator.Code.CSharp
         /// </summary>
         /// <param name="folderPath">The folder path.</param>
         /// <returns>A C# namespace.</returns>
-        public static string GetNamespace(IReadOnlyList<string> folderPath)
+        public static string GetNamespace(IReadOnlyList<string>? folderPath)
         {
             if (folderPath == null || folderPath.Count == 0)
             {

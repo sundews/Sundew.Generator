@@ -7,28 +7,31 @@
 
 namespace Sundew.Generator.Tests
 {
+    using Newtonsoft.Json;
     using Sundew.Generator.Core;
     using Sundew.Generator.Output;
 
     public class MsBuildWriterSetup : IMsBuildWriterSetup
     {
-        public MsBuildWriterSetup()
+        public MsBuildWriterSetup(string target)
         {
+            this.Target = target;
         }
 
-        public MsBuildWriterSetup(string target, string path, TypeOrObject<IWriter> outputter, bool addFilesToProject)
+        [JsonConstructor]
+        public MsBuildWriterSetup(string target, string path, TypeOrObject<IWriter> writer, bool addFilesToProject)
         {
             this.Target = target;
             this.Path = path;
-            this.Writer = outputter;
+            this.Writer = writer;
             this.AddFilesToProject = addFilesToProject;
         }
 
         public string Target { get; init; }
 
-        public string Path { get; }
+        public string? Path { get; }
 
-        public TypeOrObject<IWriter> Writer { get; init; }
+        public TypeOrObject<IWriter>? Writer { get; init; }
 
         public bool AddFilesToProject { get; init; }
     }

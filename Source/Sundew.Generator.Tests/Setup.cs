@@ -22,10 +22,10 @@ namespace Sundew.Generator.Tests
 
         public Type Type { get; set; }
 
-        public IModelSetup ModelSetup { get; set; }
+        public IModelSetup? ModelSetup { get; set; }
 
-        public IReadOnlyList<IWriterSetup> WriterSetups { get; set; }
+        public IReadOnlyList<IWriterSetup>? WriterSetups { get; set; }
 
-        public IReadOnlyList<IGeneratorSetup> GeneratorSetups { get; set; }
+        public IReadOnlyList<IGeneratorSetup>? GeneratorSetups { get; set; }
     }
 }

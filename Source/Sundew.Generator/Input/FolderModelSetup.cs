@@ -44,7 +44,7 @@ namespace Sundew.Generator.Input
         /// <value>
         /// The folder.
         /// </value>
-        public string Folder { get; init; }
+        public string? Folder { get; init; }
 
         /// <summary>
         /// Gets the files search pattern.
@@ -52,6 +52,6 @@ namespace Sundew.Generator.Input
         /// <value>
         /// The files search pattern.
         /// </value>
-        public string FilesSearchPattern { get; init; }
+        public string? FilesSearchPattern { get; init; }
     }
 }

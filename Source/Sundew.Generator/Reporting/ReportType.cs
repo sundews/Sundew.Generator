@@ -18,17 +18,17 @@ namespace Sundew.Generator.Reporting
         StartingGeneration,
 
         /// <summary>
-        /// The adding items
+        /// The adding items.
         /// </summary>
         AddingItems,
 
         /// <summary>
-        /// The completed adding
+        /// The completed adding.
         /// </summary>
         CompletedAdding,
 
         /// <summary>
-        /// The generated item
+        /// The generated item.
         /// </summary>
         GeneratedItem,
 

@@ -13,13 +13,6 @@ namespace Sundew.Generator.Core
     public class Run : IRun
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Run"/> class.
-        /// </summary>
-        public Run()
-        {
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Run" /> class.
         /// </summary>
         /// <param name="name">The name.</param>
@@ -34,6 +27,6 @@ namespace Sundew.Generator.Core
         /// <value>
         /// The name.
         /// </value>
-        public string Name { get; init; }
+        public string Name { get; }
     }
 }

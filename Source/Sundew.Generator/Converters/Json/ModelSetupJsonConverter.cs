@@ -22,12 +22,12 @@ namespace Sundew.Generator.Converters.Json
             return objectType == typeof(IWriterSetup);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             JsonHelper.WriteWithType(writer, value, serializer, ProviderPropertyName);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             JObject item = JObject.Load(reader);
             var modelSetupType = JsonHelper.GetType(item);
@@ -47,7 +47,7 @@ namespace Sundew.Generator.Converters.Json
 
             if (modelSetupType != null)
             {
-                return (IWriterSetup)item.ToObject(modelSetupType, serializer);
+                return (IWriterSetup?)item.ToObject(modelSetupType, serializer);
             }
 
             throw new JsonReaderException("Error: No model provider type was specified.");

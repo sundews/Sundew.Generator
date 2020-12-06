@@ -48,12 +48,12 @@ namespace Sundew.Generator
         private static void AddGeneratorSpecificWriterSetups(SetupInfo setupInfo, ModelCache modelCache, List<WriterInfo> writerInfos)
         {
             var generatorSetups = setupInfo.Setup.GeneratorSetups;
-            IGenerator previousGenerator = null;
-            for (int generatorSetupIndex = 0; generatorSetupIndex < generatorSetups.Count; generatorSetupIndex++)
+            IGenerator? previousGenerator = null;
+            for (int generatorSetupIndex = 0; generatorSetupIndex < generatorSetups?.Count; generatorSetupIndex++)
             {
                 var generatorInfo = CreateGeneratorInfo(setupInfo, modelCache, generatorSetups[generatorSetupIndex], generatorSetupIndex, previousGenerator);
                 previousGenerator = generatorInfo.Generator;
-                IWriter previousWriter = null;
+                IWriter? previousWriter = null;
                 var generatorWriterSetups = GetWriterSetups(generatorInfo.GeneratorSetup.WriterSetups);
                 for (int writerSetupIndex = 0; writerSetupIndex < generatorWriterSetups.Count; writerSetupIndex++)
                 {
@@ -74,14 +74,14 @@ namespace Sundew.Generator
         {
             var setup = setupInfo.Setup;
             var globalWriterSetups = GetWriterSetups(setup.WriterSetups);
-            IWriter previousWriter = null;
+            IWriter? previousWriter = null;
             for (int writerSetupIndex = 0; writerSetupIndex < globalWriterSetups.Count; writerSetupIndex++)
             {
                 var globalWriterSetup = globalWriterSetups[writerSetupIndex];
                 var sharingGeneratorInfos = new List<GeneratorInfo>();
-                IGenerator previousGenerator = null;
+                IGenerator? previousGenerator = null;
                 for (int generatorSetupIndex = 0;
-                    generatorSetupIndex < setup.GeneratorSetups.Count;
+                    generatorSetupIndex < setup.GeneratorSetups?.Count;
                     generatorSetupIndex++)
                 {
                     var generatorSetup = setup.GeneratorSetups[generatorSetupIndex];
@@ -118,7 +118,7 @@ namespace Sundew.Generator
             ModelCache modelCache,
             IGeneratorSetup generatorSetup,
             int generatorSetupIndex,
-            IGenerator previousGenerator)
+            IGenerator? previousGenerator)
         {
             var generator = GeneratorFactory.CreateGenerator(generatorSetup.Generator, setupInfo, generatorSetupIndex, previousGenerator);
             return new GeneratorInfo(setupInfo.Setup, modelCache, generatorSetup, generator);
@@ -130,7 +130,7 @@ namespace Sundew.Generator
             SetupInfo setupInfo,
             int writerSetupIndex,
             int? generatorSetupIndex,
-            IWriter previousWriter)
+            IWriter? previousWriter)
         {
             return new WriterInfo(
                 writerSetup,
@@ -138,7 +138,7 @@ namespace Sundew.Generator
                 generatorInfos);
         }
 
-        private static IReadOnlyList<IWriterSetup> GetWriterSetups(IReadOnlyList<IWriterSetup> writerSetups)
+        private static IReadOnlyList<IWriterSetup> GetWriterSetups(IReadOnlyList<IWriterSetup>? writerSetups)
         {
             return writerSetups ?? EmptyWriterSetups;
         }

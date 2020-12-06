@@ -36,7 +36,7 @@ namespace Sundew.Generator
         /// <value>
         /// The progress reporter.
         /// </value>
-        public IProgressReporter ProgressReporter { get; init; }
+        public IProgressReporter? ProgressReporter { get; init; }
 
         /// <summary>
         /// Gets the progress text writer.
@@ -44,6 +44,6 @@ namespace Sundew.Generator
         /// <value>
         /// The progress text writer.
         /// </value>
-        public TextWriter ProgressTextWriter { get; init; }
+        public TextWriter? ProgressTextWriter { get; init; }
     }
 }

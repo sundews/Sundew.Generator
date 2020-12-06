@@ -23,7 +23,7 @@ namespace Sundew.Generator
         /// <value>
         /// The model setup.
         /// </value>
-        IModelSetup ModelSetup { get; }
+        IModelSetup? ModelSetup { get; }
 
         /// <summary>
         /// Gets the writer setups.
@@ -31,7 +31,7 @@ namespace Sundew.Generator
         /// <value>
         /// The output setups.
         /// </value>
-        IReadOnlyList<IWriterSetup> WriterSetups { get; }
+        IReadOnlyList<IWriterSetup>? WriterSetups { get; }
 
         /// <summary>
         /// Gets the generator setups.
@@ -39,6 +39,6 @@ namespace Sundew.Generator
         /// <value>
         /// The generator setups.
         /// </value>
-        IReadOnlyList<IGeneratorSetup> GeneratorSetups { get; }
+        IReadOnlyList<IGeneratorSetup>? GeneratorSetups { get; }
     }
 }

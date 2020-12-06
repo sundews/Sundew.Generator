@@ -23,7 +23,7 @@ namespace Sundew.Generator.Code
         /// <value>
         /// The target namespace.
         /// </value>
-        string TargetNamespace { get; }
+        string? TargetNamespace { get; }
 
         /// <summary>
         /// Gets the usings.
@@ -31,7 +31,7 @@ namespace Sundew.Generator.Code
         /// <value>
         /// The usings.
         /// </value>
-        IReadOnlyList<string> Usings { get; }
+        IReadOnlyList<string>? Usings { get; }
 
         /// <summary>
         /// Gets a value indicating whether [use global usings].

@@ -37,7 +37,7 @@ namespace Sundew.Generator.Converters.Json
         /// <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter" /> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             if (value is IHaveType haveType)
             {
@@ -59,12 +59,12 @@ namespace Sundew.Generator.Converters.Json
         /// The object value.
         /// </returns>
         /// <exception cref="JsonReaderException">Could not load the type.</exception>
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             var typeString = reader.Value?.ToString();
             if (!string.IsNullOrEmpty(typeString))
             {
-                var type = TypeAssemblyLoader.GetType(typeString);
+                var type = TypeAssemblyLoader.GetType(typeString!);
                 if (type == null)
                 {
                     throw new JsonReaderException($"Could not load the type {typeString}");

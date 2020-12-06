@@ -43,7 +43,7 @@ namespace Sundew.Generator
         /// <returns>
         /// A list of output names.
         /// </returns>
-        public static Task<ConcurrentBag<string>> RunAsync(GeneratorOptions generatorOptions, params ISetup[] setups)
+        public static Task<ConcurrentBag<string>> RunAsync(GeneratorOptions? generatorOptions, params ISetup[] setups)
         {
             return RunAsync(new Setups(setups), generatorOptions);
         }
@@ -56,7 +56,7 @@ namespace Sundew.Generator
         /// <returns>
         /// A list of output names.
         /// </returns>
-        public static async Task<ConcurrentBag<string>> RunAsync(ISetupsFactory setupsFactory, GeneratorOptions generatorOptions = null)
+        public static async Task<ConcurrentBag<string>> RunAsync(ISetupsFactory setupsFactory, GeneratorOptions? generatorOptions = null)
         {
             generatorOptions ??= GeneratorOptions.Default;
             using var progressReporter = new ProgressReporterFactory().Create(generatorOptions.ProgressReporter, generatorOptions.ProgressTextWriter);
@@ -85,7 +85,7 @@ namespace Sundew.Generator
         /// <returns>
         /// A list of output names.
         /// </returns>
-        public static async Task<ConcurrentBag<string>> RunAsync(string directory, string pattern, GeneratorOptions generatorOptions = null)
+        public static async Task<ConcurrentBag<string>> RunAsync(string directory, string pattern, GeneratorOptions? generatorOptions = null)
         {
             generatorOptions ??= GeneratorOptions.Default;
             using var progressReporter = new ProgressReporterFactory().Create(generatorOptions.ProgressReporter, generatorOptions.ProgressTextWriter);

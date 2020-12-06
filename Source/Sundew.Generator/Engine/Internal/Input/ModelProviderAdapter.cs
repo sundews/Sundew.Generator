@@ -9,7 +9,6 @@ namespace Sundew.Generator.Engine.Internal.Input
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Sundew.Generator.Core;
     using Sundew.Generator.Input;
 
     internal class ModelProviderAdapter<TSetup, TModelSetup, TModel> : IModelProvider<ISetup, IModelSetup, object>
@@ -24,9 +23,9 @@ namespace Sundew.Generator.Engine.Internal.Input
             this.modelProvider = modelProvider;
         }
 
-        public async Task<IReadOnlyList<IModelInfo<object>>> GetModelsAsync(ISetup setup, IModelSetup modelSetup)
+        public async Task<IReadOnlyList<IModelInfo<object>>> GetModelsAsync(ISetup setup, IModelSetup? modelSetup)
         {
-            return await this.modelProvider.GetModelsAsync((TSetup)setup, (TModelSetup)modelSetup);
+            return await this.modelProvider.GetModelsAsync((TSetup)setup, (TModelSetup?)modelSetup).ConfigureAwait(false);
         }
     }
 }

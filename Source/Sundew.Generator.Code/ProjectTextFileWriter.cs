@@ -10,6 +10,7 @@ namespace Sundew.Generator.Code
     using System.IO;
     using System.Threading.Tasks;
     using System.Xml.Linq;
+    using Sundew.Base;
     using Sundew.Base.Collections;
     using Sundew.Generator.Code.CSharp;
     using Sundew.Generator.Core;
@@ -32,14 +33,14 @@ namespace Sundew.Generator.Code
         {
             var fullTargetPath = Path.GetFullPath(writerSetup.Target);
             var fileInfo = new FileInfo(fullTargetPath);
-
+            var directoryName = fileInfo.DirectoryName ?? string.Empty;
             var projectContent = XDocument.Parse(await IO.File.ReadAllTextAsync(fullTargetPath).ConfigureAwait(false));
             var projectName = ProjectHelper.GetAssemblyName(projectContent, fileInfo.Name);
 
             return new Project(
                 projectName,
                 fullTargetPath,
-                writerSetup.Folder != null ? Path.Combine(fileInfo.DirectoryName, writerSetup.Folder) : fileInfo.DirectoryName,
+                writerSetup.Folder != null ? Path.Combine(directoryName, writerSetup.Folder) : directoryName,
                 ProjectHelper.GetNamespace(projectContent, fileInfo.Name),
                 writerSetup.FileNameSuffix + writerSetup.FileExtension);
         }
@@ -72,7 +73,7 @@ namespace Sundew.Generator.Code
             var filePath = Path.Combine(
                 target.FolderPath,
                 Path.Combine(NameHelper.GetFolderPath(run.Namespace).ToArrayIfNeeded()),
-                run.FileName);
+                run.FileName.ToStringOrEmpty());
 
             await IO.File.WriteAllTextAsync(filePath, textOutput.Text).ConfigureAwait(false);
 

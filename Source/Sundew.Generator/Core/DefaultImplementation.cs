@@ -50,11 +50,11 @@ namespace Sundew.Generator.Core
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The default implementation type.</returns>
-        public static Type GetDefaultImplementationType(Type type)
+        public static Type? GetDefaultImplementationType(Type? type)
         {
-            if (type != null && type.IsAbstract)
+            if (type?.IsAbstract == true)
             {
-                return Get(type)?.DefaultImplementationType;
+                return Get(type).DefaultImplementationType;
             }
 
             return type;
