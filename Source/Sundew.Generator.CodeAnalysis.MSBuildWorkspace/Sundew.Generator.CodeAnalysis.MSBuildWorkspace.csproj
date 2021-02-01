@@ -5,7 +5,7 @@
     <Authors>Kim Hugener-Ohlsen</Authors>
     <Company>Hukano</Company>
     <Description>Generation library</Description>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Sundew.Generator.MSBuild.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
