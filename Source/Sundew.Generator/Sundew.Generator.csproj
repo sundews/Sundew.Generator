@@ -30,11 +30,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Sundew.Base" Version="6.0.0" />
-    <PackageReference Include="Sundew.Build.Publish" Version="2.2.8">
+    <PackageReference Include="Sundew.IO" Version="1.0.0" />
+    <PackageReference Include="Sundew.Packaging.Publish" Version="3.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.IO" Version="1.0.0" />
     <PackageReference Include="System.Threading.Tasks.Parallel" Version="4.3.0" />
   </ItemGroup>
 

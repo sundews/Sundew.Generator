@@ -39,7 +39,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Build.Publish" Version="2.2.8">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="3.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -59,7 +59,7 @@
     <RemoveDir Directories=".package" ContinueOnError="False" />
   </Target>
 
-  <Target Name="SetNuspecProperties" AfterTargets="SbpPreparePublishNuGet">
+  <Target Name="SetNuspecProperties" AfterTargets="SppPreparePublishNuGet">
     <PropertyGroup>
       <NuspecProperties>$(NuspecProperties);company=$(Company);description=$(Description);copyright=$(Copyright);authors=$(Authors);version=$(PackageVersion);repositoryUrl=$(RepositoryUrl);releaseNotes=$(PackageReleaseNotes);repositoryType=$(RepositoryType);licenseExpression=$(PackageLicenseExpression);targetFramework=$(TargetFramework);configuration=$(Configuration);projectDir=$(MSBuildProjectDirectory);outputPath=$(OutputPath)</NuspecProperties>
     </PropertyGroup>

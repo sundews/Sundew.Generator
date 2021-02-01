@@ -23,7 +23,7 @@ steps:
     packageType: 'sdk'
     version: 5.x
 
-- script: dotnet build $(solutionPath) --verbosity normal --configuration $(buildConfiguration) -p:'SbpSourceName=$(Build.SourceBranch)' -p:'SbpProductionSource=refs/heads/main|$(source)' -p:'SbpIntegrationSource=refs/heads/release/.+|$(source)' -p:'SbpAllowLocalSource=false' -p:'SbpEnablePublish=false' -p:'SbpPublishLogFormats=##vso[task.setvariable variable=pushSource]{2}'
+- script: dotnet build $(solutionPath) --verbosity normal --configuration $(buildConfiguration) -p:'SppSourceName=$(Build.SourceBranch)' -p:'SppProductionSource=refs/heads/main|$(source)' -p:'SppIntegrationSource=refs/heads/release/.+|$(source)' -p:'SppAllowLocalSource=false' -p:'SppEnablePublish=false' -p:'SppPublishLogFormats=##vso[task.setvariable variable=pushSource]{2}'
   displayName: 'dotnet build $(buildConfiguration)'
 
 - script: dotnet test $(solutionPath) --verbosity normal --configuration $(buildConfiguration) --no-build
@@ -34,6 +34,6 @@ steps:
     Contents: '**/*.nupkg'
     TargetFolder: $(Build.ArtifactStagingDirectory)
 
-- script: dotnet nuget push '$(Build.ArtifactStagingDirectory)/**/*.nupkg' -s '$(pushSource)' -k '$(SbpApiKey)'
+- script: dotnet nuget push '$(Build.ArtifactStagingDirectory)/**/*.nupkg' -s '$(pushSource)' -k '$(SppApiKey)'
   condition: ne(variables.pushSource, 'null')
   displayName: 'dotnet nuget push'
