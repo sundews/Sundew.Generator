@@ -35,7 +35,8 @@ steps:
    -p:"SppDevelopmentSource=refs/heads/(?:develop.*|feature/.+|bugfix/.+) => $(SppDevelopmentApiKey)@$(dev-source) {$(dev-source-latest-version)}"
    -p:"SppAllowLocalSource=false"
    -p:"SppEnablePublish=false"
-   '-p:"SppPublishLogFormats=##vso[task.setvariable variable=pushSource;]{4}|##vso[task.setvariable variable=apiKey;]{5}|##vso[task.setvariable variable=tags;]$($env:tags)$($env:tag-separator){0},{1}|##vso[task.setvariable variable=tag-separator;] |##vso[task.setvariable variable=stage;]{3}"'
+   '-p:"SppPublishLogFormats=##vso[task.setvariable variable=pushSource;]{4}|##vso[task.setvariable variable=apiKey;]{5}|##vso[task.setvariable variable=stage;]{3}"'
+   '-p:"SppAppendPublishFileLogFormats="{0},{1}" >> packagesAndVersion.txt"'
    -p:"SppApiKey=$(SppApiKey)"
   displayName: 'dotnet build $(buildConfiguration)'
 
@@ -57,9 +58,9 @@ steps:
   displayName: 'dotnet nuget push'
 
 - script: |
-   dotnet tool update CommandLineBatcher -g --version 1.0.0-pre-u20210228-230337
+   dotnet tool update CommandLineBatcher -g --version 1.0.0-pre-u20210301-154645
    git config user.email "sundew-dev@outlook.com"
    git config user.name "sundew-build"
-   cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push https://sundew-dev:$(SundewDevPwd)@github.com/hugener/Sundew.Generator.git {1}-{0}" -s ',' -v ${tags}
+   cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push https://sundew-dev:$(SundewDevPwd)@github.com/hugener/Sundew.Generator.git {1}-{0}" -s ',' -v VF:./Source/packagesAndVersion.txt
   condition: eq(variables.stage, '')
   displayName: 'tag version'
