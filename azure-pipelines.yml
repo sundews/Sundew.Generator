@@ -36,13 +36,9 @@ steps:
    -p:"SppAllowLocalSource=false"
    -p:"SppEnablePublish=false"
    '-p:"SppPublishLogFormats=##vso[task.setvariable variable=pushSource;]{4}|##vso[task.setvariable variable=apiKey;]{5}|##vso[task.setvariable variable=stage;]{3}"'
-   '-p:"SppAppendPublishFileLogFormats=&quot;{0},{1}&quot; >> packagesAndVersion.txt"'
+   '-p:"SppAppendPublishFileLogFormats=\"{0},{1}\" >> packagesAndVersion.txt"'
    -p:"SppApiKey=$(SppApiKey)"
   displayName: 'dotnet build $(buildConfiguration)'
-
-- script: |
-   echo ${tags}
-   echo $TAGS
 
 - script: dotnet test $(solutionPath) --verbosity normal --configuration $(buildConfiguration) --no-build
   displayName: 'dotnet test $(buildConfiguration)'
