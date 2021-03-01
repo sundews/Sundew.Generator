@@ -31,7 +31,7 @@
     </PackageReference>
     <PackageReference Include="Sundew.Base" Version="6.0.0" />
     <PackageReference Include="Sundew.IO" Version="1.0.0" />
-    <PackageReference Include="Sundew.Packaging.Publish" Version="4.0.0-pre-u20210301-072958">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="4.0.0-pre-u20210301-074851">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
