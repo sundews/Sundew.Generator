@@ -56,6 +56,6 @@ steps:
    dotnet tool update CommandLineBatcher -g --version 1.0.0-pre-u20210228-230337
    git config user.email "sundew-dev@outlook.com"
    git config user.name "sundew-build"
-   cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push https://sundew-dev:$(SundewDevPwd)@github.com/hugener/Sundew.Generator.git {1}-{0}" -s ',' -v $(tags)
+   cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push https://sundew-dev:$(SundewDevPwd)@github.com/hugener/Sundew.Generator.git {1}-{0}" -s ',' -v $[tags]
   condition: eq(variables.stage, '')
   displayName: 'tag version'
