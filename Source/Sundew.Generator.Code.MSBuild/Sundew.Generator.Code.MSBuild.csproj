@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Kim Hugener-Ohlsen</Authors>
     <Company>Hukano</Company>
-    <LangVersion>8</LangVersion>
+    <LangVersion>9</LangVersion>
     <Description>MSBuild integration for Sundew.Generator.Code</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>

@@ -37,7 +37,7 @@ steps:
    -p:"SppDevelopmentSource=refs/heads/(?:develop.*|feature/.+|bugfix/.+) => $(SppDevelopmentApiKey)@$(dev-source) {$(dev-source-latest-version)}"
    -p:"SppAllowLocalSource=false"
    -p:"SppEnablePublish=false"
-   '-p:"SppPublishLogFormats=##vso[task.setvariable variable=pushSource;]{4}|##vso[task.setvariable variable=apiKey;]{5}|##vso[task.setvariable variable=tags;]$(tags)$(tag-separator){0},{1}|##vso[task.setvariable variable=tag-separator;] |##vso[task.setvariable variable=stage;]{3}"'
+   '-p:"SppPublishLogFormats=##vso[task.setvariable variable=pushSource;]{4}|##vso[task.setvariable variable=apiKey;]{5}|##vso[task.setvariable variable=tags;]$[variables.tags]$[variables.tag-separator]{0},{1}|##vso[task.setvariable variable=tag-separator;] |##vso[task.setvariable variable=stage;]{3}"'
    -p:"SppApiKey=$(SppApiKey)"
   displayName: 'dotnet build $(buildConfiguration)'
 
