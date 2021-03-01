@@ -15,7 +15,13 @@ variables:
   solutionPath: ./Source/Sundew.Generator.sln
   buildConfiguration: 'Release'
   source: 'https://api.nuget.org/v3/index.json'
+  dev-source: 'https://www.myget.org/F/sundew-dev/api/v2/package'
+  dev-source-latest-version: 'https://www.myget.org/F/sundew-dev/api/v3/index.json'
   pushSource: 'null'
+  apiKey: 'null'
+  tags: ''
+  tag-separator: ''
+  stage: ''
 
 steps:
 - task: UseDotNet@2
@@ -23,7 +29,16 @@ steps:
     packageType: 'sdk'
     version: 5.x
 
-- script: dotnet build $(solutionPath) --verbosity normal --configuration $(buildConfiguration) -p:'SppSourceName=$(Build.SourceBranch)' -p:'SppProductionSource=refs/heads/main|$(source)' -p:'SppIntegrationSource=refs/heads/release/.+|$(source)' -p:'SppAllowLocalSource=false' -p:'SppEnablePublish=false' -p:'SppPublishLogFormats=##vso[task.setvariable variable=pushSource]{2}'
+- script: >
+   dotnet build $(solutionPath) --verbosity normal --configuration $(buildConfiguration)
+   -p:"SppSourceName=$(Build.SourceBranch)"
+   -p:"SppProductionSource=refs/heads/(?:master|main).* => $(source)"
+   -p:"SppIntegrationSource=refs/heads/release/.+ => $(source)"
+   -p:"SppDevelopmentSource=refs/heads/(?:develop.*|feature/.+|bugfix/.+) => $(SppDevelopmentApiKey)@$(dev-source) {$(dev-source-latest-version)}"
+   -p:"SppAllowLocalSource=false"
+   -p:"SppEnablePublish=false"
+   '-p:"SppPublishLogFormats=##vso[task.setvariable variable=pushSource;]{4}|##vso[task.setvariable variable=apiKey;]{5}|##vso[task.setvariable variable=tags;]$(tags)$(tag-separator){0},{1}|##vso[task.setvariable variable=tag-separator;] |##vso[task.setvariable variable=stage;]{3}"'
+   -p:"SppApiKey=$(SppApiKey)"
   displayName: 'dotnet build $(buildConfiguration)'
 
 - script: dotnet test $(solutionPath) --verbosity normal --configuration $(buildConfiguration) --no-build
@@ -33,7 +48,16 @@ steps:
   inputs:
     Contents: '**/*.nupkg'
     TargetFolder: $(Build.ArtifactStagingDirectory)
+  displayName: 'copy packages to artifact directory'
 
-- script: dotnet nuget push '$(Build.ArtifactStagingDirectory)/**/*.nupkg' -s '$(pushSource)' -k '$(SppApiKey)'
+- script: dotnet nuget push '$(Build.ArtifactStagingDirectory)/**/*.nupkg' -s '$(pushSource)' -k '$(apiKey)'
   condition: ne(variables.pushSource, 'null')
   displayName: 'dotnet nuget push'
+
+- script: |
+   dotnet tool update CommandLineBatcher -g --version 1.0.0-pre-u20210228-230337
+   git config user.email "sundew-dev@outlook.com"
+   git config user.name "sundew-build"
+   cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push https://sundew-dev:$(SundewDevPwd)@github.com/hugener/Sundew.Generator.git {1}-{0}" -s ',' -v $(tags)
+  condition: eq(variables.stage, '')
+  displayName: 'tag version'
