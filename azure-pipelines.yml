@@ -19,8 +19,6 @@ variables:
   dev-source-latest-version: 'https://www.myget.org/F/sundew-dev/api/v3/index.json'
   pushSource: 'null'
   apiKey: 'null'
-  tags: ''
-  tag-separator: ''
   stage: ''
 
 steps:
