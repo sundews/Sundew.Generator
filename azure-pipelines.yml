@@ -58,7 +58,7 @@ steps:
    git config user.email "sundew-dev@outlook.com"
    git config user.name "sundew-build"
    cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push https://sundew-dev:$(SundewDevPwd)@github.com/hugener/Sundew.Generator.git {1}-{0}" -s ',' -vf ./Source/logs/packages.pgkver
-   dotnet tool update Sundew.Packaging.Tool -g --version 2.0.0-pre-u20210303-230514
+   dotnet tool update Sundew.Packaging.Tool -g --version 2.0.0-pre-u20210303-231941
    cb -c "spt|await {0}.{1}" -s ',' -vf ./Source/logs/packages.pgkver
   condition: eq(variables.stage, '')
   displayName: 'tag version'
