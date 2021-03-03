@@ -25,6 +25,6 @@ namespace Sundew.Generator.Engine
         /// <returns>
         /// An async task.
         /// </returns>
-        Task<ConcurrentBag<string>> GenerateAsync(IGeneratorOptions generatorOptions, IProgressTracker<Report> progressTracker = null);
+        Task<ConcurrentBag<string>> GenerateAsync(IGeneratorOptions generatorOptions, IProgressTracker<Report>? progressTracker = null);
     }
 }
