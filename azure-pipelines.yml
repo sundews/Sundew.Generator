@@ -18,6 +18,7 @@ variables:
   dev-source: 'https://www.myget.org/F/sundew-dev/api/v2/package'
   dev-source-latest-version: 'https://www.myget.org/F/sundew-dev/api/v3/index.json'
   pushSource: 'null'
+  publishedSource: 'null'
   apiKey: 'null'
   stage: 'null'
 
@@ -35,7 +36,7 @@ steps:
    -p:"SppDevelopmentSource=refs/heads/(?:develop.*|feature/.+|bugfix/.+) => $(SppDevelopmentApiKey)@$(dev-source) {$(dev-source-latest-version)}"
    -p:"SppAllowLocalSource=false"
    -p:"SppEnablePublish=false"
-   '-p:"SppPublishLogFormats=##vso[task.setvariable variable=pushSource;]{4}|##vso[task.setvariable variable=apiKey;]{5}|##vso[task.setvariable variable=stage;]{3}"'
+   '-p:"SppPublishLogFormats=##vso[task.setvariable variable=pushSource;]{4}|##vso[task.setvariable variable=publishedSource;]{6}|##vso[task.setvariable variable=apiKey;]{5}|##vso[task.setvariable variable=stage;]{3}"'
    '-p:"SppAppendPublishFileLogFormats={0},{1}  > logs/packages.pgkver"'
    -p:"SppApiKey=$(SppApiKey)"
   displayName: 'dotnet build $(buildConfiguration)'
@@ -59,6 +60,6 @@ steps:
    git config user.name "sundew-build"
    cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push https://sundew-dev:$(SundewDevPwd)@github.com/hugener/Sundew.Generator.git {1}-{0}" -s ',' -vf ./Source/logs/packages.pgkver
    dotnet tool update Sundew.Packaging.Tool -g --version 2.0.0-pre-u20210303-231941
-   cb -c "spt|await {0}.{1}" -s ',' -vf ./Source/logs/packages.pgkver
+   cb -c "spt|await -s $(publishedSource) {0}.{1}" -s ',' -vf ./Source/logs/packages.pgkver
   condition: eq(variables.stage, '')
   displayName: 'tag version'
