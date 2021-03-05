@@ -56,15 +56,15 @@ steps:
   displayName: 'dotnet nuget push'
 
 - script: |
-   dotnet tool update CommandLineBatcher -g --version 1.0.0-pre-u20210304-201218
+   dotnet tool update CommandlineBatcher -g
    git config user.email "sundew-dev@outlook.com"
    git config user.name "sundew-build"
    cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push $(repository) {1}-{0}" -s ',' -bf ./Source/logs/packages.pgkver
-  condition: eq(variables.stage, '')
+  condition: and(succeeded(), eq(variables.stage, ''))
   displayName: 'tag stable version'
 
 - script: |
-   dotnet tool update Sundew.Packaging.Tool -g --version 2.0.0-pre-u20210304-201208
+   dotnet tool update Sundew.Packaging.Tool -g
    cb -c "spt|await -s $(feedSource) {0}.{1}" -s ',' -bf ./Source/logs/packages.pgkver
-  condition: eq(variables.stage, '')
+  condition: and(succeeded(), eq(variables.stage, ''))
   displayName: 'wait for publish'
