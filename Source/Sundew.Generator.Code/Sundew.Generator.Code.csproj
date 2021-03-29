@@ -32,7 +32,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Packaging.Publish" Version="4.0.0">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="5.1.0-u20210317-064141-pre">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

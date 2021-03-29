@@ -11,7 +11,7 @@ namespace Sundew.Generator.Engine.Internal
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Sundew.Base.Collections;
-    using Sundew.Base.Computation;
+    using Sundew.Base.Primitives.Computation;
     using Sundew.Generator.Engine.Internal.Output;
     using Sundew.Generator.Reporting;
 

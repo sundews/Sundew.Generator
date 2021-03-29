@@ -7,7 +7,7 @@
 
 namespace Sundew.Generator.Reporting
 {
-    using Sundew.Base.Computation;
+    using Sundew.Base.Primitives.Computation;
 
     /// <summary>
     /// Composite progress reporter consisting of two progress reporters.

@@ -24,7 +24,7 @@ namespace Sundew.Generator.Input
         private const string FileSearchPattern = "*.xml";
         private const string Folder = ".";
 
-        private readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(TModel));
+        private readonly XmlSerializer xmlSerializer = new(typeof(TModel));
 
         /// <summary>
         /// Gets the models.

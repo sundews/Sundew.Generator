@@ -34,7 +34,7 @@ namespace Sundew.Generator
         /// </returns>
         public IGeneratorRunner Create(IEnumerable<SetupInfo> setupInfos)
         {
-            List<WriterInfo> writerInfos = new List<WriterInfo>();
+            List<WriterInfo> writerInfos = new();
             foreach (var setupInfo in setupInfos)
             {
                 var modelCache = new ModelCache(ModelProviderFactory.CreateModelProvider(setupInfo), setupInfo.Setup);
@@ -132,7 +132,7 @@ namespace Sundew.Generator
             int? generatorSetupIndex,
             IWriter? previousWriter)
         {
-            return new WriterInfo(
+            return new(
                 writerSetup,
                 WriterFactory.CreateWriter(writerSetup.Writer, setupInfo, writerSetupIndex, generatorSetupIndex, previousWriter),
                 generatorInfos);

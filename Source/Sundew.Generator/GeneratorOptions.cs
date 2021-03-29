@@ -20,7 +20,7 @@ namespace Sundew.Generator
         /// <summary>
         /// Gets the default options.
         /// </summary>
-        public static GeneratorOptions Default { get; } = new GeneratorOptions();
+        public static GeneratorOptions Default { get; } = new();
 
         /// <summary>
         /// Gets the cancellation token.

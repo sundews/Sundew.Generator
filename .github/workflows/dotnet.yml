@@ -1,0 +1,69 @@
+name: .NET
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      solutionPath: ./Source/Sundew.Generator.sln
+      repository: 'https://sundew-dev:${{ secrets.SUNDEW_DEV_TOKEN }}@github.com/hugener/Sundew.Generator.git'
+      buildConfiguration: Release
+      source: 'https://api.nuget.org/v3/index.json'
+      dev-source: 'https://www.myget.org/F/sundew-dev/api/v2/package'
+      dev-source-latest-version: 'https://www.myget.org/F/sundew-dev/api/v3/index.json'
+      dev-symbols-source: 'https://www.myget.org/F/sundew-dev/api/v3/index.json'
+      package-versions: 'logs/packages.pkgver'
+      source-package-versions: './Source/logs/packages.pkgver'
+      packages-to-push: 'logs/packages.push'
+      source-packages-to-push: './Source/logs/packages.push'
+    steps:
+    - name: 'Await other builds'
+      uses: softprops/turnstyle@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Setup tools
+      run: |
+        dotnet tool update Sundew.Packaging.Tool -g
+        dotnet tool update CommandlineBatcher -g
+    - name: Restore
+      run: dotnet restore ${{ env.solutionPath }} -s ${{ env.source }} -s ${{ env.dev-source-latest-version }} 
+    - name: Build
+      id: build
+      run: >
+        dotnet build ${{ env.solutionPath }} --verbosity normal --configuration ${{ env.buildConfiguration }} --no-restore
+        -p:"SppSourceName=${{ github.ref }}"
+        '-p:"SppProductionSource=refs/heads/(?:master|main).* => ${{ env.source }}|${{ env.source }}"'
+        '-p:"SppIntegrationSource=refs/heads/release/.+ => ${{ env.source }}|${{ env.source }}"'
+        '-p:"SppDevelopmentSource=refs/heads/(?:develop.*|feature/.+|bugfix/.+) => ${{ secrets.SPP_DEVELOPMENT_API_KEY }}@${{ env.dev-source }} {${{ env.dev-source-latest-version }}}|${{ secrets.SPP_DEVELOPMENT_API_KEY }}@${{ env.dev-symbols-source }}"'
+        -p:"SppAllowLocalSource=false"
+        -p:"SppEnablePublish=false"
+        '-p:"SppPublishLogFormats=::set-output name=stage::{3}|::set-output name=pushSource::{4}|::set-output name=feedSource::{6}|::set-output name=apiKey::{5}|::set-output name=symbolPushSource::{8}|::set-output name=symbolApiKey::{9}"'
+        '-p:"SppAppendPublishFileLogFormats={0},{1}  > ${{ env.package-versions }}|{11}{2}{11},{11}{4}{11},***,{11}{7}{11},{11}{8}{11},{11}***{11}{12} > ${{ env.packages-to-push }}"'
+        -p:"SppApiKey=${{ secrets.SPP_API_KEY }}"
+        -p:"SppSymbolApiKey=${{ secrets.SPP_API_KEY }}"
+        -p:"ContinuousIntegrationBuild=true"
+    - name: Test
+      run: dotnet test ${{ env.solutionPath }} --verbosity normal --configuration ${{ env.buildConfiguration }} --no-build
+    - name: 'Publish package(s)'
+      if: ${{ steps.build.outputs.pushSource != '' }}
+      run: dotnet nuget push '**/*.nupkg' -s '${{ steps.build.outputs.pushSource }}' -k '${{ steps.build.outputs.apiKey }}' -n true
+    - name: 'Publish symbols'
+      if: ${{ steps.build.outputs.symbolPushSource != '' }}
+      run: dotnet nuget push '**/*.snupkg' -s '${{ steps.build.outputs.symbolPushSource }}' -k '${{ steps.build.outputs.symbolApiKey }}'
+    - name: 'Tag stable version'
+      if: ${{ success() &&  steps.build.outputs.stage == 'prod' }}
+      run: |
+        git config user.email "sundew-dev@outlook.com"
+        git config user.name "sundew-build"
+        cb -c "git|tag -a {1}-{0} -m "{1}-{0}"" "git|push ${{ env.repository }} {1}-{0}" -s ',' -bf ${{ env.source-package-versions }}
+    - name: 'Await package publish'
+      if: ${{ success() && steps.build.outputs.stage == 'prod' }}
+      run: cb -c "spt|await -s ${{ steps.build.outputs.feedSource }} {0}.{1}" -s ',' -bf ${{ env.source-package-versions }}

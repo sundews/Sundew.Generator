@@ -60,7 +60,7 @@ namespace Sundew.Generator.Core
         /// </returns>
         public static implicit operator IndentedString(string value)
         {
-            return new IndentedString(value);
+            return new(value);
         }
 
         /// <summary>

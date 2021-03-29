@@ -9,7 +9,7 @@ namespace Sundew.Generator.Engine
 {
     using System.Collections.Concurrent;
     using System.Threading.Tasks;
-    using Sundew.Base.Computation;
+    using Sundew.Base.Primitives.Computation;
     using Sundew.Generator.Reporting;
 
     /// <summary>

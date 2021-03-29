@@ -61,7 +61,7 @@ namespace Sundew.Generator.Core
         /// </returns>
         public static implicit operator TypeOrObject<TObject>(TObject outputter)
         {
-            return new TypeOrObject<TObject>(outputter);
+            return new(outputter);
         }
     }
 }

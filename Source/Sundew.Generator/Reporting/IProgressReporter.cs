@@ -8,7 +8,7 @@
 namespace Sundew.Generator.Reporting
 {
     using System;
-    using Sundew.Base.Computation;
+    using Sundew.Base.Primitives.Computation;
 
     /// <summary>
     /// Interface for implementing a progress reporter.

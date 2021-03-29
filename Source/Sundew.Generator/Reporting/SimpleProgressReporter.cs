@@ -43,7 +43,7 @@ namespace Sundew.Generator.Reporting
         /// Reports the specified progress.
         /// </summary>
         /// <param name="progress">The progress.</param>
-        public void Report(Sundew.Base.Computation.Progress<Report> progress)
+        public void Report(Sundew.Base.Primitives.Computation.Progress<Report> progress)
         {
             if (progress.Report == null)
             {

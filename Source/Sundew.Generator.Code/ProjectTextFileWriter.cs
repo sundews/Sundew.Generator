@@ -8,10 +8,10 @@
 namespace Sundew.Generator.Code
 {
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Xml.Linq;
-    using Sundew.Base;
-    using Sundew.Base.Collections;
+    using Sundew.Base.Primitives;
     using Sundew.Generator.Code.CSharp;
     using Sundew.Generator.Core;
     using Sundew.Generator.Output;
@@ -72,7 +72,7 @@ namespace Sundew.Generator.Code
         {
             var filePath = Path.Combine(
                 target.FolderPath,
-                Path.Combine(NameHelper.GetFolderPath(run.Namespace).ToArrayIfNeeded()),
+                Path.Combine(NameHelper.GetFolderPath(run.Namespace).ToArray()),
                 run.FileName.ToStringOrEmpty());
 
             await IO.File.WriteAllTextAsync(filePath, textOutput.Text).ConfigureAwait(false);

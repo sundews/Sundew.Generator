@@ -13,7 +13,7 @@ namespace Sundew.Generator
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using Sundew.Base.Computation;
+    using Sundew.Base.Primitives.Computation;
     using Sundew.Generator.Core;
     using Sundew.Generator.Discovery;
     using Sundew.Generator.Reporting;
