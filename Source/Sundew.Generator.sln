@@ -21,7 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sundew.Generator.Acceptance
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FDC6EC36-5FAD-4FEF-A612-F7479BE4A7D9}"
 	ProjectSection(SolutionItems) = preProject
-		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		Directory.Build.props = Directory.Build.props
 		..\.github\workflows\dotnet.yml = ..\.github\workflows\dotnet.yml
 		..\README.md = ..\README.md
