@@ -31,8 +31,8 @@ jobs:
         dotnet-version: 5.0.x
     - name: Setup tools
       run: |
-        dotnet tool update Sundew.Packaging.Tool -g --version 3.0.0-u20210406-210531-pre
-        dotnet tool update CommandlineBatcher -g --version 2.1.0-u20210406-212203-pre
+        dotnet tool update Sundew.Packaging.Tool -g
+        dotnet tool update CommandlineBatcher -g
     - name: Restore
       run: dotnet restore ${{ env.solutionPath }} -s ${{ env.source }} -s ${{ env.dev-source-latest-version }} 
     - name: Build

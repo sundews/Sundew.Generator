@@ -24,16 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.321">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Base.Collections" Version="7.0.0-u20210407-194455-dev-Cleanup" />
-    <PackageReference Include="Sundew.Base.Text" Version="7.0.0-u20210407-194455-dev-Cleanup" />
-    <PackageReference Include="Sundew.Base.Threading" Version="7.0.0-u20210407-194455-dev-Cleanup" />
+    <PackageReference Include="Sundew.Base.Collections" Version="7.0.0" />
+    <PackageReference Include="Sundew.Base.Text" Version="7.0.0" />
+    <PackageReference Include="Sundew.Base.Threading" Version="7.0.0" />
     <PackageReference Include="Sundew.IO" Version="1.0.0" />
-    <PackageReference Include="Sundew.Packaging.Publish" Version="5.1.0-u20210407-193833-pre">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="5.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

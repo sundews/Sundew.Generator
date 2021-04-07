@@ -43,7 +43,7 @@ namespace Sundew.Generator.Converters.Json
 
         public static Type? GetSetupTypeFromInterface(JToken token, Type genericInterfaceType, int setupTypeIndex)
         {
-            var setupType = TypeAssemblyLoader.GetType(token.Value<string>());
+            var setupType = TypeAssemblyLoader.GetType(token.Value<string>()!);
             var interfaceType = setupType?.GetGenericInterface(genericInterfaceType);
             if (interfaceType != null)
             {
