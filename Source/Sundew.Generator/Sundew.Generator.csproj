@@ -29,11 +29,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Base.Collections" Version="7.0.0-u20210329-193058-dev" />
-    <PackageReference Include="Sundew.Base.Text" Version="7.0.0-u20210329-193058-dev" />
-    <PackageReference Include="Sundew.Base.Threading" Version="7.0.0-u20210329-193058-dev" />
+    <PackageReference Include="Sundew.Base.Collections" Version="7.0.0-u20210407-194455-dev-Cleanup" />
+    <PackageReference Include="Sundew.Base.Text" Version="7.0.0-u20210407-194455-dev-Cleanup" />
+    <PackageReference Include="Sundew.Base.Threading" Version="7.0.0-u20210407-194455-dev-Cleanup" />
     <PackageReference Include="Sundew.IO" Version="1.0.0" />
-    <PackageReference Include="Sundew.Packaging.Publish" Version="5.1.0-u20210328-203014-pre">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="5.1.0-u20210407-193833-pre">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
