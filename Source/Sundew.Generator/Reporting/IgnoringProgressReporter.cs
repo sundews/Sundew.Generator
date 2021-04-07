@@ -7,7 +7,7 @@
 
 namespace Sundew.Generator.Reporting
 {
-    using Sundew.Base.Computation;
+    using Sundew.Base.Primitives.Computation;
 
     /// <summary>
     /// Implementation of <see cref="IProgressReporter{TReport}"/> that ignores reports.

@@ -10,7 +10,7 @@ namespace Sundew.Generator.MSBuild
     using System;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
-    using Sundew.Base;
+    using Sundew.Base.Primitives;
     using Sundew.Generator.Reporting;
 
     /// <summary>
@@ -41,7 +41,7 @@ namespace Sundew.Generator.MSBuild
         /// Reports the specified progress.
         /// </summary>
         /// <param name="progress">The progress.</param>
-        public void Report(Sundew.Base.Computation.Progress<Report> progress)
+        public void Report(Sundew.Base.Primitives.Computation.Progress<Report> progress)
         {
             switch (progress.Report?.ReportType)
             {

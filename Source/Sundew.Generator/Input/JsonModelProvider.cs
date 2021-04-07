@@ -46,7 +46,7 @@ namespace Sundew.Generator.Input
             return await files.SelectAsync(
                 async filePath =>
                     new ModelInfo<TModel>(
-                        JsonConvert.DeserializeObject<TModel>(await File.ReadAllTextAsync(filePath).ConfigureAwait(false)), filePath)).ConfigureAwait(false);
+                        JsonConvert.DeserializeObject<TModel>(await File.ReadAllTextAsync(filePath).ConfigureAwait(false))!, filePath)).ConfigureAwait(false);
         }
     }
 }

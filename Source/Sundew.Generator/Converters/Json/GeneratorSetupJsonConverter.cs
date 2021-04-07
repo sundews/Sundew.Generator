@@ -41,7 +41,7 @@ namespace Sundew.Generator.Converters.Json
             var generatorTypeObject = item[GeneratorPropertyName];
             if (generatorTypeObject != null)
             {
-                var generatorType = TypeAssemblyLoader.GetType(generatorTypeObject.Value<string>());
+                var generatorType = TypeAssemblyLoader.GetType(generatorTypeObject.Value<string>()!);
                 var interfaceType = generatorType?.GetGenericInterface(typeof(IGenerator<,,,,,>));
                 if (interfaceType != null)
                 {

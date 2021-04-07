@@ -97,7 +97,7 @@ namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
         {
             var filePath = Path.Combine(
                 target.FolderPath,
-                Path.Combine(NameHelper.GetFolderPath(run.Namespace).ToArrayIfNeeded()),
+                Path.Combine(NameHelper.GetFolderPath(run.Namespace).ToArray()),
                 run.Name + writerSetup.FileNameSuffix + writerSetup.FileExtension);
 
             if (this.project == null)
