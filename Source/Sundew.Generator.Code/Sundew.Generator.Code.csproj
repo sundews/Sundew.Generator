@@ -3,18 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>preview</LangVersion>
-    <Authors>Kim Hugener-Ohlsen</Authors>
-    <Company>Hukano</Company>
     <Description>Sundew.Generator is code generator aiming to provide an alternative or replacement for T4 templates.</Description>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright>Kim Hugener-Ohlsen</Copyright>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
-    <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -36,7 +26,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Packaging.Publish" Version="7.0.0">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="7.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
