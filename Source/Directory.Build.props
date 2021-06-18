@@ -4,6 +4,26 @@
    <Version>3.1</Version>
    <OutputPath>bin/$(Configuration)</OutputPath>
    <Nullable>enable</Nullable>
-   <SppForceVersion></SppForceVersion>
+   <LangVersion>latest</LangVersion>
+   <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+   <Company>Hukano</Company>
+   <Authors>Kim Hugener-Ohlsen</Authors>
+   <Copyright>Kim Hugener-Ohlsen</Copyright>
+   <RepositoryType>git</RepositoryType>
+   <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
+   <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
+   <PackageTags>code generation</PackageTags>
+   <PackageReleaseNotes>3.0 - Changed to .NET Standard 2.0</PackageReleaseNotes>
+   <PackageLicenseExpression>MIT</PackageLicenseExpression>
+   <WarningsAsErrors />
+   <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
  </PropertyGroup>
+  <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedFiles Include="$(GeneratedAssemblyInfoFile)"/>
+  </ItemGroup>
+  <Import Project="Directory.Build.props.user" Condition="Exists('Directory.Build.props.user')"/>
 </Project>

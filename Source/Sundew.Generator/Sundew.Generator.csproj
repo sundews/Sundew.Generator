@@ -2,21 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Kim Hugener-Ohlsen</Authors>
-    <Company>Hukano</Company>
-    <Description>Sundew.Generator is code generator aiming to provide an alternative or replacement for T4 templates.</Description>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <TreatSpecificWarningsAsErrors />
+    <Description>Sundew.Generator is a code generator aiming to provide an alternative or replacement for T4 templates.</Description>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright>Kim Hugener-Ohlsen</Copyright>
-    <LangVersion>preview</LangVersion>
-    <PackageReleaseNotes>3.0 - Changed to .NET Standard 2.0</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>code generation</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,16 +11,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IsExternalInit" Version="1.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.333">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Base.Collections" Version="7.0.3" />
-    <PackageReference Include="Sundew.Base.Text" Version="7.0.3" />
-    <PackageReference Include="Sundew.Base.Threading" Version="7.0.3" />
+    <PackageReference Include="Sundew.Base.Collections" Version="8.0.14" />
+    <PackageReference Include="Sundew.Base.Text" Version="8.0.14" />
+    <PackageReference Include="Sundew.Base.Threading" Version="8.0.14" />
     <PackageReference Include="Sundew.IO" Version="1.0.0" />
-    <PackageReference Include="Sundew.Packaging.Publish" Version="6.1.0">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="7.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
