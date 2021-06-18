@@ -6,6 +6,8 @@
     <Description>MSBuild integration for Sundew.Generator.Code</Description>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <NuspecFile>Sundew.Generator.Code.MSBuild.nuspec</NuspecFile>
+    <IncludeSymbols>false</IncludeSymbols>
+    <SymbolPackageFormat></SymbolPackageFormat>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

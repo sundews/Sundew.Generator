@@ -7,6 +7,8 @@
     <Description>MSBuild integration for Sundew.Generator</Description>
     <NuspecFile>Sundew.Generator.MSBuild.nuspec</NuspecFile>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <IncludeSymbols>false</IncludeSymbols>
+    <SymbolPackageFormat></SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
