@@ -9,7 +9,7 @@ jobs:
     env:
       solutionPath: ./Source/Sundew.Generator.sln
       versioningProjectPath: ./Source/Sundew.Generator/Sundew.Generator.csproj
-      repository: 'https://sundew-dev:${{ secrets.SUNDEW_DEV_TOKEN }}@github.com/hugener/Sundew.Generator.git'
+      repository: 'https://sundew-dev:${{ secrets.SUNDEW_DEV_TOKEN }}@github.com/sundews/Sundew.Generator.git'
       source: 'https://api.nuget.org/v3/index.json'
       dev-source: 'https://www.myget.org/F/sundew-dev/api/v2/package'
       dev-source-latest-version: 'https://www.myget.org/F/sundew-dev/api/v3/index.json'
