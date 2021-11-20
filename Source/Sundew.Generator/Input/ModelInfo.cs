@@ -5,39 +5,38 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Input
+namespace Sundew.Generator.Input;
+
+/// <summary>
+/// Contains a models and it's origin.
+/// </summary>
+/// <typeparam name="TModel">The type of the model.</typeparam>
+public class ModelInfo<TModel> : IModelInfo<TModel>
 {
     /// <summary>
-    /// Contains a models and it's origin.
+    /// Initializes a new instance of the <see cref="ModelInfo{TModel}"/> class.
     /// </summary>
-    /// <typeparam name="TModel">The type of the model.</typeparam>
-    public class ModelInfo<TModel> : IModelInfo<TModel>
+    /// <param name="model">The model.</param>
+    /// <param name="modelOrigin">The model origin.</param>
+    public ModelInfo(TModel model, string modelOrigin)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ModelInfo{TModel}"/> class.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <param name="modelOrigin">The model origin.</param>
-        public ModelInfo(TModel model, string modelOrigin)
-        {
-            this.Model = model;
-            this.ModelOrigin = modelOrigin;
-        }
-
-        /// <summary>
-        /// Gets the model.
-        /// </summary>
-        /// <value>
-        /// The model.
-        /// </value>
-        public TModel Model { get; }
-
-        /// <summary>
-        /// Gets the model origin.
-        /// </summary>
-        /// <value>
-        /// The model origin.
-        /// </value>
-        public string ModelOrigin { get; }
+        this.Model = model;
+        this.ModelOrigin = modelOrigin;
     }
+
+    /// <summary>
+    /// Gets the model.
+    /// </summary>
+    /// <value>
+    /// The model.
+    /// </value>
+    public TModel Model { get; }
+
+    /// <summary>
+    /// Gets the model origin.
+    /// </summary>
+    /// <value>
+    /// The model origin.
+    /// </value>
+    public string ModelOrigin { get; }
 }

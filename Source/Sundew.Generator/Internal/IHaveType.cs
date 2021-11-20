@@ -5,21 +5,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Internal
-{
-    using System;
+namespace Sundew.Generator.Internal;
 
+using System;
+
+/// <summary>
+/// Interface that knows a type.
+/// </summary>
+internal interface IHaveType
+{
     /// <summary>
-    /// Interface that knows a type.
+    /// Gets the type.
     /// </summary>
-    internal interface IHaveType
-    {
-        /// <summary>
-        /// Gets the type.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        public Type Type { get; }
-    }
+    /// <value>
+    /// The type.
+    /// </value>
+    public Type Type { get; }
 }

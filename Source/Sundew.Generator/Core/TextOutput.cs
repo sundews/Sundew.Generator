@@ -5,28 +5,27 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+/// <summary>
+/// Default implementation of <see cref="ITextOutput"/>.
+/// </summary>
+public class TextOutput : ITextOutput
 {
     /// <summary>
-    /// Default implementation of <see cref="ITextOutput"/>.
+    /// Initializes a new instance of the <see cref="TextOutput" /> class.
     /// </summary>
-    public class TextOutput : ITextOutput
+    /// <param name="text">The text.</param>
+    public TextOutput(string text)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TextOutput" /> class.
-        /// </summary>
-        /// <param name="text">The text.</param>
-        public TextOutput(string text)
-        {
-            this.Text = text;
-        }
-
-        /// <summary>
-        /// Gets the source text.
-        /// </summary>
-        /// <value>
-        /// The source text.
-        /// </value>
-        public string Text { get; }
+        this.Text = text;
     }
+
+    /// <summary>
+    /// Gets the source text.
+    /// </summary>
+    /// <value>
+    /// The source text.
+    /// </value>
+    public string Text { get; }
 }

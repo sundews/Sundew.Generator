@@ -5,27 +5,26 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Code.Tests
-{
-    using FluentAssertions;
-    using Sundew.Generator.Code.CSharp;
-    using Xunit;
+namespace Sundew.Generator.Code.Tests;
 
-    public class UsingsGeneratorTests
+using FluentAssertions;
+using Sundew.Generator.Code.CSharp;
+using Xunit;
+
+public class UsingsGeneratorTests
+{
+    [Fact]
+    public void GetUsings_Then_ResultShouldBeExpectedResult()
     {
-        [Fact]
-        public void GetUsings_Then_ResultShouldBeExpectedResult()
-        {
-            var usings1 = new[] { "Microsoft.Windows", "System.Collections", "Microsoft.Windows" };
-            var usings2 = new[] { "Microsoft.Win32", "System" };
-            const string expectedResult = @"using System;
+        var usings1 = new[] { "Microsoft.Windows", "System.Collections", "Microsoft.Windows" };
+        var usings2 = new[] { "Microsoft.Win32", "System" };
+        const string expectedResult = @"using System;
 using System.Collections;
 using Microsoft.Win32;
 using Microsoft.Windows;";
 
-            var result = UsingsHelper.GetUsings(false, 0, true, usings1, usings2);
+        var result = UsingsHelper.GetUsings(false, 0, true, usings1, usings2);
 
-            result.Should().Be(expectedResult);
-        }
+        result.Should().Be(expectedResult);
     }
 }

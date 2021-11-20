@@ -5,59 +5,58 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+using System;
+using System.Reflection;
+
+/// <summary>
+/// Allows to specify a default implementation on an interface.
+/// </summary>
+/// <seealso cref="System.Attribute" />
+[AttributeUsage(AttributeTargets.Interface)]
+
+public class DefaultImplementation : Attribute
 {
-    using System;
-    using System.Reflection;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DefaultImplementation"/> class.
+    /// </summary>
+    /// <param name="defaultImplementationType">Default type of the implementation.</param>
+    public DefaultImplementation(Type defaultImplementationType)
+    {
+        this.DefaultImplementationType = defaultImplementationType;
+    }
 
     /// <summary>
-    /// Allows to specify a default implementation on an interface.
+    /// Gets the default type of the implementation.
     /// </summary>
-    /// <seealso cref="System.Attribute" />
-    [AttributeUsage(AttributeTargets.Interface)]
+    /// <value>
+    /// The default type of the implementation.
+    /// </value>
+    public Type DefaultImplementationType { get; }
 
-    public class DefaultImplementation : Attribute
+    /// <summary>
+    /// Gets the specified type.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <returns>A <see cref="DefaultImplementation"/>.</returns>
+    public static DefaultImplementation Get(Type type)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultImplementation"/> class.
-        /// </summary>
-        /// <param name="defaultImplementationType">Default type of the implementation.</param>
-        public DefaultImplementation(Type defaultImplementationType)
+        return (DefaultImplementation)type.GetTypeInfo().GetCustomAttribute(typeof(DefaultImplementation));
+    }
+
+    /// <summary>
+    /// Gets the default type of the implementation.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <returns>The default implementation type.</returns>
+    public static Type? GetDefaultImplementationType(Type? type)
+    {
+        if (type?.IsAbstract == true)
         {
-            this.DefaultImplementationType = defaultImplementationType;
+            return Get(type).DefaultImplementationType;
         }
 
-        /// <summary>
-        /// Gets the default type of the implementation.
-        /// </summary>
-        /// <value>
-        /// The default type of the implementation.
-        /// </value>
-        public Type DefaultImplementationType { get; }
-
-        /// <summary>
-        /// Gets the specified type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>A <see cref="DefaultImplementation"/>.</returns>
-        public static DefaultImplementation Get(Type type)
-        {
-            return (DefaultImplementation)type.GetTypeInfo().GetCustomAttribute(typeof(DefaultImplementation));
-        }
-
-        /// <summary>
-        /// Gets the default type of the implementation.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The default implementation type.</returns>
-        public static Type? GetDefaultImplementationType(Type? type)
-        {
-            if (type?.IsAbstract == true)
-            {
-                return Get(type).DefaultImplementationType;
-            }
-
-            return type;
-        }
+        return type;
     }
 }

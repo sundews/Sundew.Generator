@@ -5,22 +5,21 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Discovery
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+namespace Sundew.Generator.Discovery;
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+/// <summary>
+/// Interface for implementing a finder for generator settings.
+/// </summary>
+public interface ISetupFileFinder
+{
     /// <summary>
-    /// Interface for implementing a finder for generator settings.
+    /// Searches the specified directory.
     /// </summary>
-    public interface ISetupFileFinder
-    {
-        /// <summary>
-        /// Searches the specified directory.
-        /// </summary>
-        /// <param name="directory">The directory.</param>
-        /// <param name="searchPattern">The search pattern.</param>
-        /// <returns>The found files.</returns>
-        Task<IEnumerable<string>> SearchAsync(string directory, string searchPattern);
-    }
+    /// <param name="directory">The directory.</param>
+    /// <param name="searchPattern">The search pattern.</param>
+    /// <returns>The found files.</returns>
+    Task<IEnumerable<string>> SearchAsync(string directory, string searchPattern);
 }

@@ -5,21 +5,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine.Internal
-{
-    using Sundew.Generator.Core;
+namespace Sundew.Generator.Engine.Internal;
 
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Interface that provides access to the real generator in a GeneratorAdapter.
+/// </summary>
+internal interface IHaveGenerator
+{
     /// <summary>
-    /// Interface that provides access to the real generator in a GeneratorAdapter.
+    /// Gets the generator.
     /// </summary>
-    internal interface IHaveGenerator
-    {
-        /// <summary>
-        /// Gets the generator.
-        /// </summary>
-        /// <value>
-        /// The generator.
-        /// </value>
-        IGenerator Generator { get; }
-    }
+    /// <value>
+    /// The generator.
+    /// </value>
+    IGenerator Generator { get; }
 }

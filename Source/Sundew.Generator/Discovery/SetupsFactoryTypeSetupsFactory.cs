@@ -5,50 +5,49 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Discovery
+namespace Sundew.Generator.Discovery;
+
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Sundew.Generator.Core;
+using Sundew.Generator.Reflection;
+
+/// <summary>
+/// Setups Factory for types of <see cref="ISetupsFactory"/>.
+/// </summary>
+/// <seealso cref="Sundew.Generator.Discovery.ISetupsFactory" />
+public class SetupsFactoryTypeSetupsFactory : ISetupsFactory
 {
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Reflection;
+    private readonly IEnumerable<string> typeNames;
 
     /// <summary>
-    /// Setups Factory for types of <see cref="ISetupsFactory"/>.
+    /// Initializes a new instance of the <see cref="SetupsFactoryTypeSetupsFactory"/> class.
     /// </summary>
-    /// <seealso cref="Sundew.Generator.Discovery.ISetupsFactory" />
-    public class SetupsFactoryTypeSetupsFactory : ISetupsFactory
+    /// <param name="typeNames">The type names.</param>
+    public SetupsFactoryTypeSetupsFactory(IEnumerable<string> typeNames)
     {
-        private readonly IEnumerable<string> typeNames;
+        this.typeNames = typeNames;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SetupsFactoryTypeSetupsFactory"/> class.
-        /// </summary>
-        /// <param name="typeNames">The type names.</param>
-        public SetupsFactoryTypeSetupsFactory(IEnumerable<string> typeNames)
+    /// <summary>
+    /// Gets the setups.
+    /// </summary>
+    /// <returns>
+    /// The setups.
+    /// </returns>
+    public async Task<IEnumerable<ISetup>> GetSetupsAsync()
+    {
+        var setups = new ConcurrentBag<ISetup>();
+        foreach (var typeName in this.typeNames)
         {
-            this.typeNames = typeNames;
-        }
-
-        /// <summary>
-        /// Gets the setups.
-        /// </summary>
-        /// <returns>
-        /// The setups.
-        /// </returns>
-        public async Task<IEnumerable<ISetup>> GetSetupsAsync()
-        {
-            var setups = new ConcurrentBag<ISetup>();
-            foreach (var typeName in this.typeNames)
+            foreach (var setup in await ((ISetupsFactory)Activator.CreateInstance(TypeAssemblyLoader.GetType(typeName))).GetSetupsAsync().ConfigureAwait(false))
             {
-                foreach (var setup in await ((ISetupsFactory)Activator.CreateInstance(TypeAssemblyLoader.GetType(typeName))).GetSetupsAsync().ConfigureAwait(false))
-                {
-                    setups.Add(setup);
-                }
+                setups.Add(setup);
             }
-
-            return setups;
         }
+
+        return setups;
     }
 }

@@ -5,39 +5,38 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reporting
+namespace Sundew.Generator.Reporting;
+
+using System.IO;
+
+/// <summary>
+/// Factory for creating a progress reporter.
+/// </summary>
+public class ProgressReporterFactory
 {
-    using System.IO;
-
     /// <summary>
-    /// Factory for creating a progress reporter.
+    /// Creates the specified text writer.
     /// </summary>
-    public class ProgressReporterFactory
+    /// <param name="progressReporter">The generator options progress reporter.</param>
+    /// <param name="textWriter">The text writer.</param>
+    /// <returns>
+    /// A progress reporter.
+    /// </returns>
+    public IProgressReporter Create(
+        IProgressReporter? progressReporter,
+        TextWriter? textWriter = null)
     {
-        /// <summary>
-        /// Creates the specified text writer.
-        /// </summary>
-        /// <param name="progressReporter">The generator options progress reporter.</param>
-        /// <param name="textWriter">The text writer.</param>
-        /// <returns>
-        /// A progress reporter.
-        /// </returns>
-        public IProgressReporter Create(
-            IProgressReporter? progressReporter,
-            TextWriter? textWriter = null)
+        var simpleProgressReporter = textWriter != null ? new SimpleProgressReporter(textWriter) : null;
+        if (progressReporter != null && simpleProgressReporter != null)
         {
-            var simpleProgressReporter = textWriter != null ? new SimpleProgressReporter(textWriter) : null;
-            if (progressReporter != null && simpleProgressReporter != null)
-            {
-                return new CompositeProgressReporter(progressReporter, simpleProgressReporter);
-            }
-
-            if (simpleProgressReporter != null)
-            {
-                return simpleProgressReporter;
-            }
-
-            return progressReporter ?? new ConsoleProgressReporter();
+            return new CompositeProgressReporter(progressReporter, simpleProgressReporter);
         }
+
+        if (simpleProgressReporter != null)
+        {
+            return simpleProgressReporter;
+        }
+
+        return progressReporter ?? new ConsoleProgressReporter();
     }
 }

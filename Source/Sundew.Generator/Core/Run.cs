@@ -5,28 +5,27 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+/// <summary>
+/// Provides information about the run.
+/// </summary>
+public class Run : IRun
 {
     /// <summary>
-    /// Provides information about the run.
+    /// Initializes a new instance of the <see cref="Run" /> class.
     /// </summary>
-    public class Run : IRun
+    /// <param name="name">The name.</param>
+    public Run(string name)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Run" /> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        public Run(string name)
-        {
-            this.Name = name;
-        }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        public string Name { get; }
+        this.Name = name;
     }
+
+    /// <summary>
+    /// Gets the name.
+    /// </summary>
+    /// <value>
+    /// The name.
+    /// </value>
+    public string Name { get; }
 }

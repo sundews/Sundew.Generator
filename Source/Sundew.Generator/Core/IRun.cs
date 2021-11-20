@@ -5,19 +5,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+/// <summary>
+/// Interface description a run.
+/// </summary>
+public interface IRun
 {
     /// <summary>
-    /// Interface description a run.
+    /// Gets the name .
     /// </summary>
-    public interface IRun
-    {
-        /// <summary>
-        /// Gets the name .
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        string Name { get; }
-    }
+    /// <value>
+    /// The name.
+    /// </value>
+    string Name { get; }
 }

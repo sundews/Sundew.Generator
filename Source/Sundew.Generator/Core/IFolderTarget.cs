@@ -5,27 +5,26 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+/// <summary>
+/// Interface for implementing a file target.
+/// </summary>
+public interface IFolderTarget : ITarget
 {
     /// <summary>
-    /// Interface for implementing a file target.
+    /// Gets the file path.
     /// </summary>
-    public interface IFolderTarget : ITarget
-    {
-        /// <summary>
-        /// Gets the file path.
-        /// </summary>
-        /// <value>
-        /// The file path.
-        /// </value>
-        string Path { get; }
+    /// <value>
+    /// The file path.
+    /// </value>
+    string Path { get; }
 
-        /// <summary>
-        /// Gets the folder path.
-        /// </summary>
-        /// <value>
-        /// The folder path.
-        /// </value>
-        string FolderPath { get; }
-    }
+    /// <summary>
+    /// Gets the folder path.
+    /// </summary>
+    /// <value>
+    /// The folder path.
+    /// </value>
+    string FolderPath { get; }
 }

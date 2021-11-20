@@ -5,33 +5,32 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests
+namespace Sundew.Generator.Tests;
+
+using System.Threading.Tasks;
+using Sundew.Generator.Core;
+using Sundew.Generator.Output;
+using Sundew.Generator.Reporting;
+
+public class XmlHandler : IWriter<IWriterSetup, ITarget, IRun, string>
 {
-    using System.Threading.Tasks;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Output;
-    using Sundew.Generator.Reporting;
-
-    public class XmlHandler : IWriter<IWriterSetup, ITarget, IRun, string>
+    public Task<ITarget> GetTargetAsync(IWriterSetup writerSetup)
     {
-        public Task<ITarget> GetTargetAsync(IWriterSetup writerSetup)
-        {
-            throw new System.NotImplementedException();
-        }
+        throw new System.NotImplementedException();
+    }
 
-        public Task PrepareTargetAsync(ITarget target, IWriterSetup writerSetup)
-        {
-            throw new System.NotImplementedException();
-        }
+    public Task PrepareTargetAsync(ITarget target, IWriterSetup writerSetup)
+    {
+        throw new System.NotImplementedException();
+    }
 
-        public Task<string> ApplyContentToTargetAsync(ITarget target, IRun run, IWriterSetup writerSetup, string content)
-        {
-            throw new System.NotImplementedException();
-        }
+    public Task<string> ApplyContentToTargetAsync(ITarget target, IRun run, IWriterSetup writerSetup, string content)
+    {
+        throw new System.NotImplementedException();
+    }
 
-        public Task CompleteTargetAsync(ITargetCompletionTracker targetCompletionTracker)
-        {
-            throw new System.NotImplementedException();
-        }
+    public Task CompleteTargetAsync(ITargetCompletionTracker targetCompletionTracker)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -5,41 +5,40 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Discovery
+namespace Sundew.Generator.Discovery;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Sundew.Base.Collections;
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Factory for json setups.
+/// </summary>
+/// <seealso cref="ISetupsFactory" />
+public class JsonSetupsFactory : ISetupsFactory
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Sundew.Base.Collections;
-    using Sundew.Generator.Core;
+    private readonly IEnumerable<string> setupPaths;
+    private readonly JsonSetupProvider jsonSetupProvider;
 
     /// <summary>
-    /// Factory for json setups.
+    /// Initializes a new instance of the <see cref="JsonSetupsFactory"/> class.
     /// </summary>
-    /// <seealso cref="ISetupsFactory" />
-    public class JsonSetupsFactory : ISetupsFactory
+    /// <param name="setupPaths">The generator setup paths.</param>
+    public JsonSetupsFactory(IEnumerable<string> setupPaths)
     {
-        private readonly IEnumerable<string> setupPaths;
-        private readonly JsonSetupProvider jsonSetupProvider;
+        this.setupPaths = setupPaths;
+        this.jsonSetupProvider = new JsonSetupProvider();
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JsonSetupsFactory"/> class.
-        /// </summary>
-        /// <param name="setupPaths">The generator setup paths.</param>
-        public JsonSetupsFactory(IEnumerable<string> setupPaths)
-        {
-            this.setupPaths = setupPaths;
-            this.jsonSetupProvider = new JsonSetupProvider();
-        }
-
-        /// <summary>
-        /// Gets the setups.
-        /// </summary>
-        /// <returns>
-        /// The setups.
-        /// </returns>
-        public async Task<IEnumerable<ISetup>> GetSetupsAsync()
-        {
-            return await this.setupPaths.SelectAsync(async path => await this.jsonSetupProvider.GetSetupAsync(path).ConfigureAwait(false)).ConfigureAwait(false);
-        }
+    /// <summary>
+    /// Gets the setups.
+    /// </summary>
+    /// <returns>
+    /// The setups.
+    /// </returns>
+    public async Task<IEnumerable<ISetup>> GetSetupsAsync()
+    {
+        return await this.setupPaths.SelectAsync(async path => await this.jsonSetupProvider.GetSetupAsync(path).ConfigureAwait(false)).ConfigureAwait(false);
     }
 }

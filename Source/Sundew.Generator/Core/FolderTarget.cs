@@ -5,48 +5,47 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+/// <summary>
+/// Stores info about a file target.
+/// </summary>
+public class FolderTarget : IFolderTarget
 {
     /// <summary>
-    /// Stores info about a file target.
+    /// Initializes a new instance of the <see cref="FolderTarget" /> class.
     /// </summary>
-    public class FolderTarget : IFolderTarget
+    /// <param name="name">The name.</param>
+    /// <param name="path">The path.</param>
+    /// <param name="folderPath">The folder path.</param>
+    public FolderTarget(string name, string path, string folderPath)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FolderTarget" /> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="path">The path.</param>
-        /// <param name="folderPath">The folder path.</param>
-        public FolderTarget(string name, string path, string folderPath)
-        {
-            this.Name = name;
-            this.Path = path;
-            this.FolderPath = folderPath;
-        }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        public string Name { get; }
-
-        /// <summary>
-        /// Gets the path.
-        /// </summary>
-        /// <value>
-        /// The path.
-        /// </value>
-        public string Path { get; }
-
-        /// <summary>
-        /// Gets the folder path.
-        /// </summary>
-        /// <value>
-        /// The folder path.
-        /// </value>
-        public string FolderPath { get; }
+        this.Name = name;
+        this.Path = path;
+        this.FolderPath = folderPath;
     }
+
+    /// <summary>
+    /// Gets the name.
+    /// </summary>
+    /// <value>
+    /// The name.
+    /// </value>
+    public string Name { get; }
+
+    /// <summary>
+    /// Gets the path.
+    /// </summary>
+    /// <value>
+    /// The path.
+    /// </value>
+    public string Path { get; }
+
+    /// <summary>
+    /// Gets the folder path.
+    /// </summary>
+    /// <value>
+    /// The folder path.
+    /// </value>
+    public string FolderPath { get; }
 }

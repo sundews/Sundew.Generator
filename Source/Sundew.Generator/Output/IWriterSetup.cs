@@ -5,30 +5,29 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Output
+namespace Sundew.Generator.Output;
+
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Interface for the generator setup.
+/// </summary>
+[DefaultImplementation(typeof(WriterSetup))]
+public interface IWriterSetup
 {
-    using Sundew.Generator.Core;
+    /// <summary>
+    /// Gets the target.
+    /// </summary>
+    /// <value>
+    /// The type.
+    /// </value>
+    string Target { get; }
 
     /// <summary>
-    /// Interface for the generator setup.
+    /// Gets the writer.
     /// </summary>
-    [DefaultImplementation(typeof(WriterSetup))]
-    public interface IWriterSetup
-    {
-        /// <summary>
-        /// Gets the target.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        string Target { get; }
-
-        /// <summary>
-        /// Gets the writer.
-        /// </summary>
-        /// <value>
-        /// The writer.
-        /// </value>
-        TypeOrObject<IWriter>? Writer { get; }
-    }
+    /// <value>
+    /// The writer.
+    /// </value>
+    TypeOrObject<IWriter>? Writer { get; }
 }

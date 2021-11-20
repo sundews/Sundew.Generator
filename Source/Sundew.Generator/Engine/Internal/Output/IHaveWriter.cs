@@ -5,21 +5,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine.Internal.Output
-{
-    using Sundew.Generator.Output;
+namespace Sundew.Generator.Engine.Internal.Output;
 
+using Sundew.Generator.Output;
+
+/// <summary>
+/// Interface that provides access to the real writer in a WriterAdapter.
+/// </summary>
+internal interface IHaveWriter
+{
     /// <summary>
-    /// Interface that provides access to the real writer in a WriterAdapter.
+    /// Gets the writer.
     /// </summary>
-    internal interface IHaveWriter
-    {
-        /// <summary>
-        /// Gets the writer.
-        /// </summary>
-        /// <value>
-        /// The writer.
-        /// </value>
-        IWriter Writer { get; }
-    }
+    /// <value>
+    /// The writer.
+    /// </value>
+    IWriter Writer { get; }
 }

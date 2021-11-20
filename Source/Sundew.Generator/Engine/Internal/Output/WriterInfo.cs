@@ -5,25 +5,24 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine.Internal.Output
+namespace Sundew.Generator.Engine.Internal.Output;
+
+using System.Collections.Generic;
+using Sundew.Generator.Core;
+using Sundew.Generator.Output;
+
+internal class WriterInfo
 {
-    using System.Collections.Generic;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Output;
-
-    internal class WriterInfo
+    public WriterInfo(IWriterSetup writerSetup, IWriter<IWriterSetup, ITarget, IRun, object> writer, IEnumerable<GeneratorInfo> generatorInfos)
     {
-        public WriterInfo(IWriterSetup writerSetup, IWriter<IWriterSetup, ITarget, IRun, object> writer, IEnumerable<GeneratorInfo> generatorInfos)
-        {
-            this.WriterSetup = writerSetup;
-            this.Writer = writer;
-            this.GeneratorInfos = generatorInfos;
-        }
-
-        public IWriterSetup WriterSetup { get; }
-
-        public IWriter<IWriterSetup, ITarget, IRun, object> Writer { get; }
-
-        public IEnumerable<GeneratorInfo> GeneratorInfos { get; }
+        this.WriterSetup = writerSetup;
+        this.Writer = writer;
+        this.GeneratorInfos = generatorInfos;
     }
+
+    public IWriterSetup WriterSetup { get; }
+
+    public IWriter<IWriterSetup, ITarget, IRun, object> Writer { get; }
+
+    public IEnumerable<GeneratorInfo> GeneratorInfos { get; }
 }

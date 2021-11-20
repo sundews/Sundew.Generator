@@ -5,34 +5,33 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+using System;
+using Sundew.Generator.Engine.Internal;
+
+/// <summary>
+/// Exception thrown by <see cref="GeneratorRunner"/> when an exception occurs.
+/// </summary>
+/// <seealso cref="System.Exception" />
+public class GenerationException : Exception
 {
-    using System;
-    using Sundew.Generator.Engine.Internal;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GenerationException"/> class.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    public GenerationException(string message)
+        : base(message)
+    {
+    }
 
     /// <summary>
-    /// Exception thrown by <see cref="GeneratorRunner"/> when an exception occurs.
+    /// Initializes a new instance of the <see cref="GenerationException"/> class.
     /// </summary>
-    /// <seealso cref="System.Exception" />
-    public class GenerationException : Exception
+    /// <param name="message">The error message that explains the reason for the exception.</param>
+    /// <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+    public GenerationException(string message, Exception innerException)
+        : base(message, innerException)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GenerationException"/> class.
-        /// </summary>
-        /// <param name="message">The message that describes the error.</param>
-        public GenerationException(string message)
-            : base(message)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GenerationException"/> class.
-        /// </summary>
-        /// <param name="message">The error message that explains the reason for the exception.</param>
-        /// <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
-        public GenerationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
     }
 }

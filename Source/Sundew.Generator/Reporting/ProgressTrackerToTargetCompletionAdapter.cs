@@ -5,22 +5,21 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reporting
+namespace Sundew.Generator.Reporting;
+
+using Sundew.Base.Primitives.Computation;
+
+internal class ProgressTrackerToTargetCompletionAdapter : ITargetCompletionTracker
 {
-    using Sundew.Base.Primitives.Computation;
+    private readonly IProgressTracker<Report> progressTracker;
 
-    internal class ProgressTrackerToTargetCompletionAdapter : ITargetCompletionTracker
+    public ProgressTrackerToTargetCompletionAdapter(IProgressTracker<Report> progressTracker)
     {
-        private readonly IProgressTracker<Report> progressTracker;
+        this.progressTracker = progressTracker;
+    }
 
-        public ProgressTrackerToTargetCompletionAdapter(IProgressTracker<Report> progressTracker)
-        {
-            this.progressTracker = progressTracker;
-        }
-
-        public void Report(string message)
-        {
-            this.progressTracker.Report(new Report(ReportType.TargetChanged, message));
-        }
+    public void Report(string message)
+    {
+        this.progressTracker.Report(new Report(ReportType.TargetChanged, message));
     }
 }

@@ -5,12 +5,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Input
+namespace Sundew.Generator.Input;
+
+/// <summary>
+/// Interface for implementing a model provider.
+/// </summary>
+public interface IModelProvider
 {
-    /// <summary>
-    /// Interface for implementing a model provider.
-    /// </summary>
-    public interface IModelProvider
-    {
-    }
 }

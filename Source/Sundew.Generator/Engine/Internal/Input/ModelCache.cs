@@ -5,30 +5,29 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine.Internal.Input
+namespace Sundew.Generator.Engine.Internal.Input;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Sundew.Base.Threading;
+using Sundew.Generator.Core;
+using Sundew.Generator.Input;
+
+internal class ModelCache
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Sundew.Base.Threading;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Input;
+    private readonly IModelProvider<ISetup, IModelSetup, object> modelProvider;
+    private readonly ISetup setup;
+    private readonly AsyncLazy<IReadOnlyList<IModelInfo<object>>> models;
 
-    internal class ModelCache
+    public ModelCache(IModelProvider<ISetup, IModelSetup, object> modelProvider, ISetup setup)
     {
-        private readonly IModelProvider<ISetup, IModelSetup, object> modelProvider;
-        private readonly ISetup setup;
-        private readonly AsyncLazy<IReadOnlyList<IModelInfo<object>>> models;
+        this.modelProvider = modelProvider;
+        this.setup = setup;
+        this.models = new AsyncLazy<IReadOnlyList<IModelInfo<object>>>(() => this.modelProvider.GetModelsAsync(this.setup, this.setup.ModelSetup));
+    }
 
-        public ModelCache(IModelProvider<ISetup, IModelSetup, object> modelProvider, ISetup setup)
-        {
-            this.modelProvider = modelProvider;
-            this.setup = setup;
-            this.models = new AsyncLazy<IReadOnlyList<IModelInfo<object>>>(() => this.modelProvider.GetModelsAsync(this.setup, this.setup.ModelSetup));
-        }
-
-        public async Task<IReadOnlyList<IModelInfo<object>>> GetModelInfosAsync()
-        {
-            return await this.models;
-        }
+    public async Task<IReadOnlyList<IModelInfo<object>>> GetModelInfosAsync()
+    {
+        return await this.models;
     }
 }

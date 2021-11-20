@@ -5,29 +5,28 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Code
+namespace Sundew.Generator.Code;
+
+using Sundew.Generator.Core;
+
+/// <summary>
+/// A run for outputting code.
+/// </summary>
+public interface ICodeRun : IRun
 {
-    using Sundew.Generator.Core;
+    /// <summary>
+    /// Gets the name of the file.
+    /// </summary>
+    /// <value>
+    /// The name of the file.
+    /// </value>
+    string? FileName { get; }
 
     /// <summary>
-    /// A run for outputting code.
+    /// Gets the namespace.
     /// </summary>
-    public interface ICodeRun : IRun
-    {
-        /// <summary>
-        /// Gets the name of the file.
-        /// </summary>
-        /// <value>
-        /// The name of the file.
-        /// </value>
-        string? FileName { get; }
-
-        /// <summary>
-        /// Gets the namespace.
-        /// </summary>
-        /// <value>
-        /// The namespace.
-        /// </value>
-        string? Namespace { get; }
-    }
+    /// <value>
+    /// The namespace.
+    /// </value>
+    string? Namespace { get; }
 }

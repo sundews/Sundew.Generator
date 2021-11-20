@@ -5,21 +5,20 @@
 // </copyright>
 // ------------
 
-namespace Sundew.Generator.Engine
-{
-    using System.Threading;
+namespace Sundew.Generator.Engine;
 
+using System.Threading;
+
+/// <summary>
+/// Interface for specifying generator options.
+/// </summary>
+public interface IGeneratorOptions
+{
     /// <summary>
-    /// Interface for specifying generator options.
+    /// Gets the cancellation token.
     /// </summary>
-    public interface IGeneratorOptions
-    {
-        /// <summary>
-        /// Gets the cancellation token.
-        /// </summary>
-        /// <value>
-        /// The cancellation token.
-        /// </value>
-        CancellationToken CancellationToken { get; }
-    }
+    /// <value>
+    /// The cancellation token.
+    /// </value>
+    CancellationToken CancellationToken { get; }
 }

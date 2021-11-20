@@ -5,23 +5,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine
-{
-    using System.Collections.Generic;
-    using Sundew.Generator.Core;
+namespace Sundew.Generator.Engine;
 
+using System.Collections.Generic;
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Factory interface for <see cref="IGeneratorRunner"/>.
+/// </summary>
+public interface IGeneratorRunnerFactory
+{
     /// <summary>
-    /// Factory interface for <see cref="IGeneratorRunner"/>.
+    /// Creates an <see cref="IGeneratorRunner" />.
     /// </summary>
-    public interface IGeneratorRunnerFactory
-    {
-        /// <summary>
-        /// Creates an <see cref="IGeneratorRunner" />.
-        /// </summary>
-        /// <param name="setupInfos">The setupInfos.</param>
-        /// <returns>
-        /// An <see cref="IGeneratorRunner" />.
-        /// </returns>
-        IGeneratorRunner Create(IEnumerable<SetupInfo> setupInfos);
-    }
+    /// <param name="setupInfos">The setupInfos.</param>
+    /// <returns>
+    /// An <see cref="IGeneratorRunner" />.
+    /// </returns>
+    IGeneratorRunner Create(IEnumerable<SetupInfo> setupInfos);
 }

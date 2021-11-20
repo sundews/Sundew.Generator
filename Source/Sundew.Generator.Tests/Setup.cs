@@ -5,27 +5,26 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests
+namespace Sundew.Generator.Tests;
+
+using System;
+using System.Collections.Generic;
+using Sundew.Generator.Core;
+using Sundew.Generator.Input;
+using Sundew.Generator.Output;
+
+public class Setup : ISetup
 {
-    using System;
-    using System.Collections.Generic;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Input;
-    using Sundew.Generator.Output;
-
-    public class Setup : ISetup
+    public Setup()
     {
-        public Setup()
-        {
-            this.Type = this.GetType();
-        }
-
-        public Type Type { get; set; }
-
-        public IModelSetup? ModelSetup { get; set; }
-
-        public IReadOnlyList<IWriterSetup>? WriterSetups { get; set; }
-
-        public IReadOnlyList<IGeneratorSetup>? GeneratorSetups { get; set; }
+        this.Type = this.GetType();
     }
+
+    public Type Type { get; set; }
+
+    public IModelSetup? ModelSetup { get; set; }
+
+    public IReadOnlyList<IWriterSetup>? WriterSetups { get; set; }
+
+    public IReadOnlyList<IGeneratorSetup>? GeneratorSetups { get; set; }
 }

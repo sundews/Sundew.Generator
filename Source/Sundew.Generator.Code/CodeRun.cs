@@ -5,53 +5,52 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Code
+namespace Sundew.Generator.Code;
+
+using Sundew.Generator.Core;
+
+/// <summary>
+/// A run for outputting code.
+/// </summary>
+/// <seealso cref="Sundew.Generator.Core.Run" />
+/// <seealso cref="ICodeRun" />
+public class CodeRun : Run, ICodeRun
 {
-    using Sundew.Generator.Core;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CodeRun"/> class.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    public CodeRun(string name)
+        : base(name)
+    {
+    }
 
     /// <summary>
-    /// A run for outputting code.
+    /// Initializes a new instance of the <see cref="CodeRun" /> class.
     /// </summary>
-    /// <seealso cref="Sundew.Generator.Core.Run" />
-    /// <seealso cref="ICodeRun" />
-    public class CodeRun : Run, ICodeRun
+    /// <param name="name">The name.</param>
+    /// <param name="fileName">Name of the file.</param>
+    /// <param name="namespace">The namespace.</param>
+    public CodeRun(string name, string? fileName, string? @namespace)
+        : base(name)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CodeRun"/> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        public CodeRun(string name)
-            : base(name)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CodeRun" /> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="fileName">Name of the file.</param>
-        /// <param name="namespace">The namespace.</param>
-        public CodeRun(string name, string? fileName, string? @namespace)
-            : base(name)
-        {
-            this.FileName = fileName;
-            this.Namespace = @namespace;
-        }
-
-        /// <summary>
-        /// Gets the name of the file.
-        /// </summary>
-        /// <value>
-        /// The name of the file.
-        /// </value>
-        public string? FileName { get; init; }
-
-        /// <summary>
-        /// Gets the namespace.
-        /// </summary>
-        /// <value>
-        /// The namespace.
-        /// </value>
-        public string? Namespace { get; init; }
+        this.FileName = fileName;
+        this.Namespace = @namespace;
     }
+
+    /// <summary>
+    /// Gets the name of the file.
+    /// </summary>
+    /// <value>
+    /// The name of the file.
+    /// </value>
+    public string? FileName { get; init; }
+
+    /// <summary>
+    /// Gets the namespace.
+    /// </summary>
+    /// <value>
+    /// The namespace.
+    /// </value>
+    public string? Namespace { get; init; }
 }

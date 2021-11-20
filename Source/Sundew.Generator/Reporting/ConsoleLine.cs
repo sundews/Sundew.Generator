@@ -5,38 +5,37 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reporting
+namespace Sundew.Generator.Reporting;
+
+/// <summary>
+/// Represents a line printed to the console.
+/// </summary>
+public class ConsoleLine
 {
     /// <summary>
-    /// Represents a line printed to the console.
+    /// Initializes a new instance of the <see cref="ConsoleLine"/> class.
     /// </summary>
-    public class ConsoleLine
+    /// <param name="overwriteLastLine">if set to <c>true</c> [overwrite last line].</param>
+    /// <param name="text">The text.</param>
+    public ConsoleLine(bool overwriteLastLine, string text)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleLine"/> class.
-        /// </summary>
-        /// <param name="overwriteLastLine">if set to <c>true</c> [overwrite last line].</param>
-        /// <param name="text">The text.</param>
-        public ConsoleLine(bool overwriteLastLine, string text)
-        {
-            this.OverwriteLastLine = overwriteLastLine;
-            this.Text = text;
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether [overwrite last line].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [overwrite last line]; otherwise, <c>false</c>.
-        /// </value>
-        public bool OverwriteLastLine { get; }
-
-        /// <summary>
-        /// Gets the text.
-        /// </summary>
-        /// <value>
-        /// The text.
-        /// </value>
-        public string Text { get; }
+        this.OverwriteLastLine = overwriteLastLine;
+        this.Text = text;
     }
+
+    /// <summary>
+    /// Gets a value indicating whether [overwrite last line].
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if [overwrite last line]; otherwise, <c>false</c>.
+    /// </value>
+    public bool OverwriteLastLine { get; }
+
+    /// <summary>
+    /// Gets the text.
+    /// </summary>
+    /// <value>
+    /// The text.
+    /// </value>
+    public string Text { get; }
 }

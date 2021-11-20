@@ -5,94 +5,93 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.MSBuild
+namespace Sundew.Generator.MSBuild;
+
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.Build.Framework;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Sundew.Generator.Discovery;
+
+/// <summary>
+/// Creates an <see cref="ISetupsFactory"/> from <see cref="ITaskItem"/>s and syntax trees.
+/// </summary>
+public class SetupsFactoryProvider
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using Microsoft.Build.Framework;
-    using Microsoft.CodeAnalysis;
-    using Microsoft.CodeAnalysis.CSharp;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
-    using Sundew.Generator.Discovery;
+    private readonly string currentDirectory;
+    private readonly ITaskItem[]? generationSetupTaskItems;
+    private readonly SetupsFactoryTypesVisitor typeNameAndAssemblyVisitor;
 
     /// <summary>
-    /// Creates an <see cref="ISetupsFactory"/> from <see cref="ITaskItem"/>s and syntax trees.
+    /// Initializes a new instance of the <see cref="SetupsFactoryProvider"/> class.
     /// </summary>
-    public class SetupsFactoryProvider
+    public SetupsFactoryProvider(string currentDirectory, ITaskItem[]? generationSetupTaskItems, IEnumerable<SyntaxTree> compiledGenerationSetupsSyntaxTrees, Compilation compilation)
     {
-        private readonly string currentDirectory;
-        private readonly ITaskItem[]? generationSetupTaskItems;
-        private readonly SetupsFactoryTypesVisitor typeNameAndAssemblyVisitor;
+        this.currentDirectory = currentDirectory;
+        this.generationSetupTaskItems = generationSetupTaskItems;
+        this.typeNameAndAssemblyVisitor = new SetupsFactoryTypesVisitor(compiledGenerationSetupsSyntaxTrees, compilation);
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SetupsFactoryProvider"/> class.
-        /// </summary>
-        public SetupsFactoryProvider(string currentDirectory, ITaskItem[]? generationSetupTaskItems, IEnumerable<SyntaxTree> compiledGenerationSetupsSyntaxTrees, Compilation compilation)
+    /// <summary>
+    /// Gets the setups factory.
+    /// </summary>
+    /// <returns>A setups factory.</returns>
+    public ISetupsFactory? GetSetupsFactory()
+    {
+        ISetupsFactory? setupsFactory = null;
+        if (this.generationSetupTaskItems?.Any() == true)
         {
-            this.currentDirectory = currentDirectory;
-            this.generationSetupTaskItems = generationSetupTaskItems;
-            this.typeNameAndAssemblyVisitor = new SetupsFactoryTypesVisitor(compiledGenerationSetupsSyntaxTrees, compilation);
+            setupsFactory = new JsonSetupsFactory(this.generationSetupTaskItems.Select(x => Path.Combine(this.currentDirectory, x.ItemSpec)));
         }
 
-        /// <summary>
-        /// Gets the setups factory.
-        /// </summary>
-        /// <returns>A setups factory.</returns>
-        public ISetupsFactory? GetSetupsFactory()
+        var setupsFactoryTypes = this.typeNameAndAssemblyVisitor.GetTypes();
+        if (setupsFactoryTypes.Any())
         {
-            ISetupsFactory? setupsFactory = null;
-            if (this.generationSetupTaskItems?.Any() == true)
-            {
-                setupsFactory = new JsonSetupsFactory(this.generationSetupTaskItems.Select(x => Path.Combine(this.currentDirectory, x.ItemSpec)));
-            }
-
-            var setupsFactoryTypes = this.typeNameAndAssemblyVisitor.GetTypes();
-            if (setupsFactoryTypes.Any())
-            {
-                setupsFactory = setupsFactory != null
-                    ? (ISetupsFactory)new CompositeSetupsFactory(setupsFactory, new SetupsFactoryTypeSetupsFactory(setupsFactoryTypes))
-                    : new SetupsFactoryTypeSetupsFactory(setupsFactoryTypes);
-            }
-
-            return setupsFactory;
+            setupsFactory = setupsFactory != null
+                ? (ISetupsFactory)new CompositeSetupsFactory(setupsFactory, new SetupsFactoryTypeSetupsFactory(setupsFactoryTypes))
+                : new SetupsFactoryTypeSetupsFactory(setupsFactoryTypes);
         }
 
-        private class SetupsFactoryTypesVisitor : CSharpSyntaxWalker
+        return setupsFactory;
+    }
+
+    private class SetupsFactoryTypesVisitor : CSharpSyntaxWalker
+    {
+        private readonly IEnumerable<SyntaxTree> syntaxTrees;
+        private readonly Compilation compilation;
+        private List<string>? types;
+        private SemanticModel? semanticModel;
+
+        public SetupsFactoryTypesVisitor(IEnumerable<SyntaxTree> syntaxTrees, Compilation compilation)
         {
-            private readonly IEnumerable<SyntaxTree> syntaxTrees;
-            private readonly Compilation compilation;
-            private List<string>? types;
-            private SemanticModel? semanticModel;
+            this.syntaxTrees = syntaxTrees;
+            this.compilation = compilation;
+        }
 
-            public SetupsFactoryTypesVisitor(IEnumerable<SyntaxTree> syntaxTrees, Compilation compilation)
+        public IReadOnlyList<string> GetTypes()
+        {
+            this.types = new List<string>();
+            foreach (var syntaxTree in this.syntaxTrees)
             {
-                this.syntaxTrees = syntaxTrees;
-                this.compilation = compilation;
+                this.semanticModel = this.compilation.GetSemanticModel(syntaxTree);
+                this.Visit(syntaxTree.GetRoot());
             }
 
-            public IReadOnlyList<string> GetTypes()
-            {
-                this.types = new List<string>();
-                foreach (var syntaxTree in this.syntaxTrees)
-                {
-                    this.semanticModel = this.compilation.GetSemanticModel(syntaxTree);
-                    this.Visit(syntaxTree.GetRoot());
-                }
+            var actualTypes = this.types;
+            this.types = null;
+            return actualTypes;
+        }
 
-                var actualTypes = this.types;
-                this.types = null;
-                return actualTypes;
-            }
-
-            public override void VisitClassDeclaration(ClassDeclarationSyntax node)
+        public override void VisitClassDeclaration(ClassDeclarationSyntax node)
+        {
+            base.VisitClassDeclaration(node);
+            var declaredSymbol = this.semanticModel.GetDeclaredSymbol(node);
+            if (declaredSymbol != null)
             {
-                base.VisitClassDeclaration(node);
-                var declaredSymbol = this.semanticModel.GetDeclaredSymbol(node);
-                if (declaredSymbol != null)
-                {
-                    this.types?.Add($"{declaredSymbol.ToDisplayString()}, {declaredSymbol.ContainingAssembly}");
-                }
+                this.types?.Add($"{declaredSymbol.ToDisplayString()}, {declaredSymbol.ContainingAssembly}");
             }
         }
     }

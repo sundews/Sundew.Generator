@@ -5,12 +5,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace System.Runtime.CompilerServices
+namespace System.Runtime.CompilerServices;
+
+/// <summary>
+/// Enable property readonly initializers.
+/// </summary>
+public class IsExternalInit
 {
-    /// <summary>
-    /// Enable property readonly initializers.
-    /// </summary>
-    public class IsExternalInit
-    {
-    }
 }

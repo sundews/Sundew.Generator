@@ -5,29 +5,28 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Input
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+namespace Sundew.Generator.Input;
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+/// <summary>
+/// Interface for implementing a model provider.
+/// </summary>
+/// <typeparam name="TSetup">The type of the setup.</typeparam>
+/// <typeparam name="TModelSetup">The type of the model setup.</typeparam>
+/// <typeparam name="TModel">The type of the model.</typeparam>
+public interface IModelProvider<in TSetup, in TModelSetup, TModel> : IModelProvider
+    where TModelSetup : class
+    where TModel : class?
+{
     /// <summary>
-    /// Interface for implementing a model provider.
+    /// Gets the models.
     /// </summary>
-    /// <typeparam name="TSetup">The type of the setup.</typeparam>
-    /// <typeparam name="TModelSetup">The type of the model setup.</typeparam>
-    /// <typeparam name="TModel">The type of the model.</typeparam>
-    public interface IModelProvider<in TSetup, in TModelSetup, TModel> : IModelProvider
-        where TModelSetup : class
-        where TModel : class?
-    {
-        /// <summary>
-        /// Gets the models.
-        /// </summary>
-        /// <param name="setup">The setup.</param>
-        /// <param name="modelSetup">The model setup.</param>
-        /// <returns>
-        /// The models.
-        /// </returns>
-        Task<IReadOnlyList<IModelInfo<TModel>>> GetModelsAsync(TSetup setup, TModelSetup? modelSetup);
-    }
+    /// <param name="setup">The setup.</param>
+    /// <param name="modelSetup">The model setup.</param>
+    /// <returns>
+    /// The models.
+    /// </returns>
+    Task<IReadOnlyList<IModelInfo<TModel>>> GetModelsAsync(TSetup setup, TModelSetup? modelSetup);
 }

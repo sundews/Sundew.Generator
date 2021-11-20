@@ -5,24 +5,23 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reporting
+namespace Sundew.Generator.Reporting;
+
+using System;
+using Sundew.Base.Primitives.Computation;
+
+/// <summary>
+/// Interface for implementing a progress reporter.
+/// </summary>
+public interface IProgressReporter : IProgressReporter<Report>, IDisposable
 {
-    using System;
-    using Sundew.Base.Primitives.Computation;
+    /// <summary>
+    /// Starts this instance.
+    /// </summary>
+    void Start();
 
     /// <summary>
-    /// Interface for implementing a progress reporter.
+    /// Stops this instance.
     /// </summary>
-    public interface IProgressReporter : IProgressReporter<Report>, IDisposable
-    {
-        /// <summary>
-        /// Starts this instance.
-        /// </summary>
-        void Start();
-
-        /// <summary>
-        /// Stops this instance.
-        /// </summary>
-        void Stop();
-    }
+    void Stop();
 }

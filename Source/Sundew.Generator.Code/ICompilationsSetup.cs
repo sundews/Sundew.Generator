@@ -5,23 +5,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Code
-{
-    using System.Collections.Generic;
-    using Sundew.Generator.Core;
+namespace Sundew.Generator.Code;
 
+using System.Collections.Generic;
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Interface for implementing a setup that can provide paths for compilations.
+/// </summary>
+[DefaultImplementation(typeof(CompilationsSetup))]
+public interface ICompilationsSetup : ISetup
+{
     /// <summary>
-    /// Interface for implementing a setup that can provide paths for compilations.
+    /// Gets the compilation paths.
     /// </summary>
-    [DefaultImplementation(typeof(CompilationsSetup))]
-    public interface ICompilationsSetup : ISetup
-    {
-        /// <summary>
-        /// Gets the compilation paths.
-        /// </summary>
-        /// <value>
-        /// The compilation paths.
-        /// </value>
-        IReadOnlyList<string>? CompilationPaths { get; }
-    }
+    /// <value>
+    /// The compilation paths.
+    /// </value>
+    IReadOnlyList<string>? CompilationPaths { get; }
 }

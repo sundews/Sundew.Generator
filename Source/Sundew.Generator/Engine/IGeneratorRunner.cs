@@ -5,26 +5,25 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine
-{
-    using System.Collections.Concurrent;
-    using System.Threading.Tasks;
-    using Sundew.Base.Primitives.Computation;
-    using Sundew.Generator.Reporting;
+namespace Sundew.Generator.Engine;
 
+using System.Collections.Concurrent;
+using System.Threading.Tasks;
+using Sundew.Base.Primitives.Computation;
+using Sundew.Generator.Reporting;
+
+/// <summary>
+/// Interface for implementing a generator engine.
+/// </summary>
+public interface IGeneratorRunner
+{
     /// <summary>
-    /// Interface for implementing a generator engine.
+    /// Run the generation asynchronously.
     /// </summary>
-    public interface IGeneratorRunner
-    {
-        /// <summary>
-        /// Run the generation asynchronously.
-        /// </summary>
-        /// <param name="generatorOptions">The generation options.</param>
-        /// <param name="progressTracker">The generation progress tracker.</param>
-        /// <returns>
-        /// An async task.
-        /// </returns>
-        Task<ConcurrentBag<string>> GenerateAsync(IGeneratorOptions generatorOptions, IProgressTracker<Report>? progressTracker = null);
-    }
+    /// <param name="generatorOptions">The generation options.</param>
+    /// <param name="progressTracker">The generation progress tracker.</param>
+    /// <returns>
+    /// An async task.
+    /// </returns>
+    Task<ConcurrentBag<string>> GenerateAsync(IGeneratorOptions generatorOptions, IProgressTracker<Report>? progressTracker = null);
 }

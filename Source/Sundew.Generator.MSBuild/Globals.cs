@@ -5,26 +5,25 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.MSBuild
+namespace Sundew.Generator.MSBuild;
+
+using Sundew.Generator.Discovery;
+using Sundew.Generator.Reporting;
+
+/// <summary>
+/// Contains globals for code generation script.
+/// </summary>
+public class Globals
 {
-    using Sundew.Generator.Discovery;
-    using Sundew.Generator.Reporting;
+    /// <summary>
+    /// The progress reporter.
+    /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "Script globals")]
+    public IProgressReporter? ProgressReporter;
 
     /// <summary>
-    /// Contains globals for code generation script.
+    /// The setups factory.
     /// </summary>
-    public class Globals
-    {
-        /// <summary>
-        /// The progress reporter.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "Script globals")]
-        public IProgressReporter? ProgressReporter;
-
-        /// <summary>
-        /// The setups factory.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "Script globals")]
-        public ISetupsFactory? SetupsFactory;
-    }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "Script globals")]
+    public ISetupsFactory? SetupsFactory;
 }

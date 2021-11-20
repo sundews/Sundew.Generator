@@ -5,42 +5,41 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Discovery
+namespace Sundew.Generator.Discovery;
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Combine the output of two <see cref="ISetupsFactory"/>.
+/// </summary>
+/// <seealso cref="Sundew.Generator.Discovery.ISetupsFactory" />
+public class CompositeSetupsFactory : ISetupsFactory
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Sundew.Generator.Core;
+    private readonly ISetupsFactory setupsFactory;
+    private readonly ISetupsFactory additionalSetupsFactory;
 
     /// <summary>
-    /// Combine the output of two <see cref="ISetupsFactory"/>.
+    /// Initializes a new instance of the <see cref="CompositeSetupsFactory"/> class.
     /// </summary>
-    /// <seealso cref="Sundew.Generator.Discovery.ISetupsFactory" />
-    public class CompositeSetupsFactory : ISetupsFactory
+    /// <param name="setupsFactory">The setups factory.</param>
+    /// <param name="additionalSetupsFactory">The additional setups factory.</param>
+    public CompositeSetupsFactory(ISetupsFactory setupsFactory, ISetupsFactory additionalSetupsFactory)
     {
-        private readonly ISetupsFactory setupsFactory;
-        private readonly ISetupsFactory additionalSetupsFactory;
+        this.setupsFactory = setupsFactory;
+        this.additionalSetupsFactory = additionalSetupsFactory;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CompositeSetupsFactory"/> class.
-        /// </summary>
-        /// <param name="setupsFactory">The setups factory.</param>
-        /// <param name="additionalSetupsFactory">The additional setups factory.</param>
-        public CompositeSetupsFactory(ISetupsFactory setupsFactory, ISetupsFactory additionalSetupsFactory)
-        {
-            this.setupsFactory = setupsFactory;
-            this.additionalSetupsFactory = additionalSetupsFactory;
-        }
-
-        /// <summary>
-        /// Gets the setups.
-        /// </summary>
-        /// <returns>
-        /// The setups.
-        /// </returns>
-        public async Task<IEnumerable<ISetup>> GetSetupsAsync()
-        {
-            return (await this.setupsFactory.GetSetupsAsync()).Concat(await this.additionalSetupsFactory.GetSetupsAsync());
-        }
+    /// <summary>
+    /// Gets the setups.
+    /// </summary>
+    /// <returns>
+    /// The setups.
+    /// </returns>
+    public async Task<IEnumerable<ISetup>> GetSetupsAsync()
+    {
+        return (await this.setupsFactory.GetSetupsAsync()).Concat(await this.additionalSetupsFactory.GetSetupsAsync());
     }
 }

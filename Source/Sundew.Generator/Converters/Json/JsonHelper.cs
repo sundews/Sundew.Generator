@@ -5,58 +5,57 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Converters.Json
+namespace Sundew.Generator.Converters.Json;
+
+using System;
+using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Sundew.Generator.Core;
+using Sundew.Generator.Reflection;
+
+internal static class JsonHelper
 {
-    using System;
-    using System.Reflection;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Reflection;
-
-    internal static class JsonHelper
+    public static Type? GetType(JObject jObject)
     {
-        public static Type? GetType(JObject jObject)
+        var typeToken = jObject["Type"];
+        var typeName = typeToken?.Value<string>();
+        if (typeName != null)
         {
-            var typeToken = jObject["Type"];
-            var typeName = typeToken?.Value<string>();
-            if (typeName != null)
-            {
-                return TypeAssemblyLoader.GetType(typeName);
-            }
-
-            return null;
+            return TypeAssemblyLoader.GetType(typeName);
         }
 
-        public static void WriteWithType(JsonWriter writer, object? value, JsonSerializer serializer, string typePropertyName)
-        {
-            if (value == null)
-            {
-                return;
-            }
+        return null;
+    }
 
-            var item = JObject.FromObject(value, serializer);
-            var objectType = value.GetType();
-            item[typePropertyName] = $"{objectType.FullName}, {objectType.GetTypeInfo().Assembly.GetName().Name}";
-            item.WriteTo(writer);
+    public static void WriteWithType(JsonWriter writer, object? value, JsonSerializer serializer, string typePropertyName)
+    {
+        if (value == null)
+        {
+            return;
         }
 
-        public static Type? GetSetupTypeFromInterface(JToken token, Type genericInterfaceType, int setupTypeIndex)
-        {
-            var setupType = TypeAssemblyLoader.GetType(token.Value<string>()!);
-            var interfaceType = setupType?.GetGenericInterface(genericInterfaceType);
-            if (interfaceType != null)
-            {
-                var defaultImplementationType = DefaultImplementation.GetDefaultImplementationType(interfaceType.GenericTypeArguments[setupTypeIndex]);
-                if (defaultImplementationType != null)
-                {
-                    return defaultImplementationType;
-                }
+        var item = JObject.FromObject(value, serializer);
+        var objectType = value.GetType();
+        item[typePropertyName] = $"{objectType.FullName}, {objectType.GetTypeInfo().Assembly.GetName().Name}";
+        item.WriteTo(writer);
+    }
 
-                throw new JsonReaderException($"Error: No instantiable setup type was found for {setupType}.");
+    public static Type? GetSetupTypeFromInterface(JToken token, Type genericInterfaceType, int setupTypeIndex)
+    {
+        var setupType = TypeAssemblyLoader.GetType(token.Value<string>()!);
+        var interfaceType = setupType?.GetGenericInterface(genericInterfaceType);
+        if (interfaceType != null)
+        {
+            var defaultImplementationType = DefaultImplementation.GetDefaultImplementationType(interfaceType.GenericTypeArguments[setupTypeIndex]);
+            if (defaultImplementationType != null)
+            {
+                return defaultImplementationType;
             }
 
-            return null;
+            throw new JsonReaderException($"Error: No instantiable setup type was found for {setupType}.");
         }
+
+        return null;
     }
 }

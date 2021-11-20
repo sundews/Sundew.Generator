@@ -5,33 +5,32 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests
+namespace Sundew.Generator.Tests;
+
+using System.Threading.Tasks;
+using Sundew.Generator.Core;
+using Sundew.Generator.Output;
+using Sundew.Generator.Reporting;
+
+public class TextWriter : IWriter<IMsBuildWriterSetup, ITarget, IRun, string>
 {
-    using System.Threading.Tasks;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Output;
-    using Sundew.Generator.Reporting;
-
-    public class TextWriter : IWriter<IMsBuildWriterSetup, ITarget, IRun, string>
+    public Task<ITarget> GetTargetAsync(IMsBuildWriterSetup writerSetup)
     {
-        public Task<ITarget> GetTargetAsync(IMsBuildWriterSetup writerSetup)
-        {
-            throw new System.NotImplementedException();
-        }
+        throw new System.NotImplementedException();
+    }
 
-        public Task PrepareTargetAsync(ITarget target, IMsBuildWriterSetup writerSetup)
-        {
-            throw new System.NotImplementedException();
-        }
+    public Task PrepareTargetAsync(ITarget target, IMsBuildWriterSetup writerSetup)
+    {
+        throw new System.NotImplementedException();
+    }
 
-        Task<string> IWriter<IMsBuildWriterSetup, ITarget, IRun, string>.ApplyContentToTargetAsync(ITarget target, IRun run, IMsBuildWriterSetup writerSetup, string output)
-        {
-            throw new System.NotImplementedException();
-        }
+    Task<string> IWriter<IMsBuildWriterSetup, ITarget, IRun, string>.ApplyContentToTargetAsync(ITarget target, IRun run, IMsBuildWriterSetup writerSetup, string output)
+    {
+        throw new System.NotImplementedException();
+    }
 
-        public Task CompleteTargetAsync(ITargetCompletionTracker targetCompletionTracker)
-        {
-            throw new System.NotImplementedException();
-        }
+    public Task CompleteTargetAsync(ITargetCompletionTracker targetCompletionTracker)
+    {
+        throw new System.NotImplementedException();
     }
 }

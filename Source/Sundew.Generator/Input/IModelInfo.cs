@@ -5,28 +5,27 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Input
+namespace Sundew.Generator.Input;
+
+/// <summary>
+/// Model info interface.
+/// </summary>
+/// <typeparam name="TModel">The type of the model.</typeparam>
+public interface IModelInfo<out TModel>
 {
     /// <summary>
-    /// Model info interface.
+    /// Gets the model.
     /// </summary>
-    /// <typeparam name="TModel">The type of the model.</typeparam>
-    public interface IModelInfo<out TModel>
-    {
-        /// <summary>
-        /// Gets the model.
-        /// </summary>
-        /// <value>
-        /// The model.
-        /// </value>
-        TModel Model { get; }
+    /// <value>
+    /// The model.
+    /// </value>
+    TModel Model { get; }
 
-        /// <summary>
-        /// Gets the model origin.
-        /// </summary>
-        /// <value>
-        /// The model origin.
-        /// </value>
-        string ModelOrigin { get; }
-    }
+    /// <summary>
+    /// Gets the model origin.
+    /// </summary>
+    /// <value>
+    /// The model origin.
+    /// </value>
+    string ModelOrigin { get; }
 }

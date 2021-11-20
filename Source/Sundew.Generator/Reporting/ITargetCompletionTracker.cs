@@ -5,17 +5,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reporting
+namespace Sundew.Generator.Reporting;
+
+/// <summary>
+/// Interface for implementing a completion tracker.
+/// </summary>
+public interface ITargetCompletionTracker
 {
     /// <summary>
-    /// Interface for implementing a completion tracker.
+    /// Reports the specified message.
     /// </summary>
-    public interface ITargetCompletionTracker
-    {
-        /// <summary>
-        /// Reports the specified message.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        void Report(string message);
-    }
+    /// <param name="message">The message.</param>
+    void Report(string message);
 }

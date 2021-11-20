@@ -5,61 +5,60 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reporting
+namespace Sundew.Generator.Reporting;
+
+/// <summary>
+/// Indicates the type of report.
+/// </summary>
+public enum ReportType
 {
     /// <summary>
-    /// Indicates the type of report.
+    /// Report for starting generation.
     /// </summary>
-    public enum ReportType
-    {
-        /// <summary>
-        /// Report for starting generation.
-        /// </summary>
-        StartingGeneration,
+    StartingGeneration,
 
-        /// <summary>
-        /// The adding items.
-        /// </summary>
-        AddingItems,
+    /// <summary>
+    /// The adding items.
+    /// </summary>
+    AddingItems,
 
-        /// <summary>
-        /// The completed adding.
-        /// </summary>
-        CompletedAdding,
+    /// <summary>
+    /// The completed adding.
+    /// </summary>
+    CompletedAdding,
 
-        /// <summary>
-        /// The generated item.
-        /// </summary>
-        GeneratedItem,
+    /// <summary>
+    /// The generated item.
+    /// </summary>
+    GeneratedItem,
 
-        /// <summary>
-        /// The applied content to the target.
-        /// </summary>
-        AppliedContent,
+    /// <summary>
+    /// The applied content to the target.
+    /// </summary>
+    AppliedContent,
 
-        /// <summary>
-        /// Report for target completed.
-        /// </summary>
-        CompletedTarget,
+    /// <summary>
+    /// Report for target completed.
+    /// </summary>
+    CompletedTarget,
 
-        /// <summary>
-        /// Report for target changed.
-        /// </summary>
-        TargetChanged,
+    /// <summary>
+    /// Report for target changed.
+    /// </summary>
+    TargetChanged,
 
-        /// <summary>
-        /// Report for generation completed.
-        /// </summary>
-        CompletedGeneration,
+    /// <summary>
+    /// Report for generation completed.
+    /// </summary>
+    CompletedGeneration,
 
-        /// <summary>
-        /// The cancelled.
-        /// </summary>
-        Cancelled,
+    /// <summary>
+    /// The cancelled.
+    /// </summary>
+    Cancelled,
 
-        /// <summary>
-        /// Report for an error.
-        /// </summary>
-        Error,
-    }
+    /// <summary>
+    /// Report for an error.
+    /// </summary>
+    Error,
 }

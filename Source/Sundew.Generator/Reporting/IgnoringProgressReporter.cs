@@ -5,30 +5,29 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reporting
+namespace Sundew.Generator.Reporting;
+
+using Sundew.Base.Primitives.Computation;
+
+/// <summary>
+/// Implementation of <see cref="IProgressReporter{TReport}"/> that ignores reports.
+/// </summary>
+/// <seealso cref="IProgressReporter{Report}" />
+public class IgnoringProgressReporter : IProgressReporter<Report>
 {
-    using Sundew.Base.Primitives.Computation;
+    /// <summary>
+    /// Gets the default ignoring progress tracker.
+    /// </summary>
+    /// <value>
+    /// The default.
+    /// </value>
+    public static IProgressTracker<Report> Default { get; } = new ProgressTracker<Report>(new IgnoringProgressReporter());
 
     /// <summary>
-    /// Implementation of <see cref="IProgressReporter{TReport}"/> that ignores reports.
+    /// Reports the specified progress.
     /// </summary>
-    /// <seealso cref="IProgressReporter{Report}" />
-    public class IgnoringProgressReporter : IProgressReporter<Report>
+    /// <param name="progress">The progress.</param>
+    public void Report(Progress<Report> progress)
     {
-        /// <summary>
-        /// Gets the default ignoring progress tracker.
-        /// </summary>
-        /// <value>
-        /// The default.
-        /// </value>
-        public static IProgressTracker<Report> Default { get; } = new ProgressTracker<Report>(new IgnoringProgressReporter());
-
-        /// <summary>
-        /// Reports the specified progress.
-        /// </summary>
-        /// <param name="progress">The progress.</param>
-        public void Report(Progress<Report> progress)
-        {
-        }
     }
 }

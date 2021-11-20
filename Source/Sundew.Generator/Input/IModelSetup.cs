@@ -5,30 +5,29 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Input
+namespace Sundew.Generator.Input;
+
+using System;
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Default model setup.
+/// </summary>
+public interface IModelSetup
 {
-    using System;
-    using Sundew.Generator.Core;
+    /// <summary>
+    /// Gets the provider.
+    /// </summary>
+    /// <value>
+    /// The provider.
+    /// </value>
+    TypeOrObject<IModelProvider>? Provider { get; }
 
     /// <summary>
-    /// Default model setup.
+    /// Gets the type of the model.
     /// </summary>
-    public interface IModelSetup
-    {
-        /// <summary>
-        /// Gets the provider.
-        /// </summary>
-        /// <value>
-        /// The provider.
-        /// </value>
-        TypeOrObject<IModelProvider>? Provider { get; }
-
-        /// <summary>
-        /// Gets the type of the model.
-        /// </summary>
-        /// <value>
-        /// The type of the model.
-        /// </value>
-        Type? ModelType { get; }
-    }
+    /// <value>
+    /// The type of the model.
+    /// </value>
+    Type? ModelType { get; }
 }

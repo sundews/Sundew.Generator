@@ -5,21 +5,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
-{
-    using Sundew.Generator.Output;
+namespace Sundew.Generator.Core;
 
+using Sundew.Generator.Output;
+
+/// <summary>
+/// Interface for providing source text for <see cref="TextFileWriter"/>.
+/// </summary>
+public interface ITextOutput
+{
     /// <summary>
-    /// Interface for providing source text for <see cref="TextFileWriter"/>.
+    /// Gets the source text.
     /// </summary>
-    public interface ITextOutput
-    {
-        /// <summary>
-        /// Gets the source text.
-        /// </summary>
-        /// <value>
-        /// The source text.
-        /// </value>
-        string Text { get; }
-    }
+    /// <value>
+    /// The source text.
+    /// </value>
+    string Text { get; }
 }

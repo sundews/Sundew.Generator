@@ -5,26 +5,25 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Discovery
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Sundew.Generator.Core;
+namespace Sundew.Generator.Discovery;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Factory for creating a <see cref="SetupInfo"/>s.
+/// </summary>
+public static class SetupInfoFactory
+{
     /// <summary>
-    /// Factory for creating a <see cref="SetupInfo"/>s.
+    /// Creates the setup infos.
     /// </summary>
-    public static class SetupInfoFactory
+    /// <param name="setups">The setups.</param>
+    /// <returns>An <see cref="IEnumerable{SetupInfo}"/>.</returns>
+    public static IEnumerable<SetupInfo> CreateSetupInfos(IEnumerable<ISetup> setups)
     {
-        /// <summary>
-        /// Creates the setup infos.
-        /// </summary>
-        /// <param name="setups">The setups.</param>
-        /// <returns>An <see cref="IEnumerable{SetupInfo}"/>.</returns>
-        public static IEnumerable<SetupInfo> CreateSetupInfos(IEnumerable<ISetup> setups)
-        {
-            return setups.Select((setup, index) => new SetupInfo(Environment.StackTrace, setup));
-        }
+        return setups.Select((setup, index) => new SetupInfo(Environment.StackTrace, setup));
     }
 }

@@ -5,36 +5,35 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Converters.Json
+namespace Sundew.Generator.Converters.Json;
+
+using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+internal class SetupJsonConverter : JsonConverter
 {
-    using System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
+    private const string TypePropertyName = "Type";
 
-    internal class SetupJsonConverter : JsonConverter
+    public override bool CanConvert(Type objectType)
     {
-        private const string TypePropertyName = "Type";
+        return objectType == typeof(ISetup);
+    }
 
-        public override bool CanConvert(Type objectType)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+    {
+        JsonHelper.WriteWithType(writer, value, serializer, TypePropertyName);
+    }
+
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+    {
+        JObject item = JObject.Load(reader);
+        var setupType = JsonHelper.GetType(item);
+        if (setupType == null)
         {
-            return objectType == typeof(ISetup);
+            throw new JsonReaderException("The root element should declare it's type in Type property.");
         }
 
-        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-        {
-            JsonHelper.WriteWithType(writer, value, serializer, TypePropertyName);
-        }
-
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
-        {
-            JObject item = JObject.Load(reader);
-            var setupType = JsonHelper.GetType(item);
-            if (setupType == null)
-            {
-                throw new JsonReaderException("The root element should declare it's type in Type property.");
-            }
-
-            return item.ToObject(setupType, serializer);
-        }
+        return item.ToObject(setupType, serializer);
     }
 }

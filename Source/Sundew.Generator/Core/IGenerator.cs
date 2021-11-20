@@ -5,12 +5,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+/// <summary>
+/// Interface for type agnostic generators.
+/// </summary>
+public interface IGenerator
 {
-    /// <summary>
-    /// Interface for type agnostic generators.
-    /// </summary>
-    public interface IGenerator
-    {
-    }
 }

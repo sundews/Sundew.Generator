@@ -5,44 +5,43 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine.Internal.Output
+namespace Sundew.Generator.Engine.Internal.Output;
+
+using System.Collections.Generic;
+using Sundew.Generator.Core;
+using Sundew.Generator.Output;
+
+internal class TargetRun
 {
-    using System.Collections.Generic;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Output;
-
-    internal class TargetRun
+    public TargetRun(
+        IWriterSetup writerSetup,
+        IWriter<IWriterSetup, ITarget, IRun, object> writer,
+        ITarget target,
+        List<GeneratorRun> targetGeneratorRuns)
     {
-        public TargetRun(
-            IWriterSetup writerSetup,
-            IWriter<IWriterSetup, ITarget, IRun, object> writer,
-            ITarget target,
-            List<GeneratorRun> targetGeneratorRuns)
-        {
-            this.WriterSetup = writerSetup;
-            this.Writer = writer;
-            this.Target = target;
-            this.GeneratorRuns = targetGeneratorRuns;
-        }
-
-        /// <summary>
-        /// Gets the target setup.
-        /// </summary>
-        /// <value>
-        /// The target setup.
-        /// </value>
-        public IWriterSetup WriterSetup { get; }
-
-        public IWriter<IWriterSetup, ITarget, IRun, object> Writer { get; }
-
-        public ITarget Target { get; }
-
-        /// <summary>
-        /// Gets the generator runs.
-        /// </summary>
-        /// <value>
-        /// The generator runs.
-        /// </value>
-        public IReadOnlyList<GeneratorRun> GeneratorRuns { get; }
+        this.WriterSetup = writerSetup;
+        this.Writer = writer;
+        this.Target = target;
+        this.GeneratorRuns = targetGeneratorRuns;
     }
+
+    /// <summary>
+    /// Gets the target setup.
+    /// </summary>
+    /// <value>
+    /// The target setup.
+    /// </value>
+    public IWriterSetup WriterSetup { get; }
+
+    public IWriter<IWriterSetup, ITarget, IRun, object> Writer { get; }
+
+    public ITarget Target { get; }
+
+    /// <summary>
+    /// Gets the generator runs.
+    /// </summary>
+    /// <value>
+    /// The generator runs.
+    /// </value>
+    public IReadOnlyList<GeneratorRun> GeneratorRuns { get; }
 }

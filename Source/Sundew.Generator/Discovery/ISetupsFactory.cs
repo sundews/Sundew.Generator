@@ -5,21 +5,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Discovery
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Sundew.Generator.Core;
+namespace Sundew.Generator.Discovery;
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Interface for implementing a setup factory.
+/// </summary>
+public interface ISetupsFactory
+{
     /// <summary>
-    /// Interface for implementing a setup factory.
+    /// Gets the setups.
     /// </summary>
-    public interface ISetupsFactory
-    {
-        /// <summary>
-        /// Gets the setups.
-        /// </summary>
-        /// <returns>The setups.</returns>
-        Task<IEnumerable<ISetup>> GetSetupsAsync();
-    }
+    /// <returns>The setups.</returns>
+    Task<IEnumerable<ISetup>> GetSetupsAsync();
 }

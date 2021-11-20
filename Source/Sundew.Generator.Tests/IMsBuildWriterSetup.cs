@@ -5,14 +5,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests
-{
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Output;
+namespace Sundew.Generator.Tests;
 
-    [DefaultImplementation(typeof(MsBuildWriterSetup))]
-    public interface IMsBuildWriterSetup : IWriterSetup
-    {
-        bool AddFilesToProject { get; }
-    }
+using Sundew.Generator.Core;
+using Sundew.Generator.Output;
+
+[DefaultImplementation(typeof(MsBuildWriterSetup))]
+public interface IMsBuildWriterSetup : IWriterSetup
+{
+    bool AddFilesToProject { get; }
 }

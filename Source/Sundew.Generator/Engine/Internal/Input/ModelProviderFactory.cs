@@ -5,115 +5,114 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine.Internal.Input
+namespace Sundew.Generator.Engine.Internal.Input;
+
+using System;
+using System.Linq;
+using System.Reflection;
+using Sundew.Generator.Core;
+using Sundew.Generator.Input;
+using Sundew.Generator.Reflection;
+
+internal static class ModelProviderFactory
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Input;
-    using Sundew.Generator.Reflection;
+    private static readonly Type ModelProviderInterfaceType = typeof(IModelProvider<,,>);
 
-    internal static class ModelProviderFactory
+    public static IModelProvider<ISetup, IModelSetup, object> CreateModelProvider(SetupInfo setupInfo)
     {
-        private static readonly Type ModelProviderInterfaceType = typeof(IModelProvider<,,>);
-
-        public static IModelProvider<ISetup, IModelSetup, object> CreateModelProvider(SetupInfo setupInfo)
+        var setup = setupInfo.Setup;
+        var modelSetup = setup.ModelSetup;
+        var modelType = GetModelType(modelSetup?.ModelType, setupInfo, modelSetup?.Provider?.Type);
+        if (modelSetup == null)
         {
-            var setup = setupInfo.Setup;
-            var modelSetup = setup.ModelSetup;
-            var modelType = GetModelType(modelSetup?.ModelType, setupInfo, modelSetup?.Provider?.Type);
-            if (modelSetup == null)
-            {
-                return CreateWrappedModelProvider(setup, null, modelType, (IModelProvider)Activator.CreateInstance(typeof(EmptyModelProvider<>).MakeGenericType(modelType ?? typeof(object))));
-            }
-
-            if (modelType == null)
-            {
-                throw new InitializationException("The model type could not be determined, please check the setup.", setupInfo.Origin, null);
-            }
-
-            var modelProviderTypeOrObject = modelSetup.Provider;
-            var modelProviderType = modelProviderTypeOrObject == null ? typeof(JsonModelProvider<>) : modelProviderTypeOrObject.Type;
-            if (modelProviderTypeOrObject?.Object != null)
-            {
-                if (modelProviderTypeOrObject.Object is IModelProvider<ISetup, IModelSetup, object> modelProvider)
-                {
-                    return modelProvider;
-                }
-
-                return CreateWrappedModelProvider(setup, modelSetup, modelType, modelProviderTypeOrObject.Object);
-            }
-
-            var modelProviderTypeInfo = modelProviderType.GetTypeInfo();
-            if (modelProviderTypeInfo.IsGenericTypeDefinition)
-            {
-                if (modelProviderTypeInfo.GenericTypeParameters.Length == 1)
-                {
-                    return CreateWrappedModelProvider(
-                        setup,
-                        modelSetup,
-                        modelType,
-                        (IModelProvider)Activator.CreateInstance(modelProviderType.MakeGenericType(modelType)));
-                }
-
-                throw new InitializationException(
-                    $"The model provider: {modelProviderType.Name} is generic, but could not be constructed, please check the setup.",
-                    setupInfo.Origin,
-                    nameof(modelSetup.Provider));
-            }
-
-            return CreateWrappedModelProvider(setup, modelSetup, modelType, (IModelProvider)Activator.CreateInstance(modelProviderType));
+            return CreateWrappedModelProvider(setup, null, modelType, (IModelProvider)Activator.CreateInstance(typeof(EmptyModelProvider<>).MakeGenericType(modelType ?? typeof(object))));
         }
 
-        private static Type GetModelType(Type? modelType, SetupInfo setupInfo, Type? modelProviderType)
+        if (modelType == null)
         {
-            if (modelType != null)
+            throw new InitializationException("The model type could not be determined, please check the setup.", setupInfo.Origin, null);
+        }
+
+        var modelProviderTypeOrObject = modelSetup.Provider;
+        var modelProviderType = modelProviderTypeOrObject == null ? typeof(JsonModelProvider<>) : modelProviderTypeOrObject.Type;
+        if (modelProviderTypeOrObject?.Object != null)
+        {
+            if (modelProviderTypeOrObject.Object is IModelProvider<ISetup, IModelSetup, object> modelProvider)
             {
-                return modelType;
+                return modelProvider;
             }
 
-            var modelProviderInterfaceModelType = GetModelProviderInterfaceModelType(modelProviderType);
-            if (modelProviderInterfaceModelType != null)
-            {
-                return modelProviderInterfaceModelType;
-            }
+            return CreateWrappedModelProvider(setup, modelSetup, modelType, modelProviderTypeOrObject.Object);
+        }
 
-            var generatorInterfaceModelType = GetGeneratorInterfaceModelType(setupInfo);
-            if (generatorInterfaceModelType != null)
+        var modelProviderTypeInfo = modelProviderType.GetTypeInfo();
+        if (modelProviderTypeInfo.IsGenericTypeDefinition)
+        {
+            if (modelProviderTypeInfo.GenericTypeParameters.Length == 1)
             {
-                return generatorInterfaceModelType;
+                return CreateWrappedModelProvider(
+                    setup,
+                    modelSetup,
+                    modelType,
+                    (IModelProvider)Activator.CreateInstance(modelProviderType.MakeGenericType(modelType)));
             }
 
             throw new InitializationException(
-                "The model type could not be determined, please check the setup.",
+                $"The model provider: {modelProviderType.Name} is generic, but could not be constructed, please check the setup.",
                 setupInfo.Origin,
-                null);
+                nameof(modelSetup.Provider));
         }
 
-        private static Type? GetModelProviderInterfaceModelType(Type? modelProviderType)
+        return CreateWrappedModelProvider(setup, modelSetup, modelType, (IModelProvider)Activator.CreateInstance(modelProviderType));
+    }
+
+    private static Type GetModelType(Type? modelType, SetupInfo setupInfo, Type? modelProviderType)
+    {
+        if (modelType != null)
         {
-            var modelProviderInterfaceType = modelProviderType?.GetGenericInterface(ModelProviderInterfaceType);
-            return DefaultImplementation.GetDefaultImplementationType(modelProviderInterfaceType?.GenericTypeArguments[2]);
+            return modelType;
         }
 
-        private static Type? GetGeneratorInterfaceModelType(SetupInfo setupInfo)
+        var modelProviderInterfaceModelType = GetModelProviderInterfaceModelType(modelProviderType);
+        if (modelProviderInterfaceModelType != null)
         {
-            var generatorSetup = setupInfo.Setup.GeneratorSetups?.FirstOrDefault();
-            if (generatorSetup != null)
-            {
-                var interfaceType = generatorSetup.Generator?.Type.GetGenericInterface(typeof(IGenerator<,,,,,>));
-                return DefaultImplementation.GetDefaultImplementationType(interfaceType?.GenericTypeArguments.ElementAtOrDefault(3));
-            }
-
-            return null;
+            return modelProviderInterfaceModelType;
         }
 
-        private static IModelProvider<ISetup, IModelSetup, object> CreateWrappedModelProvider(ISetup setup, IModelSetup? modelSetup, Type modelType, IModelProvider modelProvider)
+        var generatorInterfaceModelType = GetGeneratorInterfaceModelType(setupInfo);
+        if (generatorInterfaceModelType != null)
         {
-            return (IModelProvider<ISetup, IModelSetup, object>)Activator.CreateInstance(
-                typeof(ModelProviderAdapter<,,>).MakeGenericType(setup.GetType(), modelSetup?.GetType() ?? typeof(IModelSetup), modelType),
-                modelProvider);
+            return generatorInterfaceModelType;
         }
+
+        throw new InitializationException(
+            "The model type could not be determined, please check the setup.",
+            setupInfo.Origin,
+            null);
+    }
+
+    private static Type? GetModelProviderInterfaceModelType(Type? modelProviderType)
+    {
+        var modelProviderInterfaceType = modelProviderType?.GetGenericInterface(ModelProviderInterfaceType);
+        return DefaultImplementation.GetDefaultImplementationType(modelProviderInterfaceType?.GenericTypeArguments[2]);
+    }
+
+    private static Type? GetGeneratorInterfaceModelType(SetupInfo setupInfo)
+    {
+        var generatorSetup = setupInfo.Setup.GeneratorSetups?.FirstOrDefault();
+        if (generatorSetup != null)
+        {
+            var interfaceType = generatorSetup.Generator?.Type.GetGenericInterface(typeof(IGenerator<,,,,,>));
+            return DefaultImplementation.GetDefaultImplementationType(interfaceType?.GenericTypeArguments.ElementAtOrDefault(3));
+        }
+
+        return null;
+    }
+
+    private static IModelProvider<ISetup, IModelSetup, object> CreateWrappedModelProvider(ISetup setup, IModelSetup? modelSetup, Type modelType, IModelProvider modelProvider)
+    {
+        return (IModelProvider<ISetup, IModelSetup, object>)Activator.CreateInstance(
+            typeof(ModelProviderAdapter<,,>).MakeGenericType(setup.GetType(), modelSetup?.GetType() ?? typeof(IModelSetup), modelType),
+            modelProvider);
     }
 }

@@ -5,29 +5,28 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Code.CSharp
+namespace Sundew.Generator.Code.CSharp;
+
+using System.Collections.Generic;
+
+/// <summary>
+/// Helper class for creating file names.
+/// </summary>
+public static class NameHelper
 {
-    using System.Collections.Generic;
+    private const char Dot = '.';
 
     /// <summary>
-    /// Helper class for creating file names.
+    /// Gets the folder path.
     /// </summary>
-    public static class NameHelper
+    /// <param name="namespace">The namespace.</param>
+    /// <returns>
+    /// The folder path.
+    /// </returns>
+    public static IReadOnlyList<string> GetFolderPath(string? @namespace)
     {
-        private const char Dot = '.';
-
-        /// <summary>
-        /// Gets the folder path.
-        /// </summary>
-        /// <param name="namespace">The namespace.</param>
-        /// <returns>
-        /// The folder path.
-        /// </returns>
-        public static IReadOnlyList<string> GetFolderPath(string? @namespace)
-        {
-            return string.IsNullOrEmpty(@namespace)
-                ? new string[0]
-                : @namespace!.Split(Dot);
-        }
+        return string.IsNullOrEmpty(@namespace)
+            ? new string[0]
+            : @namespace!.Split(Dot);
     }
 }

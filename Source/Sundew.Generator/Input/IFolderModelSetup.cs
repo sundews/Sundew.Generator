@@ -5,28 +5,27 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Input
+namespace Sundew.Generator.Input;
+
+/// <summary>
+/// Interface for implementing a file model setup.
+/// </summary>
+/// <seealso cref="Sundew.Generator.Input.IModelSetup" />
+public interface IFolderModelSetup : IModelSetup
 {
     /// <summary>
-    /// Interface for implementing a file model setup.
+    /// Gets the folder.
     /// </summary>
-    /// <seealso cref="Sundew.Generator.Input.IModelSetup" />
-    public interface IFolderModelSetup : IModelSetup
-    {
-        /// <summary>
-        /// Gets the folder.
-        /// </summary>
-        /// <value>
-        /// The folder.
-        /// </value>
-        string? Folder { get; }
+    /// <value>
+    /// The folder.
+    /// </value>
+    string? Folder { get; }
 
-        /// <summary>
-        /// Gets the files search pattern.
-        /// </summary>
-        /// <value>
-        /// The files search pattern.
-        /// </value>
-        string? FilesSearchPattern { get; }
-    }
+    /// <summary>
+    /// Gets the files search pattern.
+    /// </summary>
+    /// <value>
+    /// The files search pattern.
+    /// </value>
+    string? FilesSearchPattern { get; }
 }

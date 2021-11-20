@@ -5,38 +5,37 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Output
+namespace Sundew.Generator.Output;
+
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Interface for implementing a file writer setup.
+/// </summary>
+[DefaultImplementation(typeof(FileWriterSetup))]
+public interface IFileWriterSetup : IWriterSetup
 {
-    using Sundew.Generator.Core;
+    /// <summary>
+    /// Gets the file extension.
+    /// </summary>
+    /// <value>
+    /// The file extension.
+    /// </value>
+    string? FileExtension { get; }
 
     /// <summary>
-    /// Interface for implementing a file writer setup.
+    /// Gets the file name suffix.
     /// </summary>
-    [DefaultImplementation(typeof(FileWriterSetup))]
-    public interface IFileWriterSetup : IWriterSetup
-    {
-        /// <summary>
-        /// Gets the file extension.
-        /// </summary>
-        /// <value>
-        /// The file extension.
-        /// </value>
-        string? FileExtension { get; }
+    /// <value>
+    /// The file name suffix.
+    /// </value>
+    string? FileNameSuffix { get; }
 
-        /// <summary>
-        /// Gets the file name suffix.
-        /// </summary>
-        /// <value>
-        /// The file name suffix.
-        /// </value>
-        string? FileNameSuffix { get; }
-
-        /// <summary>
-        /// Gets the folder.
-        /// </summary>
-        /// <value>
-        /// The folder.
-        /// </value>
-        string? Folder { get; }
-    }
+    /// <summary>
+    /// Gets the folder.
+    /// </summary>
+    /// <value>
+    /// The folder.
+    /// </value>
+    string? Folder { get; }
 }

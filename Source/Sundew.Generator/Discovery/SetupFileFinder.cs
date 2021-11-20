@@ -5,29 +5,28 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Discovery
-{
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Threading.Tasks;
+namespace Sundew.Generator.Discovery;
 
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+/// <summary>
+/// File finder providing files from the specified directory, which matches the search pattern.
+/// </summary>
+/// <seealso cref="ISetupFileFinder" />
+public class SetupFileFinder : ISetupFileFinder
+{
     /// <summary>
-    /// File finder providing files from the specified directory, which matches the search pattern.
+    /// Searches the specified directory.
     /// </summary>
-    /// <seealso cref="ISetupFileFinder" />
-    public class SetupFileFinder : ISetupFileFinder
+    /// <param name="directory">The directory.</param>
+    /// <param name="searchPattern">The search pattern.</param>
+    /// <returns>
+    /// The found files.
+    /// </returns>
+    public Task<IEnumerable<string>> SearchAsync(string directory, string searchPattern)
     {
-        /// <summary>
-        /// Searches the specified directory.
-        /// </summary>
-        /// <param name="directory">The directory.</param>
-        /// <param name="searchPattern">The search pattern.</param>
-        /// <returns>
-        /// The found files.
-        /// </returns>
-        public Task<IEnumerable<string>> SearchAsync(string directory, string searchPattern)
-        {
-            return Sundew.IO.Directory.EnumerateFilesAsync(directory, searchPattern, SearchOption.AllDirectories);
-        }
+        return Sundew.IO.Directory.EnumerateFilesAsync(directory, searchPattern, SearchOption.AllDirectories);
     }
 }

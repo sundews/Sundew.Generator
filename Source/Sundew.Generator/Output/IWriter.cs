@@ -5,12 +5,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Output
+namespace Sundew.Generator.Output;
+
+/// <summary>
+/// Interface for marking an writer.
+/// </summary>
+public interface IWriter
 {
-    /// <summary>
-    /// Interface for marking an writer.
-    /// </summary>
-    public interface IWriter
-    {
-    }
 }

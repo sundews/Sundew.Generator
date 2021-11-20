@@ -5,17 +5,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reflection
-{
-    using System;
-    using System.Linq;
-    using System.Reflection;
+namespace Sundew.Generator.Reflection;
 
-    internal static class ReflectionExtensions
+using System;
+using System.Linq;
+using System.Reflection;
+
+internal static class ReflectionExtensions
+{
+    public static Type GetGenericInterface(this Type type, Type interfaceType)
     {
-        public static Type GetGenericInterface(this Type type, Type interfaceType)
-        {
-            return type.GetTypeInfo().ImplementedInterfaces.FirstOrDefault(x => x.IsGenericType && x.GetGenericTypeDefinition() == interfaceType);
-        }
+        return type.GetTypeInfo().ImplementedInterfaces.FirstOrDefault(x => x.IsGenericType && x.GetGenericTypeDefinition() == interfaceType);
     }
 }

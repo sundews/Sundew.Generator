@@ -5,35 +5,34 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests
+namespace Sundew.Generator.Tests;
+
+using FluentAssertions;
+using Sundew.Base.Collections;
+using Sundew.Generator.Discovery;
+using Sundew.Generator.Output;
+using Xunit;
+
+public class SetupInfoFactoryTests
 {
-    using FluentAssertions;
-    using Sundew.Base.Collections;
-    using Sundew.Generator.Discovery;
-    using Sundew.Generator.Output;
-    using Xunit;
-
-    public class SetupInfoFactoryTests
+    [Fact]
+    public void CreateSetupInfo_Then_ResultContainOneItem()
     {
-        [Fact]
-        public void CreateSetupInfo_Then_ResultContainOneItem()
-        {
-            var setup =
-                new Setup
+        var setup =
+            new Setup
+            {
+                WriterSetups = new IWriterSetup[]
                 {
-                    WriterSetups = new IWriterSetup[]
+                    new WriterSetup(@"c:\temp")
                     {
-                        new WriterSetup(@"c:\temp")
-                        {
-                            Writer = new TextFileWriter(),
-                        },
+                        Writer = new TextFileWriter(),
                     },
-                    GeneratorSetups = new[] { new GeneratorSetup() },
-                };
+                },
+                GeneratorSetups = new[] { new GeneratorSetup() },
+            };
 
-            var result = SetupInfoFactory.CreateSetupInfos(setup.ToEnumerable());
+        var result = SetupInfoFactory.CreateSetupInfos(setup.ToEnumerable());
 
-            result.Should().HaveCount(1);
-        }
+        result.Should().HaveCount(1);
     }
 }

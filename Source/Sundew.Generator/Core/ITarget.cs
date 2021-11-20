@@ -5,19 +5,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Core
+namespace Sundew.Generator.Core;
+
+/// <summary>
+/// Interface for implementing a target info.
+/// </summary>
+public interface ITarget
 {
     /// <summary>
-    /// Interface for implementing a target info.
+    /// Gets the name.
     /// </summary>
-    public interface ITarget
-    {
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        string Name { get; }
-    }
+    /// <value>
+    /// The name.
+    /// </value>
+    string Name { get; }
 }

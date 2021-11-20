@@ -5,19 +5,19 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests
-{
-    using FluentAssertions;
-    using Newtonsoft.Json;
-    using Sundew.Generator.Converters.Json;
-    using Xunit;
+namespace Sundew.Generator.Tests;
 
-    public class DeserializationTests
+using FluentAssertions;
+using Newtonsoft.Json;
+using Sundew.Generator.Converters.Json;
+using Xunit;
+
+public class DeserializationTests
+{
+    [Fact]
+    public void DeserializeObject_When_TextContainsWriterSetup_Then_ResultWriterSetupShouldBeEmpty()
     {
-        [Fact]
-        public void DeserializeObject_When_TextContainsWriterSetup_Then_ResultWriterSetupShouldBeEmpty()
-        {
-            const string input = @"
+        const string input = @"
 {
     ""Type"": ""Sundew.Generator.Tests.Setup, Sundew.Generator.Tests"",
     ""WriterSetups"": [
@@ -35,15 +35,14 @@ namespace Sundew.Generator.Tests
     ],
     ""ModelType"": ""Sundew.Generator.Tests.TextWriter, Sundew.Generator.Tests""
 }";
-            var result = JsonConvert.DeserializeObject<ISetup>(
-                input,
-                new SetupJsonConverter(),
-                new WriterSetupJsonConverter(),
-                new GeneratorSetupJsonConverter(),
-                new TypeOrObjectJsonConverter(),
-                new ModelSetupJsonConverter());
+        var result = JsonConvert.DeserializeObject<ISetup>(
+            input,
+            new SetupJsonConverter(),
+            new WriterSetupJsonConverter(),
+            new GeneratorSetupJsonConverter(),
+            new TypeOrObjectJsonConverter(),
+            new ModelSetupJsonConverter());
 
-            result!.WriterSetups.Should().NotBeEmpty();
-        }
+        result!.WriterSetups.Should().NotBeEmpty();
     }
 }

@@ -5,19 +5,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator
-{
-    using Sundew.Generator.Core;
+namespace Sundew.Generator;
 
-    /// <summary>
-    /// Interface for implementing a Text generator.
-    /// </summary>
-    /// <typeparam name="TSetup">The type of the global settings.</typeparam>
-    /// <typeparam name="TGeneratorSetup">The type of the generator settings.</typeparam>
-    /// <typeparam name="TModel">The type of the model.</typeparam>
-    /// <typeparam name="TOutput">The type of the output.</typeparam>
-    /// <seealso cref="IGenerator{TSetup, TGeneratorSetup, ITarget, TModel, IRun}" />
-    public interface IGenerator<in TSetup, in TGeneratorSetup, in TModel, out TOutput> : IGenerator<TSetup, TGeneratorSetup, ITarget, TModel, IRun, TOutput>
-    {
-    }
+using Sundew.Generator.Core;
+
+/// <summary>
+/// Interface for implementing a Text generator.
+/// </summary>
+/// <typeparam name="TSetup">The type of the global settings.</typeparam>
+/// <typeparam name="TGeneratorSetup">The type of the generator settings.</typeparam>
+/// <typeparam name="TModel">The type of the model.</typeparam>
+/// <typeparam name="TOutput">The type of the output.</typeparam>
+/// <seealso cref="IGenerator{TSetup, TGeneratorSetup, ITarget, TModel, IRun}" />
+public interface IGenerator<in TSetup, in TGeneratorSetup, in TModel, out TOutput> : IGenerator<TSetup, TGeneratorSetup, ITarget, TModel, IRun, TOutput>
+{
 }

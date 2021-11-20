@@ -5,58 +5,57 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Code.CSharp
+namespace Sundew.Generator.Code.CSharp;
+
+using System.Collections.Generic;
+
+/// <summary>
+/// Helper class for creating namespaces.
+/// </summary>
+public static class NamespaceHelper
 {
-    using System.Collections.Generic;
+    /// <summary>
+    /// Gets the namespace.
+    /// </summary>
+    /// <param name="rootNamespace">The root namespace.</param>
+    /// <param name="folderPath">The folder path.</param>
+    /// <returns>A C# namespace.</returns>
+    public static string? GetNamespace(string? rootNamespace, IReadOnlyList<string>? folderPath)
+    {
+        var folderNamespace = GetNamespace(folderPath);
+        return CombineNamespaces(rootNamespace, folderNamespace);
+    }
+
+    /// <summary>Combines the two namespaces.</summary>
+    /// <param name="rootNamespace">The root namespace.</param>
+    /// <param name="otherNamespace">The other namespace.</param>
+    public static string? CombineNamespaces(string? rootNamespace, string? otherNamespace)
+    {
+        if (string.IsNullOrEmpty(rootNamespace))
+        {
+            return otherNamespace;
+        }
+
+        if (string.IsNullOrEmpty(otherNamespace))
+        {
+            return rootNamespace;
+        }
+
+        return rootNamespace + $".{otherNamespace}";
+    }
 
     /// <summary>
-    /// Helper class for creating namespaces.
+    /// Gets the namespace.
     /// </summary>
-    public static class NamespaceHelper
+    /// <param name="folderPath">The folder path.</param>
+    /// <returns>A C# namespace.</returns>
+    public static string GetNamespace(IReadOnlyList<string>? folderPath)
     {
-        /// <summary>
-        /// Gets the namespace.
-        /// </summary>
-        /// <param name="rootNamespace">The root namespace.</param>
-        /// <param name="folderPath">The folder path.</param>
-        /// <returns>A C# namespace.</returns>
-        public static string? GetNamespace(string? rootNamespace, IReadOnlyList<string>? folderPath)
+        if (folderPath == null || folderPath.Count == 0)
         {
-            var folderNamespace = GetNamespace(folderPath);
-            return CombineNamespaces(rootNamespace, folderNamespace);
+            return string.Empty;
         }
 
-        /// <summary>Combines the two namespaces.</summary>
-        /// <param name="rootNamespace">The root namespace.</param>
-        /// <param name="otherNamespace">The other namespace.</param>
-        public static string? CombineNamespaces(string? rootNamespace, string? otherNamespace)
-        {
-            if (string.IsNullOrEmpty(rootNamespace))
-            {
-                return otherNamespace;
-            }
-
-            if (string.IsNullOrEmpty(otherNamespace))
-            {
-                return rootNamespace;
-            }
-
-            return rootNamespace + $".{otherNamespace}";
-        }
-
-        /// <summary>
-        /// Gets the namespace.
-        /// </summary>
-        /// <param name="folderPath">The folder path.</param>
-        /// <returns>A C# namespace.</returns>
-        public static string GetNamespace(IReadOnlyList<string>? folderPath)
-        {
-            if (folderPath == null || folderPath.Count == 0)
-            {
-                return string.Empty;
-            }
-
-            return string.Join(".", folderPath);
-        }
+        return string.Join(".", folderPath);
     }
 }

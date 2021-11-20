@@ -5,24 +5,23 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
+namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace;
+
+using System.Threading.Tasks;
+
+internal static class MSBuildWorkspaceFactory
 {
-    using System.Threading.Tasks;
+    private static bool wasWorkspaceCreatedOnce;
 
-    internal static class MSBuildWorkspaceFactory
+    public static Task<Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace> CreateAsync()
     {
-        private static bool wasWorkspaceCreatedOnce;
-
-        public static Task<Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace> CreateAsync()
+        if (wasWorkspaceCreatedOnce)
         {
-            if (wasWorkspaceCreatedOnce)
-            {
-                return Task.FromResult(Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create());
-            }
-
-            var createWorkspaceTask = Task.Run(() => Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create());
-            wasWorkspaceCreatedOnce = true;
-            return createWorkspaceTask;
+            return Task.FromResult(Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create());
         }
+
+        var createWorkspaceTask = Task.Run(() => Microsoft.CodeAnalysis.MSBuild.MSBuildWorkspace.Create());
+        wasWorkspaceCreatedOnce = true;
+        return createWorkspaceTask;
     }
 }

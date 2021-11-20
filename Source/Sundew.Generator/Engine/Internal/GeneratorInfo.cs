@@ -5,27 +5,26 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Engine.Internal
+namespace Sundew.Generator.Engine.Internal;
+
+using Sundew.Generator.Core;
+using Sundew.Generator.Engine.Internal.Input;
+
+internal class GeneratorInfo
 {
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Engine.Internal.Input;
-
-    internal class GeneratorInfo
+    public GeneratorInfo(ISetup setup, ModelCache modelCache, IGeneratorSetup generatorSetup, IGenerator<ISetup, IGeneratorSetup, ITarget, object, IRun, object> generator)
     {
-        public GeneratorInfo(ISetup setup, ModelCache modelCache, IGeneratorSetup generatorSetup, IGenerator<ISetup, IGeneratorSetup, ITarget, object, IRun, object> generator)
-        {
-            this.Setup = setup;
-            this.ModelCache = modelCache;
-            this.GeneratorSetup = generatorSetup;
-            this.Generator = generator;
-        }
-
-        public ISetup Setup { get; }
-
-        public ModelCache ModelCache { get; }
-
-        public IGeneratorSetup GeneratorSetup { get; }
-
-        public IGenerator<ISetup, IGeneratorSetup, ITarget, object, IRun, object> Generator { get; }
+        this.Setup = setup;
+        this.ModelCache = modelCache;
+        this.GeneratorSetup = generatorSetup;
+        this.Generator = generator;
     }
+
+    public ISetup Setup { get; }
+
+    public ModelCache ModelCache { get; }
+
+    public IGeneratorSetup GeneratorSetup { get; }
+
+    public IGenerator<ISetup, IGeneratorSetup, ITarget, object, IRun, object> Generator { get; }
 }

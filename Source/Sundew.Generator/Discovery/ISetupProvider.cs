@@ -5,20 +5,19 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Discovery
-{
-    using System.Threading.Tasks;
+namespace Sundew.Generator.Discovery;
 
+using System.Threading.Tasks;
+
+/// <summary>
+/// Provider for getting an <see cref="ISetup"/> based on a file path.
+/// </summary>
+public interface ISetupProvider
+{
     /// <summary>
-    /// Provider for getting an <see cref="ISetup"/> based on a file path.
+    /// Gets the setup.
     /// </summary>
-    public interface ISetupProvider
-    {
-        /// <summary>
-        /// Gets the setup.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <returns>An <see cref="ISetup"/>.</returns>
-        Task<ISetup> GetSetupAsync(string path);
-    }
+    /// <param name="path">The path.</param>
+    /// <returns>An <see cref="ISetup"/>.</returns>
+    Task<ISetup> GetSetupAsync(string path);
 }

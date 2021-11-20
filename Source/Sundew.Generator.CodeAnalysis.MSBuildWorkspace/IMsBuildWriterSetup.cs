@@ -5,24 +5,23 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
-{
-    using Sundew.Generator.Core;
-    using Sundew.Generator.Output;
+namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace;
 
+using Sundew.Generator.Core;
+using Sundew.Generator.Output;
+
+/// <summary>
+/// Interface for implementing a target setup for MS Build.
+/// </summary>
+/// <seealso cref="IWriterSetup" />
+[DefaultImplementation(typeof(MsBuildWriterSetup))]
+public interface IMsBuildWriterSetup : IFileWriterSetup
+{
     /// <summary>
-    /// Interface for implementing a target setup for MS Build.
+    /// Gets a value indicating whether [add files to project].
     /// </summary>
-    /// <seealso cref="IWriterSetup" />
-    [DefaultImplementation(typeof(MsBuildWriterSetup))]
-    public interface IMsBuildWriterSetup : IFileWriterSetup
-    {
-        /// <summary>
-        /// Gets a value indicating whether [add files to project].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [add files to project]; otherwise, <c>false</c>.
-        /// </value>
-        bool AddFilesToProject { get; }
-    }
+    /// <value>
+    ///   <c>true</c> if [add files to project]; otherwise, <c>false</c>.
+    /// </value>
+    bool AddFilesToProject { get; }
 }

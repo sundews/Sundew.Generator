@@ -5,72 +5,71 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Reporting
+namespace Sundew.Generator.Reporting;
+
+using System.IO;
+
+/// <summary>
+/// A simple progress reporter.
+/// </summary>
+public class SimpleProgressReporter : IProgressReporter
 {
-    using System.IO;
+    private readonly TextWriter textWriter;
 
     /// <summary>
-    /// A simple progress reporter.
+    /// Initializes a new instance of the <see cref="SimpleProgressReporter"/> class.
     /// </summary>
-    public class SimpleProgressReporter : IProgressReporter
+    /// <param name="textWriter">The text writer.</param>
+    public SimpleProgressReporter(TextWriter textWriter)
     {
-        private readonly TextWriter textWriter;
+        this.textWriter = textWriter;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SimpleProgressReporter"/> class.
-        /// </summary>
-        /// <param name="textWriter">The text writer.</param>
-        public SimpleProgressReporter(TextWriter textWriter)
+    /// <summary>
+    /// Starts this instance.
+    /// </summary>
+    public void Start()
+    {
+    }
+
+    /// <summary>
+    /// Stops this instance.
+    /// </summary>
+    public void Stop()
+    {
+    }
+
+    /// <summary>
+    /// Reports the specified progress.
+    /// </summary>
+    /// <param name="progress">The progress.</param>
+    public void Report(Sundew.Base.Primitives.Computation.Progress<Report> progress)
+    {
+        if (progress.Report == null)
         {
-            this.textWriter = textWriter;
+            return;
         }
 
-        /// <summary>
-        /// Starts this instance.
-        /// </summary>
-        public void Start()
+        switch (progress.Report.ReportType)
         {
+            case ReportType.StartingGeneration:
+                this.textWriter.WriteLine("Starting generation");
+                break;
+            case ReportType.GeneratedItem:
+            case ReportType.AppliedContent:
+            case ReportType.CompletedTarget:
+                this.textWriter.WriteLine(progress.Report.Parameter?.ToString() ?? string.Empty);
+                break;
+            case ReportType.CompletedGeneration:
+                this.textWriter.WriteLine("Completed generation");
+                break;
         }
+    }
 
-        /// <summary>
-        /// Stops this instance.
-        /// </summary>
-        public void Stop()
-        {
-        }
-
-        /// <summary>
-        /// Reports the specified progress.
-        /// </summary>
-        /// <param name="progress">The progress.</param>
-        public void Report(Sundew.Base.Primitives.Computation.Progress<Report> progress)
-        {
-            if (progress.Report == null)
-            {
-                return;
-            }
-
-            switch (progress.Report.ReportType)
-            {
-                case ReportType.StartingGeneration:
-                    this.textWriter.WriteLine("Starting generation");
-                    break;
-                case ReportType.GeneratedItem:
-                case ReportType.AppliedContent:
-                case ReportType.CompletedTarget:
-                    this.textWriter.WriteLine(progress.Report.Parameter?.ToString() ?? string.Empty);
-                    break;
-                case ReportType.CompletedGeneration:
-                    this.textWriter.WriteLine("Completed generation");
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-        }
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
     }
 }
