@@ -4,7 +4,7 @@
    <Version>3.1</Version>
    <OutputPath>bin/$(Configuration)</OutputPath>
    <Nullable>enable</Nullable>
-   <LangVersion>latest</LangVersion>
+   <LangVersion>preview</LangVersion>
    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
    <Company>Hukano</Company>
    <Authors>Kim Hugener-Ohlsen</Authors>
