@@ -58,7 +58,7 @@ namespace Sundew.Generator.CodeAnalysis.MSBuildWorkspace
             return new Project(
                 projectName,
                 fullTargetPath,
-                fileInfo.DirectoryName,
+                fileInfo.DirectoryName ?? throw new ArgumentNullException(nameof(fileInfo.DirectoryName), $"{nameof(fileInfo.DirectoryName)} cannot be null"),
                 ProjectHelper.GetNamespace(projectContent, fallbackName),
                 writerSetup.FileNameSuffix + writerSetup.FileExtension);
         }

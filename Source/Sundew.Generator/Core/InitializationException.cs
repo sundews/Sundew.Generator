@@ -11,7 +11,6 @@ namespace Sundew.Generator.Core
     /// Exception for indicating an exception during initialization.
     /// </summary>
     /// <seealso cref="GenerationException" />
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "RCS1194:Implement exception constructors.", Justification = "Other constructors should not be used.")]
     public sealed class InitializationException : GenerationException
     {
         /// <summary>
