@@ -24,7 +24,7 @@
     <PackageReference Include="Sundew.Base.Text" Version="8.1.1+c75a9ef95c" />
     <PackageReference Include="Sundew.Base.Threading" Version="8.1.1+c75a9ef95c" />
     <PackageReference Include="Sundew.IO" Version="1.0.0" />
-    <PackageReference Include="Sundew.Packaging.Publish" Version="8.0.0">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="8.0.1+17cd6ff533">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
