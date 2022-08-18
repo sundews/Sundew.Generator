@@ -20,7 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Base.Collections" Version="8.1.1+c75a9ef95c" />
+    <PackageReference Include="Sundew.Base.Collections" Version="8.2.0+37f28db0c1" />
     <PackageReference Include="Sundew.Base.Text" Version="8.1.1+c75a9ef95c" />
     <PackageReference Include="Sundew.Base.Threading" Version="8.1.1+c75a9ef95c" />
     <PackageReference Include="Sundew.IO" Version="1.0.0" />
