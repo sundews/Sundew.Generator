@@ -10,6 +10,7 @@
    <Authors>Kim Hugener-Ohlsen</Authors>
    <Copyright>Kim Hugener-Ohlsen</Copyright>
    <RepositoryType>git</RepositoryType>
+   <PackageReadmeFile>docs/README.md</PackageReadmeFile>
    <PackageProjectUrl>https://github.com/hugener/Sundew.Generator</PackageProjectUrl>
    <RepositoryUrl>https://github.com/hugener/Sundew.Generator</RepositoryUrl>
    <PackageTags>code generation</PackageTags>
@@ -24,6 +25,7 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedFiles Include="$(GeneratedAssemblyInfoFile)"/>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\docs"/>
   </ItemGroup>
   <Import Project="Directory.Build.props.user" Condition="Exists('Directory.Build.props.user')"/>
 </Project>
