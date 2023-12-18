@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GeneratorRunner.cs" company="Hukano">
-// Copyright (c) Hukano. All rights reserved.
+// <copyright file="GeneratorRunner.cs" company="Sundews">
+// Copyright (c) Sundews. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Sundew.Base.Collections;
-using Sundew.Base.Primitives.Computation;
+using Sundew.Base.Computation;
 using Sundew.Generator.Core;
 using Sundew.Generator.Engine.Internal.Output;
 using Sundew.Generator.Reporting;

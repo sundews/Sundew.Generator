@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConsoleProgressReporter.cs" company="Hukano">
-// Copyright (c) Hukano. All rights reserved.
+// <copyright file="ConsoleProgressReporter.cs" company="Sundews">
+// Copyright (c) Sundews. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Sundew.Base.Primitives;
+using Sundew.Base;
 using Sundew.Base.Text;
 
 /// <summary>
@@ -29,7 +29,7 @@ public class ConsoleProgressReporter : IProgressReporter
 
     private readonly Stopwatch stopwatch = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
-    private readonly BlockingCollection<Base.Primitives.Computation.Progress<Report>> reports = new(new ConcurrentQueue<Base.Primitives.Computation.Progress<Report>>());
+    private readonly BlockingCollection<Base.Computation.Progress<Report>> reports = new(new ConcurrentQueue<Base.Computation.Progress<Report>>());
     private readonly bool isRedirected;
     private Task? outputTask;
     private int busyIndicatorIndex;
@@ -46,7 +46,7 @@ public class ConsoleProgressReporter : IProgressReporter
     /// Reports the specified progress.
     /// </summary>
     /// <param name="progress">The progress.</param>
-    public void Report(Sundew.Base.Primitives.Computation.Progress<Report> progress)
+    public void Report(Sundew.Base.Computation.Progress<Report> progress)
     {
         this.reports.Add(progress);
         if (progress.Report?.ReportType == ReportType.CompletedGeneration)
@@ -99,7 +99,7 @@ public class ConsoleProgressReporter : IProgressReporter
 
     private Task Output()
     {
-        Base.Primitives.Computation.Progress<Report>? previousProgress = null;
+        Base.Computation.Progress<Report>? previousProgress = null;
         while (!this.cancellationTokenSource.Token.IsCancellationRequested && !this.reports.IsCompleted)
         {
             if (this.reports.TryTake(out var progress, TimeSpan.FromMilliseconds(100)))
@@ -119,7 +119,7 @@ public class ConsoleProgressReporter : IProgressReporter
         return Task.CompletedTask;
     }
 
-    private IEnumerable<ConsoleLine> GetLines(Base.Primitives.Computation.Progress<Report> progress, Base.Primitives.Computation.Progress<Report>? previousProgress)
+    private IEnumerable<ConsoleLine> GetLines(Base.Computation.Progress<Report> progress, Base.Computation.Progress<Report>? previousProgress)
     {
         if (progress.Report != null)
         {
@@ -187,7 +187,7 @@ public class ConsoleProgressReporter : IProgressReporter
         return BusyIndicator[this.busyIndicatorIndex++ % 4];
     }
 
-    private IEnumerable<ConsoleLine> GetBusyIndicatorLine(Base.Primitives.Computation.Progress<Report> previousProgress)
+    private IEnumerable<ConsoleLine> GetBusyIndicatorLine(Base.Computation.Progress<Report> previousProgress)
     {
         if (!this.isRedirected)
         {
@@ -196,7 +196,7 @@ public class ConsoleProgressReporter : IProgressReporter
         }
     }
 
-    private string GetProgressMessage(Base.Primitives.Computation.Progress<Report> progress, string processUnknownValue)
+    private string GetProgressMessage(Base.Computation.Progress<Report> progress, string processUnknownValue)
     {
         var ending = this.isRedirected ? Environment.NewLine : string.Empty;
         var progressValue = progress.HasCompletedAdding ? $"{progress.Percentage,8:P}" : processUnknownValue;

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectTextFileWriter.cs" company="Hukano">
-// Copyright (c) Hukano. All rights reserved.
+// <copyright file="ProjectTextFileWriter.cs" company="Sundews">
+// Copyright (c) Sundews. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Sundew.Base.Primitives;
+using Sundew.Base;
 using Sundew.Generator.Code.CSharp;
 using Sundew.Generator.Core;
 using Sundew.Generator.Output;

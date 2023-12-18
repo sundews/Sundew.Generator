@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MsBuildLogReporter.cs" company="Hukano">
-// Copyright (c) Hukano. All rights reserved.
+// <copyright file="MsBuildLogReporter.cs" company="Sundews">
+// Copyright (c) Sundews. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -10,7 +10,7 @@ namespace Sundew.Generator.MSBuild;
 using System;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Sundew.Base.Primitives;
+using Sundew.Base;
 using Sundew.Generator.Reporting;
 
 /// <summary>
@@ -41,7 +41,7 @@ public class MsBuildLogReporter : IProgressReporter
     /// Reports the specified progress.
     /// </summary>
     /// <param name="progress">The progress.</param>
-    public void Report(Sundew.Base.Primitives.Computation.Progress<Report> progress)
+    public void Report(Sundew.Base.Computation.Progress<Report> progress)
     {
         switch (progress.Report?.ReportType)
         {

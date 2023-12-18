@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GeneratorFacade.cs" company="Hukano">
-// Copyright (c) Hukano. All rights reserved.
+// <copyright file="GeneratorFacade.cs" company="Sundews">
+// Copyright (c) Sundews. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Sundew.Base.Primitives.Computation;
+using Sundew.Base.Computation;
 using Sundew.Generator.Core;
 using Sundew.Generator.Discovery;
 using Sundew.Generator.Reporting;

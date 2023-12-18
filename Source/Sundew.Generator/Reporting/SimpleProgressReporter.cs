@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SimpleProgressReporter.cs" company="Hukano">
-// Copyright (c) Hukano. All rights reserved.
+// <copyright file="SimpleProgressReporter.cs" company="Sundews">
+// Copyright (c) Sundews. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ public class SimpleProgressReporter : IProgressReporter
     /// Reports the specified progress.
     /// </summary>
     /// <param name="progress">The progress.</param>
-    public void Report(Sundew.Base.Primitives.Computation.Progress<Report> progress)
+    public void Report(Sundew.Base.Computation.Progress<Report> progress)
     {
         if (progress.Report == null)
         {
