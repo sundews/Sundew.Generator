@@ -20,12 +20,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Base.Collections" Version="12.0.2" />
-    <PackageReference Include="Sundew.Base.Computation" Version="12.0.2" />
-    <PackageReference Include="Sundew.Base.Text" Version="12.0.2" />
-    <PackageReference Include="Sundew.Base.Threading" Version="12.0.2" />
+    <PackageReference Include="Sundew.Base.Collections" Version="12.0.6" />
+    <PackageReference Include="Sundew.Base.Computation" Version="12.0.6" />
+    <PackageReference Include="Sundew.Base.Text" Version="12.0.6" />
+    <PackageReference Include="Sundew.Base.Threading" Version="12.0.6" />
     <PackageReference Include="Sundew.IO" Version="1.0.0" />
-    <PackageReference Include="Sundew.Packaging.Publish" Version="10.0.5">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="10.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
