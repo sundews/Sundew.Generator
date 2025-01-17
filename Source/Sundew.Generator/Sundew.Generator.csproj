@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="PolySharp" Version="1.14.1">
+    <PackageReference Include="PolySharp" Version="1.15.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -20,12 +20,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sundew.Base.Collections" Version="13.0.1" />
-    <PackageReference Include="Sundew.Base.Computation" Version="13.0.1" />
-    <PackageReference Include="Sundew.Base.Text" Version="13.0.1" />
-    <PackageReference Include="Sundew.Base.Threading" Version="13.0.1" />
+    <PackageReference Include="Sundew.Base.Collections" Version="14.0.0" />
+    <PackageReference Include="Sundew.Base.Computation" Version="14.0.0" />
+    <PackageReference Include="Sundew.Base.Text" Version="14.0.0" />
+    <PackageReference Include="Sundew.Base.Threading" Version="14.0.0" />
     <PackageReference Include="Sundew.IO" Version="1.0.0" />
-    <PackageReference Include="Sundew.Packaging.Publish" Version="10.0.8">
+    <PackageReference Include="Sundew.Packaging.Publish" Version="10.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

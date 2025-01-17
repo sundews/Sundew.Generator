@@ -9,7 +9,6 @@ namespace Sundew.Generator;
 
 using System.Collections.Generic;
 using System.Linq;
-using Sundew.Base.Collections;
 using Sundew.Generator.Core;
 using Sundew.Generator.Engine;
 using Sundew.Generator.Engine.Internal;
@@ -59,7 +58,7 @@ public class GeneratorRunnerFactory : IGeneratorRunnerFactory
             {
                 var writerInfo = CreateWriterInfo(
                     generatorWriterSetups[writerSetupIndex],
-                    generatorInfo.ToEnumerable(),
+                    [generatorInfo],
                     setupInfo,
                     writerSetupIndex,
                     generatorSetupIndex,
@@ -98,7 +97,7 @@ public class GeneratorRunnerFactory : IGeneratorRunnerFactory
                 }
                 else
                 {
-                    var writerInfo = CreateWriterInfo(globalWriterSetup, generatorInfo.ToEnumerable(), setupInfo, writerSetupIndex, null, previousWriter);
+                    var writerInfo = CreateWriterInfo(globalWriterSetup, [generatorInfo], setupInfo, writerSetupIndex, null, previousWriter);
                     writerInfos.Add(writerInfo);
                     previousWriter = writerInfo.Writer;
                 }

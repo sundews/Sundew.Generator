@@ -8,7 +8,6 @@
 namespace Sundew.Generator.Tests;
 
 using FluentAssertions;
-using Sundew.Base.Collections;
 using Sundew.Generator.Discovery;
 using Sundew.Generator.Output;
 using Xunit;
@@ -31,7 +30,7 @@ public class SetupInfoFactoryTests
                 GeneratorSetups = new[] { new GeneratorSetup() },
             };
 
-        var result = SetupInfoFactory.CreateSetupInfos(setup.ToEnumerable());
+        var result = SetupInfoFactory.CreateSetupInfos([setup]);
 
         result.Should().HaveCount(1);
     }
