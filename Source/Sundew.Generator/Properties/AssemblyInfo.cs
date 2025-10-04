@@ -3,10 +3,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 
-using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-
-[assembly: InternalsVisibleTo("Sundew.Generator.Tests")]
+[assembly: InternalsVisibleTo("Sundew.Generator.Development.Tests")]

@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Build/">
+    <File Path="../.github/workflows/dotnet.yml" />
+    <File Path="../README.md" />
+    <File Path="Build/stylecop.json" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.props.user" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Sundew.Generator.Development.AcceptanceTests/Sundew.Generator.Development.AcceptanceTests.csproj" />
+  <Project Path="Sundew.Generator.Code.MSBuild/Sundew.Generator.Code.MSBuild.csproj" />
+  <Folder Name="/Build/Development/">
+    <File Path="Build/Development/stylecop.json" />
+  </Folder>
+  <Project Path="Sundew.Generator.Code.Development.Tests/Sundew.Generator.Code.Development.Tests.csproj" />
+  <Project Path="Sundew.Generator.Code/Sundew.Generator.Code.csproj" />
+  <Project Path="Sundew.Generator.CodeAnalysis.MSBuildWorkspace/Sundew.Generator.CodeAnalysis.MSBuildWorkspace.csproj" />
+  <Project Path="Sundew.Generator.MSBuild/Sundew.Generator.MSBuild.csproj" />
+  <Project Path="Sundew.Generator.Development.Tests/Sundew.Generator.Development.Tests.csproj" />
+  <Project Path="Sundew.Generator/Sundew.Generator.csproj" />
+</Solution>

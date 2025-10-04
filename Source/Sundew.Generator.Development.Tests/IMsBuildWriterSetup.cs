@@ -5,7 +5,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests;
+namespace Sundew.Generator.Development.Tests;
 
 using Sundew.Generator.Core;
 using Sundew.Generator.Output;

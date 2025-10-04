@@ -5,9 +5,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Code.Tests;
+namespace Sundew.Generator.Code.Development.Tests;
 
-using FluentAssertions;
+using AwesomeAssertions;
 using Sundew.Generator.Code.CSharp;
 using Xunit;
 

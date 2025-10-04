@@ -16,7 +16,7 @@ jobs:
     name: .NET
     runs-on: ubuntu-latest
     env:
-      solutionPath: ./Source/Sundew.Generator.sln
+      solutionPath: ./Source/Sundew.Generator.slnx
       versioningProjectPath: ./Source/Sundew.Generator/Sundew.Generator.csproj
       repository: 'https://sundew-dev:${{ secrets.SUNDEW_DEV_TOKEN }}@github.com/sundews/Sundew.Generator.git'
       source: 'https://api.nuget.org/v3/index.json'
@@ -28,14 +28,17 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Setup .NET 9
+    - name: Setup .NET preview
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.x.x
-    - name: Setup .NET 8
+        dotnet-version: 10.x.x
+        dotnet-quality: preview
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.x.x
+        dotnet-version: |
+            9.x.x
+            8.x.x
     - name: Build setup
       id: build-setup
       run: >

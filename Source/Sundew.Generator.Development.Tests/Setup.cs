@@ -5,10 +5,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests;
+namespace Sundew.Generator.Development.Tests;
 
-using System;
-using System.Collections.Generic;
+using global::System;
+using global::System.Collections.Generic;
 using Sundew.Generator.Core;
 using Sundew.Generator.Input;
 using Sundew.Generator.Output;

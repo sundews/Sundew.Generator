@@ -29,6 +29,7 @@ public static class NamespaceHelper
     /// <summary>Combines the two namespaces.</summary>
     /// <param name="rootNamespace">The root namespace.</param>
     /// <param name="otherNamespace">The other namespace.</param>
+    /// <returns>The combined namespace.</returns>
     public static string? CombineNamespaces(string? rootNamespace, string? otherNamespace)
     {
         if (string.IsNullOrEmpty(rootNamespace))

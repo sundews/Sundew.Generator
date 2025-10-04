@@ -28,6 +28,10 @@ public class SetupsFactoryProvider
     /// <summary>
     /// Initializes a new instance of the <see cref="SetupsFactoryProvider"/> class.
     /// </summary>
+    /// <param name="currentDirectory">The current directory.</param>
+    /// <param name="generationSetupTaskItems">The generation setup task items.</param>
+    /// <param name="compiledGenerationSetupsSyntaxTrees">The compiled generation setup syntax trees.</param>
+    /// <param name="compilation">The compilation.</param>
     public SetupsFactoryProvider(string currentDirectory, ITaskItem[]? generationSetupTaskItems, IEnumerable<SyntaxTree> compiledGenerationSetupsSyntaxTrees, Compilation compilation)
     {
         this.currentDirectory = currentDirectory;

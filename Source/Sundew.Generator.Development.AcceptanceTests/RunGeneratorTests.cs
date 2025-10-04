@@ -5,7 +5,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.AcceptanceTests;
+namespace Sundew.Generator.Development.AcceptanceTests;
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;

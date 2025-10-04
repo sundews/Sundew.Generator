@@ -6,7 +6,7 @@
    <Nullable>enable</Nullable>
    <LangVersion>preview</LangVersion>
    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-   <Company>Hukano</Company>
+   <Company>Sundews</Company>
    <Authors>Kim Hugener-Ohlsen</Authors>
    <Copyright>Kim Hugener-Ohlsen</Copyright>
    <RepositoryType>git</RepositoryType>

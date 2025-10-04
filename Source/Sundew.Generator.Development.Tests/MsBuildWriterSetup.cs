@@ -1,25 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WriterSetup.cs" company="Sundews">
+// <copyright file="MsBuildWriterSetup.cs" company="Sundews">
 // Copyright (c) Sundews. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests;
+namespace Sundew.Generator.Development.Tests;
 
 using Newtonsoft.Json;
 using Sundew.Generator.Core;
 using Sundew.Generator.Output;
 
-public class WriterSetup : IMsBuildWriterSetup
+public class MsBuildWriterSetup : IMsBuildWriterSetup
 {
-    public WriterSetup(string target)
+    public MsBuildWriterSetup(string target)
     {
         this.Target = target;
     }
 
     [JsonConstructor]
-    public WriterSetup(string target, string path, TypeOrObject<IWriter> writer, bool addFilesToProject)
+    public MsBuildWriterSetup(string target, string path, TypeOrObject<IWriter> writer, bool addFilesToProject)
     {
         this.Target = target;
         this.Path = path;
@@ -29,7 +29,7 @@ public class WriterSetup : IMsBuildWriterSetup
 
     public string Target { get; init; }
 
-    public string? Path { get; init; }
+    public string? Path { get; }
 
     public TypeOrObject<IWriter>? Writer { get; init; }
 

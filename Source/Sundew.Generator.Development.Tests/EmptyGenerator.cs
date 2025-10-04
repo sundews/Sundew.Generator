@@ -5,20 +5,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sundew.Generator.Tests;
+namespace Sundew.Generator.Development.Tests;
 
-using System.Collections.Generic;
+using global::System.Collections.Generic;
 using Sundew.Generator.Core;
 
 public class EmptyGenerator : IGenerator<Setup, GeneratorSetup, int, string>
 {
     public IReadOnlyList<IRun> Prepare(Setup setup, GeneratorSetup generatorSetup, ITarget target, int model, string modelOrigin)
     {
-        throw new System.NotSupportedException();
+        throw new global::System.NotSupportedException();
     }
 
     public string Generate(Setup setup, GeneratorSetup generatorSetup, ITarget target, int model, IRun run, long index)
     {
-        throw new System.NotSupportedException();
+        throw new global::System.NotSupportedException();
     }
 }

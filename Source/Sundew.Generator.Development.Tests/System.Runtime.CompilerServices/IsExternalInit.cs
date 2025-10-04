@@ -5,7 +5,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace System.Runtime.CompilerServices;
+namespace Sundew.Generator.Development.Tests.System.Runtime.CompilerServices;
 
 /// <summary>
 /// Enable property readonly initializers.
