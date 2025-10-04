@@ -19,21 +19,21 @@ public class DeserializationTests
     {
         const string input = @"
 {
-    ""Type"": ""Sundew.Generator.Tests.Setup, Sundew.Generator.Tests"",
+    ""Type"": ""Sundew.Generator.Development.Tests.Setup, Sundew.Generator.Development.Tests"",
     ""WriterSetups"": [
-        { ""Target"": ""c:\\temp\\hmm.txt"", ""Writer"": ""Sundew.Generator.Tests.TextWriter, Sundew.Generator.Tests"", ""AddFilesToProject"": false },
+        { ""Target"": ""c:\\temp\\hmm.txt"", ""Writer"": ""Sundew.Generator.Development.Tests.TextWriter, Sundew.Generator.Development.Tests"", ""AddFilesToProject"": false },
         { ""Target"": ""c:\\temp\\hmm2.txt"", ""AddFilesToProject"": true }
     ],
     ""GeneratorSetups"": [
         {
-            ""Generator"": ""Sundew.Generator.Tests.EmptyGenerator, Sundew.Generator.Tests"",
+            ""Generator"": ""Sundew.Generator.Development.Tests.EmptyGenerator, Sundew.Generator.Development.Tests"",
             ""WriterSetups"": [
                 { ""Target"": ""c:\\temp\\hmm3.txt"", ""AddFilesToProject"": false },
                 { ""Target"": ""c:\\temp\\hmm4.txt"", ""AddFilesToProject"": true }
             ]
         }
     ],
-    ""ModelType"": ""Sundew.Generator.Tests.TextWriter, Sundew.Generator.Tests""
+    ""ModelType"": ""Sundew.Generator.Development.Tests.TextWriter, Sundew.Generator.Development.Tests""
 }";
         var result = JsonConvert.DeserializeObject<ISetup>(
             input,
