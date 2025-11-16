@@ -109,7 +109,9 @@ internal class GeneratorRunner : IGeneratorRunner
     {
         try
         {
-            await this.writerInfos.ForEachAsync(async writerInfo =>
+            await this.writerInfos.ForEachAsync(
+                Parallelism.Default,
+                async writerInfo =>
             {
                 if (cancellationToken.IsCancellationRequested)
                 {

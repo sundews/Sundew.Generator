@@ -50,9 +50,7 @@ public class ProjectTextFileWriter : IWriter<IFileWriterSetup, IProject, ICodeRu
     /// </summary>
     /// <param name="target">The target.</param>
     /// <param name="writerSetup">The target setup.</param>
-    /// <returns>
-    /// The <see cref="T:Sundew.Generator.Common.Target" />.
-    /// </returns>
+    /// <returns>A task.</returns>
     public Task PrepareTargetAsync(IProject target, IFileWriterSetup writerSetup)
     {
         return Task.CompletedTask;

@@ -19,7 +19,7 @@ internal static class GeneratorFinalizer
 {
     public static Task FinalizeAsync(IEnumerable<TargetRun> targetRuns, IProgressTracker<Report> progressTracker, ConcurrentBag<string> outputs)
     {
-        return targetRuns.ForEachAsync(targetRun => FinalizeOutputsAsync(targetRun, progressTracker, outputs));
+        return targetRuns.ForEachAsync(Parallelism.Default, targetRun => FinalizeOutputsAsync(targetRun, progressTracker, outputs));
     }
 
     private static async ValueTask FinalizeOutputsAsync(TargetRun targetRun, IProgressTracker<Report> progressTracker, ConcurrentBag<string> outputs)

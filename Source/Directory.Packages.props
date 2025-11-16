@@ -3,25 +3,25 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AwesomeAssertions" Version="9.2.0" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.3.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
-    <PackageVersion Include="Microsoft.Build.Framework" Version="17.8.3" />
-    <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.8.3" />
+    <PackageVersion Include="Microsoft.Build.Framework" Version="17.8.43" />
+    <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.8.43" />
     <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.8.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.8.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.8.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
-    <PackageVersion Include="Sundew.Base.Collections" Version="15.0.0-u20251004-104049-ci" />
-    <PackageVersion Include="Sundew.Base.Computation" Version="15.0.0-u20251004-104049-ci" />
-    <PackageVersion Include="Sundew.Base.Text" Version="15.0.0-u20251004-104049-ci" />
-    <PackageVersion Include="Sundew.Base.Threading" Version="15.0.0-u20251004-104049-ci" />
+    <PackageVersion Include="Sundew.Base.Collections" Version="15.0.0-u20251116-012807-ci" />
+    <PackageVersion Include="Sundew.Base.Computation" Version="15.0.0-u20251116-012807-ci" />
+    <PackageVersion Include="Sundew.Base.Text" Version="15.0.0-u20251116-012807-ci" />
+    <PackageVersion Include="Sundew.Base.Threading" Version="15.0.0-u20251116-012807-ci" />
     <PackageVersion Include="Sundew.IO" Version="1.0.0" />
-    <PackageVersion Include="Sundew.Packaging.Publish" Version="10.0.10-u20250427-204945-ci" />
+    <PackageVersion Include="Sundew.Packaging.Publish" Version="10.0.10-u20251005-144005-pre" />
     <PackageVersion Include="System.Threading.Tasks.Parallel" Version="4.3.0" />
     <PackageVersion Include="TransparentMoq" Version="4.20.70.2" />
     <PackageVersion Include="xunit" Version="2.9.3" />
