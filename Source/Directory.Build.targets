@@ -16,6 +16,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4')) OR $(TargetFramework.StartsWith('netstandard'))">
+    <PolySharpExcludeGeneratedTypes>System.Runtime.CompilerServices.ModuleInitializerAttribute</PolySharpExcludeGeneratedTypes>
+  </PropertyGroup>
+
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4')) OR $(TargetFramework.StartsWith('netstandard'))">
     <PackageReference Include="PolySharp">
       <PrivateAssets>all</PrivateAssets>
@@ -47,12 +51,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk"  />
     <PackageReference Include="TransparentMoq"  />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.runner.visualstudio" >
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="TUnit" />
   </ItemGroup>
+
 
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" >
@@ -67,3 +68,4 @@
   </ItemGroup>
 
 </Project>
+

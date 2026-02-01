@@ -9,11 +9,11 @@ namespace Sundew.Generator.Code.Development.Tests;
 
 using AwesomeAssertions;
 using Sundew.Generator.Code.CSharp;
-using Xunit;
+using TUnit.Core;
 
 public class UsingsGeneratorTests
 {
-    [Fact]
+    [Test]
     public void GetUsings_Then_ResultShouldBeExpectedResult()
     {
         var usings1 = new[] { "Microsoft.Windows", "System.Collections", "Microsoft.Windows" };

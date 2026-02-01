@@ -16,7 +16,7 @@ using Sundew.Generator.Core;
 using Sundew.Generator.Input;
 using Sundew.Generator.Output;
 using Sundew.Generator.Reporting;
-using Xunit;
+using TUnit.Core;
 using ISetup = Sundew.Generator.ISetup;
 
 public class RunGeneratorTests
@@ -36,7 +36,7 @@ public class RunGeneratorTests
         this.generator.Setup(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), this.run1, It.IsAny<long>())).Returns(() => new object());
     }
 
-    [Fact]
+    [Test]
     public async Task Given_ASetupWithOneGeneratorAndRunAndModelAndWriter_When_GeneratorRuns_Then_GeneratorGenerateShouldBeCalledOnce()
     {
         await this.RunGenerator();
@@ -44,7 +44,7 @@ public class RunGeneratorTests
         this.generator.Verify(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), this.run1, It.IsAny<long>()), Times.Once());
     }
 
-    [Fact]
+    [Test]
     public async Task Given_ASetupWithOneGeneratorAndRunAndModelAndWriter_When_GeneratorRuns_Then_WriterCompleteTargetAsyncShouldBeCalledOnce()
     {
         await this.RunGenerator();
@@ -52,7 +52,7 @@ public class RunGeneratorTests
         this.writer.Verify(x => x.CompleteTargetAsync(It.IsAny<ITargetCompletionTracker>()), Times.Once());
     }
 
-    [Fact]
+    [Test]
     public async Task Given_ASetupWithOneGeneratorAndTwoRunsAndOneModelAndWriter_When_GeneratorRuns_Then_GeneratorGenerateShouldBeCalledShouldBeCalledTwice()
     {
         var run2 = New.Mock<IRun>();
@@ -64,7 +64,7 @@ public class RunGeneratorTests
         this.generator.Verify(x => x.Generate(It.IsAny<ISetup>(), It.IsAny<IGeneratorSetup>(), this.target, It.IsAny<object>(), It.IsAny<IRun>(), It.IsAny<long>()), Times.Exactly(2));
     }
 
-    [Fact]
+    [Test]
     public async Task Given_ASetupWithOneGeneratorAndTwoRunsAndOneModelAndWriter_When_GeneratorRuns_Then_WriterGetTargetAsyncShouldBeCalledOnce()
     {
         var run2 = New.Mock<IRun>();
@@ -76,7 +76,7 @@ public class RunGeneratorTests
         this.writer.Verify(x => x.GetTargetAsync(It.IsAny<IWriterSetup>()), Times.Once);
     }
 
-    [Fact]
+    [Test]
     public async Task Given_ASetupWithOneGeneratorAndTwoRunsAndOneModelAndWriter_When_GeneratorRuns_Then_WriterPrepareTargetAsyncShouldBeCalledOnce()
     {
         var run2 = New.Mock<IRun>();
@@ -88,7 +88,7 @@ public class RunGeneratorTests
         this.writer.Verify(x => x.PrepareTargetAsync(It.IsAny<ITarget>(), It.IsAny<IWriterSetup>()), Times.Once);
     }
 
-    [Fact]
+    [Test]
     public async Task Given_ASetupWithOneGeneratorAndTwoRunsAndOneModelAndWriter_When_GeneratorRuns_Then_WriterApplyContentToTargetAsyncShouldBeCalledTwice()
     {
         var run2 = New.Mock<IRun>();
@@ -100,7 +100,7 @@ public class RunGeneratorTests
         this.writer.Verify(x => x.ApplyContentToTargetAsync(It.IsAny<ITarget>(), It.IsAny<IRun>(), It.IsAny<IWriterSetup>(), It.IsAny<object>()), Times.Exactly(2));
     }
 
-    [Fact]
+    [Test]
     public async Task Given_ASetupWithOneGeneratorAndTwoRunsAndOneModelAndWriter_When_GeneratorRuns_Then_WriterCompleteTargetAsyncShouldBeCalledOnce()
     {
         var run2 = New.Mock<IRun>();
@@ -112,9 +112,9 @@ public class RunGeneratorTests
         this.writer.Verify(x => x.CompleteTargetAsync(It.IsAny<ITargetCompletionTracker>()), Times.Once);
     }
 
-    [Theory]
-    [InlineData(true, 1)]
-    [InlineData(false, 2)]
+    [Test]
+    [Arguments(true, 1)]
+    [Arguments(false, 2)]
     public async Task Given_ASetupWithTwoGeneratorsAndOneModelAndWriter_When_GeneratorRuns_Then_WriterCompleteTargetAsyncShouldBeCalledExpectedNumberOfTimes(bool shareGlobalWriters, int expectedNumberOfCalls)
     {
         var generator2 = New.Mock<IGenerator<ISetup, IGeneratorSetup, ITarget, object, IRun, object>>();

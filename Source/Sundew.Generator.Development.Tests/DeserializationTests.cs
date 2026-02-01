@@ -10,11 +10,11 @@ namespace Sundew.Generator.Development.Tests;
 using AwesomeAssertions;
 using Newtonsoft.Json;
 using Sundew.Generator.Converters.Json;
-using Xunit;
+using TUnit.Core;
 
 public class DeserializationTests
 {
-    [Fact]
+    [Test]
     public void DeserializeObject_When_TextContainsWriterSetup_Then_ResultWriterSetupShouldBeEmpty()
     {
         const string input = @"

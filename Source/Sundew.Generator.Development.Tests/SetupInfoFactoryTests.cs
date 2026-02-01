@@ -10,11 +10,11 @@ namespace Sundew.Generator.Development.Tests;
 using AwesomeAssertions;
 using Sundew.Generator.Discovery;
 using Sundew.Generator.Output;
-using Xunit;
+using TUnit.Core;
 
 public class SetupInfoFactoryTests
 {
-    [Fact]
+    [Test]
     public void CreateSetupInfo_Then_ResultContainOneItem()
     {
         var setup =
